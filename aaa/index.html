@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>   
+    <title>人大新闻发布群</title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <!--优先使用 IE 最新版本和 Chrome-->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <!--360 使用Google Chrome Frame-->
+    <meta name="renderer" content="webkit">
+    <!--百度禁止转码-->
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!-- 是否启用 WebApp 全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no, email=no,adress=no" searchtype="map" />
+    <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+    <meta name="HandheldFriendly" content="true">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache,must-revalidate">
+    <meta http-equiv="expires" content="0">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no, minimal-ui">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+
+    <meta http-equiv="keywords" content="">
+    <meta http-equiv="description" content="">
+
+<!--        <link rel="stylesheet" href="css/swiper-3.3.0.min.css">-->
+    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+<!--    <script type="text/javascript" src="js/zepto.min.js"></script>-->
+<!--    <script type="text/javascript" src="js/swiper-3.3.0.jquery.min.js"></script>-->
+    <!--    <link rel="stylesheet" href="css/animate.css">-->
+    <!--    <link rel="stylesheet" href="css/loading-img.css">-->
+    <!--    <script type="text/javascript" src="js/loading-img.js"></script>-->
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/loaders.min.css">
+    <link rel="stylesheet" href="css/talk.css">
+
+</head>
+
+<body jqcode="603014" mzcode="8000456"   style="visibility:hidden;">
+
+<div class="load-mask">
+    <div class="loader-inner line-spin-fade-loader" style="top:50%;left:50%;">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="preview-img">
+        <img src="images/demo-upload.png">
+    </div>
+</div>
+
+<!-- 分享 页-->
+  <div class="page-s">
+    <div class="page-s-s"></div>
+    <div class="page-s-t"></div>
+    <div class="page-s-logo1"></div>
+    <div class="page-s-logo2"></div>
+    <div class="page-s-logo3"></div>
+    <div class="page-s-t2">
+        编辑：赵婀娜 吴丹
+        <br>设计：王亚静
+        <br>技术：孙瑶宁 冯慧青
+    </div>
+  </div>
+   
+   
+  
+    <div class="container">
+        <!--群名称-->
+        <!-- <div class="qunming">
+            <img src="images/titless.jpg">
+        </div> -->
+        <!--记录时间-->
+    <div>    
+         <div class="time-record" style="display:block;">
+            <span>上午 11:00</span>
+        </div>
+
+        <div class="invite-member" style="display:block;">
+            <span>傅莹邀请了你和钟南山、敬一丹、曾香桂、马化腾加入了群聊</span>
+        </div>
+
+        <div class="listen-msg" style="display:block;">
+            <span>可点击语言消息选择收听</span>
+        </div>
+
+        <div class="blank-content"  style="display:block;"></div>
+
+        
+         <!--第一组对话-->
+        <div class="talk-record" style="display:block;">
+            <div class="head-portrait">
+                <img src="images/touxiang1.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">傅莹(大会发言人)</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                        大家好，我是十二届全国人大四次会议新闻发布会的发言人傅莹。现在，就大会的议程和人大工作的有关问题回答大家的提问。<img src="images/hp.png" style="vertical-align:middle;">
+                    </div>
+                </div>
+
+            </div>
+            <div class="scrolls"></div>
+        </div>
+
+        </div>
+        <div class="talk-record" style="display:none;">
+            <div class="head-portrait">
+                <img src="images/jingji.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">经济日报记者：</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                        发言人您好，今年对“十三五”规划有何期待？
+                    </div>
+                </div>
+
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        
+         <div class="talk-record" style="display:none;" time='5000'>
+            <div class="head-portrait">
+                <img src="images/touxiang1.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">傅莹(大会发言人)</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/lsj.png">
+                    </div>
+                    <div class="talk-voice">
+                      <img src="images/lb.png" style="width:10px;">
+                      <audio controls="controls" preload>
+                          <source src="voice/one.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                      </audio>
+                    </div>
+                    <div class="voice-time voice-time1">48 " <span class="red-point"></span> </div>
+                </div>
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        
+        <!--第二组对话-->
+         <div class="talk-record" style="display:none;">
+            <div class="head-portrait">
+                <img src="images/cbs.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">哥伦比亚广播公司记者：</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                        南海岛礁“军事化”，您怎么看？
+                    </div>
+                </div>
+
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        
+        
+        <div class="talk-record"  style="display:none;" time='5000'>
+            <div class="head-portrait">
+                <img src="images/touxiang1.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">傅莹(大会发言人)</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/lsj.png">
+                    </div>
+                    <div class="talk-voice">
+                      <img src="images/lb.png" style="width:10px;">
+                      <audio controls="controls" preload>
+                          <source src="voice/two.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                      </audio>
+                    </div>
+                    <div class="voice-time voice-time2">54 " <span class="red-point"></span> </div>
+                    
+                </div>
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        
+        
+        <div class="talk-record"  style="display:none;" time="500">
+            <div class="head-portrait">
+                <img src="images/xb.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">小白</div>
+                <div class="talk-msg-container">
+                    <!--<div class="triangle">
+                        <img src="images/sj.png">
+                    </div>-->
+                    <div class="upload-img">
+                        <img src="images/fugai.png">
+                    </div>
+                </div>
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        
+         <div class="talk-record" style="display:none;">
+            <div class="head-portrait">
+                <img src="images/xd.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">小丹</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                       <img src="images/z.png">
+                       <img src="images/z.png">
+                       <img src="images/z.png"> !
+                        为发言人点赞！
+                    </div>
+                </div>
+
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        
+        <!--第三组对话-->
+         <div class="talk-record" style="display:none;">
+            <div class="head-portrait">
+                <img src="images/renm.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">人民日报记者：</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                     发言人您好，慈善法草案提请大会审议了，是出于什么考虑？
+                    </div>
+                </div>
+
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        
+        <div class="talk-record" style="display:none;">
+            <div class="head-portrait">
+                <img src="images/touxiang1.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">傅莹(大会发言人)</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                      慈善法份量是很重的，不要低估这部法律的重要性。这是我们国家慈善事业建设的第一部基础性和综合性的法律。
+                    </div>
+                </div>
+
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        <div class="talk-record" style="display:none;">
+            <div class="head-portrait">
+                <img src="images/touxiang1.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">傅莹(大会发言人)</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                      应该说中国人还是有扶贫济困的传统，尤其是这些年中国社会财富增加比较快，有很多个人和企业愿意把自己财富的一部分拿出来，去帮助那些更困难的、更有需要的人，所以慈善事业发展是很快的。党和政府在这方面也给予了很多支持和扶持，法律法规在逐步完善。
+                    </div>
+                </div>
+
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        
+        
+         <div class="invite-member" style="margin-bottom:5%;" style="display:none;">
+            <span>姚明邀请马云加入了群聊</span>
+            <div class="scrolls"></div>
+        </div>
+        
+        <!--第四组对话-->
+         <div class="talk-record">
+            <div class="head-portrait">
+                <img src="images/xinh.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">新华社记者：</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                        当前的反腐是否已经到了一个节点，进入了一个已经建章立制的阶段？
+                    </div>
+                </div>
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        
+        
+        <!-- <div class="talk-record" style="display:none;">
+            <div class="head-portrait">
+                <img src="images/demo-head.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">小丽</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                        同问!
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        
+        
+        <div class="talk-record" style="display:none;">
+            <div class="head-portrait">
+                <img src="images/touxiang1.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">傅莹(大会发言人)</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                       本届人大以来，到去年底，已经有43人辞职，罢免了27人。
+                    </div>
+                </div>
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        <div class="talk-record" style="display:none;">
+            <div class="head-portrait">
+                <img src="images/touxiang1.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">傅莹(大会发言人)</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+2015年重点是刑法修正案（九）当中强化了反腐败的内容，今年的重点准备修订行政监察法。在国际方面，我们正在制定国际刑事司法协助法，人大常委会也已经批准了与51个国家有关刑事司法协助的双边条约。另外，中国还是联合国反腐败公约的缔约方，我们和其他缔约方一起加强这方面的合作。
+                    </div>
+                </div>
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        
+        
+        <!--第五组对话-->
+        <div class="talk-record" style="display:none;">
+            <div class="head-portrait">
+                <img src="images/jinghua.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">京华时报记者：</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                        有专家预测，京津地区空气质量达标要到2030年才能实现，对此人大怎么看？
+                    </div>
+                </div>
+
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        
+         <div class="talk-record" style="display:none;" time='5000'>
+            <div class="head-portrait">
+                <img src="images/touxiang1.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">傅莹(大会发言人)</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                        2030年是比较远，大气污染治理确实是一个复杂的难题。人大环资委主任都很少笑的，我认为他“亚历山大”。
+                    </div>
+                </div>
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        <div class="talk-record" style="display:none;" time='5000'>
+            <div class="head-portrait">
+                <img src="images/touxiang1.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">傅莹(大会发言人)</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                        人大连续三年进行了高强度监督、立法工作，今年1月1日，新修订的大气污染防治法已实施，这部严格的法律要不折不扣地得到落实。但任何治理都是有代价的，要平衡各方利益是难题。
+                    </div>
+                </div>
+            </div>
+            <div class="scrolls"></div>
+        </div>
+       
+         
+         <!--第六组对话-->
+          <div class="talk-record" style="display:none;">
+            <div class="head-portrait">
+                <img src="images/cnn.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">美国CNN：</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                       能不能透露一下今年中国的军费开支？
+                    </div>
+                </div>
+
+            </div>
+            <div class="scrolls"></div>
+        </div>       
+
+        <div class="talk-record" style="display:none;">
+            <div class="head-portrait">
+                <img src="images/touxiang1.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">傅莹(大会发言人)</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                        我提前讲单项预算有抢跑之嫌，但是我不讲，你们是不是有点心塞？<img src="images/hp.png" style="vertical-align:middle;">
+                    </div>
+                </div>
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        <div class="talk-record"  style="display:none;">
+            <div class="head-portrait">
+                <img src="images/xb.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">小白</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                        哈哈~~ 心塞！好时髦的词！
+                    </div>
+                </div>
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        <div class="talk-record" style="display:none;">
+            <div class="head-portrait">
+                <img src="images/touxiang1.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">傅莹(大会发言人)</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                        所以我还是给你一个大致的数。今年中国军费预算保持增长，但增长的增幅比前几年要低，是7%至8%之间。
+                    </div>
+                </div>
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        
+        <div class="talk-record" style="display:none;">
+            <div class="head-portrait">
+                <img src="images/touxiang1.jpg">
+            </div>
+            <div class="record-msg">
+                <div class="talk-name">傅莹(大会发言人)</div>
+                <div class="talk-msg-container">
+                    <div class="triangle">
+                        <img src="images/sj.png">
+                    </div>
+                    <div class="talk-msg">
+                       本场新闻发布会到此结束，希望我的回答能让你们满意。欢迎各位将此群分享到朋友圈，谢谢。<img  src="images/bb.png"><img  src="images/hp.png">
+                    </div>
+                </div>
+            </div>
+            <div class="scrolls"></div>
+        </div>
+        <div style="width:100%;height: 50px;background: #EBEBEB;"></div>
+     <div class="blank-content" style="display:none;"></div>
+
+    </div>
+  
+  
+   <div class="botbg">
+       <img src="images/botbg.jpg">
+   </div>
+   
+<script type="text/javascript" src="js/talk.js"></script>
+   
+<!--统计代码-->   
+<script type="text/javascript">
+//久其统计代码
+var  _numRegExt=/\d+/;
+var _jqcode="603011";
+var _maq = _maq||[];
+window["_maq"] = _maq;
+_maq.push(["appkey", "APP_KEY"]);
+if(!_numRegExt.test(_jqcode)){
+    alert('请填写久其统计活动代码!');
+}
+_maq.push(["tid", _jqcode]);
+_maq.push(["trackPV"]); 
+(function() {
+   
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') +'h5rcv.i-dataworks.com/js/tracker/ha.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();
+
+//秒针统计代码
+(function(){
+var  mzcode="8000453";
+if(!_numRegExt.test(mzcode)){
+    alert("请填写秒针统计活动代码!");
+    return;
+}    
+    
+var ga = document.createElement('script'); ga.type = 'text/javascript';
+ga.src = 'http://js.miaozhen.com/wx.1.0.js';
+ga.onload=function(){
+    _mwx=window._mwx||{};
+     //秒针的活动id
+	_mwx.siteId=parseInt(mzcode);
+	_mz_wx_view(1,0);
+	_mwx.debug=true;  
+    }
+var body = document.getElementsByTagName('body')[0]; body.appendChild(ga);
+})();
+    
+</script>  
+       
+   
+   
+<script type="text/javascript" src="js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+                var str = '<script type="text/javascript" src="other/.cn/wechat/sign?random=' + Math.random() + '"\/><\/script>';
+                 str += '<script type="text/javascript" src="js/app.js"><\/script>';
+                 document.write(str);
+                 var _path = window.location.href;
+                 var arr = _path.replace("http://", "").split("/");
+                 _path = "http://weixin.pdmi.cn/rendaxinwenfabuhuixin/fengmian.png";
+         
+                 wx.ready(function () {
+                     wx_data.title = '傅莹邀请你加入群聊';
+                     wx_data.desc = '现在就大会的议程和人大工作的有关问题，回答大家的提问……';
+                     wx_data.imgUrl = _path;
+                     wx_data.link = "http://weixin.pdmi.cn/rendaxinwenfabuhuixin/r5/index.html",
+                     // 分享到朋友圈
+                     shareTimeline(wx_data);
+                     // 分享给好友
+                     shareAppMessage(wx_data);
+                 });
+                 wx.error(function (res) {});
+    </script>
+    <script type="text/javascript" src="js/lianghui_tongji.js"></script>
+</body>
+
+</html>

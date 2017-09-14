@@ -1,0 +1,99 @@
+<html>
+<head>
+<title></title>
+<meta charset="utf-8">
+</head>
+<style>
+   *{
+     margin:0;
+	 padding:0;
+    }
+	ul{
+	   list-style:none;
+	}
+	.news{
+	     width:300px;
+		 height:200px;
+	}
+	.news .menu{
+	   width:300px;
+	   height:40px;
+	}
+   .news .menu ul li{
+      float:left;
+	  width:97px;
+	  height:40px;
+	  line-height:40px;
+	 
+	  text-align:center;
+	  background:#CF0;
+   }
+   .news .menu ul li.hover{
+        background:#0F0;
+       
+   }
+   .news .con{
+      clear:both;
+   }
+  .news .con div{
+     display:none;
+  }   
+</style>
+<body>
+<script>
+    function tab(name,a,num){
+        for(var i=1;i<=num;i++){
+		   var tit =  document.getElementById(name+i);
+		   var c  = document.getElementById('con_'+name+'_'+i);
+		   if(i == a){
+		       tit.className = 'hover';
+			   c.style.display = 'block';
+		   }else{
+               tit.className = '';
+			   c.style.display = 'none';
+		   }
+		
+		} 
+	 
+	}
+
+</script>
+
+<div class="news">
+   <div class="menu">
+      <ul>
+	    <li id="one1" onmouseover="tab('one',1,3)" class="hover">111</li>
+		<li id="one2" onmouseover="tab('one',2,3)">222</li>
+		<li id="one3" onmouseover="tab('one',3,3)">333</li>
+	  </ul>
+   </div>
+   <div class="con">
+        <div id="con_one_1" style="display:block; margin-left:15px;">
+		    <ul>
+			    <li>111111111</li>
+				<li>111111111</li>
+				<li>111111111</li>
+				<li>111111111</li>
+			</ul>
+		</div>
+		<div id="con_one_2" style=" margin-left:110px;">
+		    <ul>
+			    <li>222222222</li>
+				<li>222222222</li>
+				<li>222222222</li>
+				<li>222222222</li>
+			</ul>
+		</div>
+		<div id="con_one_3" style=" margin-left:210px;">
+		    <ul>
+			    <li>333333333</li>
+				<li>333333333</li>
+				<li>333333333</li>
+				<li>333333333</li>
+			</ul>
+		</div>
+   </div>
+</div>
+
+</body>
+</html>

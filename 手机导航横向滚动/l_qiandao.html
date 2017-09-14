@@ -1,0 +1,94 @@
+<html lang="en" ng-app="myApp" style="font-size: 58.5938px;"><head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>每日签到</title>
+	<link rel="stylesheet" type="text/css" href="publish/css/swiper.min.css">
+	<script src="publish/js/jquery-1.8.3.min.js"></script>
+	<script src="publish/js/swiper.min.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var swiper = new Swiper('.swiper-container', {
+				pagination: '.swiper-pagination',
+				slidesPerView: 5,
+				spaceBetween: 0,
+				freeMode: true
+			});
+		}
+		$(function(){
+
+			for(i = 0;i<20;i++){
+				$(".swiper-wrapper").append('<div class="swiper-slide">热门</div>')
+			}
+
+		})
+	</script>
+<style type="text/css">
+		body{
+			margin: 0;
+		}
+		.dataer{
+			height: .9rem;
+			border-top: 1px solid #fff;
+			font-family: "微软雅黑";
+			color: #fff;
+			background: #1b6d85;
+		}
+		.dataer .swiper-wrapper .swiper-slide{
+			display: block;
+			float: left;
+			height: .9rem;
+			border-left: 1px solid #fff;
+			line-height: .9rem;
+			text-align: center;
+			box-sizing:border-box; -moz-box-sizing:border-box;-webik-box-sizing:border-box;
+		}
+		.swiper-container {
+			width: 100%;
+			height: .9rem;
+			margin: 0 auto;
+		}
+		.swiper-slide {
+			text-align: center;
+			font-size: .18rem;
+
+			/* Center slide text vertically */
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			-webkit-box-pack: center;
+			-ms-flex-pack: center;
+			-webkit-justify-content: center;
+			justify-content: center;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			-webkit-align-items: center;
+			align-items: center;
+		}
+		.dataer .swiper-wrapper .swiper-slide:first-child{
+			border: 0;
+		}
+		.dataer .swiper-wrapper .swiper-slide p{
+			text-align: center;
+			font-size: .24rem;
+			margin-bottom: 0;
+			color: #fff;
+		}
+		.dataer .swiper-wrapper .swiper-slide p:last-child{
+			font-size: .20rem;
+		}
+
+	</style>
+</head>
+<body>
+<div class="dataer">
+			<!-- Swiper -->
+			<div class="swiper-container swiper-container-horizontal swiper-container-free-mode">
+				<div class="swiper-wrapper">
+
+
+				</div>
+			</div>
+		</div>
+</body>
+</html>

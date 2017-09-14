@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>找医院</title>
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="../css/framework7.ios.min.css">
+    <link rel="stylesheet" href="../css/framework7.ios.colors.min.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="../css/my-app.css">
+    <link rel="stylesheet" href="../css/ekang.css"/>
+    <!--医院列表-->
+    <link rel="stylesheet" href="../css/index/index-2.css"/>
+</head>
+<body>
+
+<div class="views tabs toolbar-through">
+    <!--导航条-->
+    <!-- Second view (for second wrap)-->
+    <div id="view" class="view view-main tab active">
+        <!-- We can make with view with navigation, let's add Top Navbar-->
+        <div class="navbar">
+            <div class="navbar-inner" style="background-color: #38a16d">
+                <div class="left" id="back">
+                    <i class="icon icon-back color-white" style="color: white"></i>
+                    <span style="color: white">返回</span>
+                </div>
+                <div class="center sliding" style="color: white">找医院</div>
+                <!--选择-->
+
+            </div>
+        </div>
+        <div class="tabs-choose text-center" style=" margin-top: 44px;">
+            <div id="dropdownDepartment" class="icon-right2" style="border-right: 1px solid #EDEDED">北京</div>
+            <div id="dropdownDepartment_department" class="icon-right2" style="border-right: 1px solid #EDEDED">综合排序</div>
+            <div id="dropdownHospital" class="icon-right2">全部类型</div>
+        </div>
+        <!--选择-->
+        <div class="sel-popup" style="display:none;margin-top: 85px;">
+            <div id="hospitalItems" class="item-content" style="display:none;height: 280px">
+                <div class="list item-left text-center" id="hospitalList"></div>
+            </div>
+
+            <div id="departmentItems" class="item-content" style="display:none;">
+                <div class="text-center item-left list" id="departmentLeft"></div>
+                <div class="text-center item-right list" id="departmentRight"></div>
+            </div>
+
+            <div id="departmentItems_department" class="item-content" style="display:none;height: 150px">
+                <div class="text-center item-left list" id="departmentLeft_department" style="height: 150px">
+                    <a data-name="综合排序" data-id="0" class="list-item text-left list-item-p-tb15 list-item-norightborder">综合排序</a>
+                    <a data-name="预约量" data-id="1" class="list-item text-left list-item-p-tb15 list-item-norightborder">预约量</a>
+                    <a data-name="距离" data-id="2" class="list-item text-left list-item-p-tb15 list-item-norightborder">距离</a>
+                </div>
+            </div>
+            <div class="over-popup"></div>
+        </div>
+        <div class="pages navbar-through">
+            <div data-page="index-2" class="page page-on-center">
+                <div class="page-content pull-to-refresh-content infinite-scroll">
+                    <!-- 默认的下拉刷新层 -->
+                    <div class="pull-to-refresh-layer">
+                        <div class="preloader"></div>
+                        <div class="pull-to-refresh-arrow"></div>
+                    </div>
+
+
+                    <div class="main-content">
+
+                        <!--医生列表-->
+                        <div id="doctorItems"></div>
+
+                        <!--搜索无结果-->
+                        <div id="searchIcon" style="position: absolute;display: none; margin-top: 173px;width: 100%;text-align: center">
+                            <img src="../img/icon-girl.png" alt="小女孩" style="width: 125px;height: 61px;left: 50%"/>
+                            <p style="font-size: 13px;color: #808080">没有符合条件的医生</p>
+                        </div>
+
+                        <!-- 加载提示符 -->
+                        <div class="infinite-scroll-preloader">
+                            <div class="preloader"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="../js/framework7.min.js"></script>
+<script type="text/javascript" src="../js/my-app.js"></script>
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/ekang.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script>
+
+    var type = getQueryString("type");
+
+    $(function () {
+        var     $hospitalItems = $('#hospitalItems'),
+                $departmentItems = $('#departmentItems'),
+                $departmentItems_department = $('#departmentItems_department');
+                childNodes = [], //地区
+                departmentNodes = [],  // 科室
+
+                pageIndex = 1;// 页码
+
+        var     city_code = '';     // 城市id
+        var     hospital_ID = '';   // 医院id
+        var     department_id = ''; // 科室id
+        var     hospital_name;
+
+        var option = {
+            // 获取医院列表
+            getHospital: function(){
+                $.ajax({
+                    type: 'GET',
+                    url: textUrl +'/hospital/getCategory/',
+                    data: {
+                        city_code: city_code,
+                        page_size: '500',
+                        page_index: 1,
+                    },
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    success: function (result) {
+                        if (result.ret == 0) {
+                            var typeData = result.data;
+                            var item = '';
+                            for(var i=0;i<typeData.length;i++){
+                                item += '<a class="list-item " data-id="' + i + '" data-name="'+typeData[i] +'" style="text-align: left">' + typeData[i] + '</a>';
+                            }
+
+                            $('#hospitalList').html(item);
+
+                            $hospitalItems.find('a').on('click', function () {
+                                hospital_ID = $(this).data('id');
+                                hospital_name = $(this).data('name');
+                                $('#dropdownHospital').html(hospital_name);
+                                $('#dropdownHospital').click();
+                                option.getDoctorList();
+                            });
+                        }
+                    }
+                });
+            },
+
+            // 获取城市区域
+            getDepartment: function () {
+                $.ajax({
+                    type: 'GET',
+                    url: textUrl+'/location/getProvinceList/',
+                    data: {
+                        page_size: '500',
+                        page_index: 1,
+                        sid: '',
+                    },
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    success: function (result) {
+                        $('#departmentRight').html('');
+                        if (result.ret == 0) {
+                            var itemLeft = '';
+                            childNodes = [];
+
+                            $.each(result.data, function (i, o) {
+                                var data = o;
+
+                                childNodes.push(o.city_list);
+
+                                itemLeft += '<a class="list-item text-left list-item-p-tb15 list-item-norightborder" data-id="' + data.id + '" data-index="' + i + '">' + data.name + '</a>';
+                            });
+                            $('#departmentLeft').html(itemLeft);
+                            depart = option.getChildDepart(0);
+                            $('#departmentLeft a').on('click', function () {
+                                $('.item-active').removeClass('item-active');
+                                $(this).addClass('item-active');
+                                province_ID = $(this).data('index');
+                                var currentIndex = $(this).data('index');
+                                option.getChildDepart(currentIndex);
+                            });
+                        }
+                    }
+                });
+            },
+
+            // 获取子城市
+            getChildDepart: function (index) {
+                var item = '';
+                $.each(childNodes[index], function (i, data) {
+                    item += '<a class="list-item list-item-noborder text-left list-item-p-tb15" data-id="' + data.code + '" data-name="'+data.name+'">' + data.name + '</a>';
+                });
+                $('#departmentRight').html(item);
+
+                $('#departmentRight a').on('click', function () {
+                    $('#dropdownDepartment').removeClass('icon-down2').addClass('icon-right2');
+                    $departmentItems.hide();
+                    $('.sel-popup').hide();
+                    $('#doctorItems').html('');
+                    pageIndex = 1;
+
+                    // 请求医生列表
+                    city_code = $(this).data('id');
+                    city_name = $(this).data('name');
+                    $('#dropdownDepartment').html(city_name);
+                    option.getDoctorList();
+
+                });
+            },
+
+            // 获取医院列表
+            getDoctorList: function () {
+                $.ajax({
+                    type: 'GET',
+                    url: textUrl+'/hospital/hospitalList',
+                    data: {
+                        city_code: city_code,
+                        category_id: hospital_ID,
+//                        category_name: hospital_name,
+                        sort: department_id,
+                        longitude : $.cookie("longitude"),
+                        latitude : $.cookie("latitude"),
+                        page_size: 20,
+                        page_index: pageIndex
+                    },
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    success: function (result) {
+                        if (result.ret == 0) {
+                            if(result.data.length == 0){
+                                $('#searchIcon').show();
+                            }else{
+                                $('#searchIcon').hide();
+                            }
+
+                            var item = '';
+                            $.each(result.data, function (i, o) {
+
+                                item += '<div data-name="'+ o.hospital_name+'" data-id="'+ o.id+'" onclick="docterDetail($(this))" style="position:relative;background-color: white;width: 100%;height: 61px;border-bottom: 1px solid #e6e6e6">';
+                                item += '<img src="'+o.pic+'" alt="头像" class="left-box" style="position: absolute;width: 40px;height: 40px;border-radius: 4px;top:10px;left:10px"/>';
+                                item += '<div style="position: absolute;font-size: 14px;color: #333333;top: 10px;left: 48px; width: 80%" class="message">'+o.hospital_name+'&nbsp&nbsp<span style="position: absolute;width: 33px;height: 16px;line-height:16px;font-size: 12px;background-color: #f95e64;color: white;text-align: center;border-radius: 2px">'+o.type_text+'</span></div>';
+                                item += '<span style="position: absolute;font-size: 12px;color: #808080;top: 31px;left: 48px" class="message">'+o.direction+'</span>';
+                                item += '<span class="message" style="position: absolute;text-align: right;font-size: 12px;color: #808080;right: 15px;top: 31px;background: url(../img/icon_position.png) no-repeat right center transparent; background-size: 9px 13px;background-position: 0 0;">&nbsp&nbsp&nbsp&nbsp&nbsp'+o.distance+'</span>';
+                                item += '</div>';
+                            });
+
+                            // 加载完毕需要重置
+                            myApp.pullToRefreshDone();
+
+                            // 加载数据
+                            // 重置加载flag
+                            loading = false;
+                            if (lastIndex >= maxItems) {
+                                // 加载完毕，则注销无限加载事件，以防不必要的加载
+                                myApp.detachInfiniteScroll($('.infinite-scroll'));
+                                // 删除加载提示符
+                                $('.infinite-scroll-preloader').remove();
+                                return;
+                            }
+                            // 如果正在加载，则退出
+                            if (pageIndex >1 ){
+                                // 添加新条目
+                                $('#doctorItems').append(item);
+                            }else{
+                                $('#doctorItems').html(item);
+                            }
+
+
+
+                            // 更新最后加载的序号
+                            lastIndex = $('#doctorItems').length;
+
+                            if(result.data.length <= 20){
+                                $('.infinite-scroll-preloader').hide();
+                            }else{
+                                $('.infinite-scroll-preloader').show();
+                            }
+
+                        }else{
+
+                        }
+                    }
+                });
+            }
+        };
+
+        $('#departmentLeft_department a').on('click', function () {
+            $('#dropdownDepartment_department').removeClass('icon-down2').addClass('icon-right2');
+            $departmentItems.hide();
+            $('.sel-popup').hide();
+            $('#doctorItems').html('');
+            pageIndex = 1;
+            // 请求医生列表
+            department_id = $(this).data('id');
+            department_name = $(this).data('name');
+            $('#dropdownDepartment_department').html(department_name);
+            option.getDoctorList();
+        });
+
+        // 医院
+        $('#dropdownHospital').on('click', function () {
+            //禁用滚动条
+//            $('body').addClass('disabled-scroll');
+            option.getHospital();
+
+            $('#dropdownDepartment').removeClass('icon-down2').addClass('icon-right2');
+            $('#dropdownDepartment_department').removeClass('icon-down2').addClass('icon-right2');
+            $departmentItems.hide();
+            $departmentItems_department.hide();
+
+            if (!$hospitalItems.is(':visible')) {
+                $(this).removeClass('icon-right2').addClass('icon-down2');
+                $hospitalItems.show();
+                $('.sel-popup').show();
+            }
+            else {
+                $(this).removeClass('icon-down2').addClass('icon-right2');
+                $hospitalItems.hide();
+                $('.sel-popup').hide();
+            }
+
+        });
+
+        // 城市
+        $('#dropdownDepartment').on('click', function () {
+            $('#dropdownHospital').removeClass('icon-down2').addClass('icon-right2');
+            $('#dropdownDepartment_department').removeClass('icon-down2').addClass('icon-right2');
+            $hospitalItems.hide();
+            $departmentItems_department.hide();
+
+            if (!$departmentItems.is(':visible')) {
+                depart
+                $('#departmentLeft a').eq(0).addClass('item-active')
+                $(this).removeClass('icon-right2').addClass('icon-down2');
+                $departmentItems.show();
+                $('.sel-popup').show();
+            }
+            else {
+                $(this).removeClass('icon-down2').addClass('icon-right2');
+                $departmentItems.hide();
+                $('.sel-popup').hide();
+            }
+        });
+
+        // 科室
+        $('#dropdownDepartment_department').on('click', function () {
+            // 获取科室
+//            option.getDepartmentList();
+
+            $('#dropdownHospital').removeClass('icon-down2').addClass('icon-right2');
+            $('#dropdownDepartment').removeClass('icon-down2').addClass('icon-right2');
+            $hospitalItems.hide();
+            $departmentItems.hide();
+            if (!$departmentItems_department.is(':visible')) {
+
+                $(this).removeClass('icon-right2').addClass('icon-down2');
+                $departmentItems_department.show();
+                $('.sel-popup').show();
+            }
+            else {
+                $(this).removeClass('icon-down2').addClass('icon-right2');
+                $departmentItems_department.hide();
+                $('.sel-popup').hide();
+            }
+        });
+
+        $('.over-popup').on('click', function () {
+            $('#dropdownHospital,#dropdownDepartment,#dropdownDepartment_department').removeClass('icon-down2').addClass('icon-right2');
+            $hospitalItems.hide();
+            $departmentItems.hide();
+            $departmentItems_department.hide();
+            $('.sel-popup').hide();
+        });
+
+        // 获取医院列表
+        option.getHospital();
+        // 获取城市
+        option.getDepartment();
+        // 初始化医生列表
+        option.getDoctorList();
+
+        $('#back').on('click', function () {
+            if(type == 100){
+                history.go(-1);
+            }else{
+                location.href = "../index.html";
+            }
+        });
+
+        // 刷新
+        var myApp = new Framework7();
+        var $$ = Dom7;
+        // 下拉刷新页面
+        var ptrContent = $$('.pull-to-refresh-content');
+        // 添加'refresh'监听器
+        ptrContent.on('refresh', function (e) {
+            pageIndex=1;
+            option.getDoctorList();
+        });
+
+        // 加载数据
+        var loading = false;
+        // 上次加载的序号
+        var lastIndex = $('#doctorItems').length;
+        // 最多可加载的条目
+        var maxItems = 20;
+        // 注册'infinite'事件处理函数
+        $$('.infinite-scroll').on('infinite', function () {
+            // 如果正在加载，则退出
+            if (loading) return;
+            // 设置flag
+            loading = true;
+            pageIndex++;
+            option.getDoctorList();
+        });
+    });
+
+    function docterDetail(o){
+        var id = o.data("id");
+        var name = o.data("name");
+        if(type == "100"){
+            if($.cookie("local_userId")){
+                $.cookie('examination_hospital', name, { expires: 7,path: '/' });
+                location.href = "../examination/examination_orders.html?hospitalId="+id+"";
+            }else{
+                location.href = "../login.html";
+            }
+        }else{
+            location.href = "hospitalDetail.html?type=1&hospitalId="+id;
+        }
+    }
+
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script src="../js/weixin2.js"></script>
+</body>
+</html>

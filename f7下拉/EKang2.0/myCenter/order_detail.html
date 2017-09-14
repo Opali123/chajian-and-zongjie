@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>订单详情</title>
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="../css/framework7.ios.min.css">
+    <link rel="stylesheet" href="../css/framework7.ios.colors.min.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="../css/my-app.css">
+    <link rel="stylesheet" href="../css/ekang.css"/>
+    <style type="text/css">
+        .hospital_img {
+            position: absolute;
+            width: 54px;
+            height: 54px;
+            border-radius: 4px;
+            left: 10px;
+            top: 10px;
+            z-index: 0;
+        }
+
+        .hospital_name {
+            position: absolute;
+            font-size: 14px;
+            color: #333333;
+            top: 10px;
+            left: 70px;
+            font-weight: bold;
+            /*width: 80%;*/
+        }
+
+        .hospital_name span {
+            position: absolute;
+            width: 33px;
+            height: 16px;
+            line-height: 16px;
+            font-size: 12px;
+            background-color: #f95e64;
+            color: white;
+            text-align: center;
+            border-radius: 3px;
+        }
+
+        .hospital_subContent {
+            position: absolute;
+            font-size: 12px;
+            color: #808080;
+            left: 70px;
+            top: 30px;
+        }
+
+        .hospital_subContent span {
+            position: absolute;
+            font-size: 12px;
+            color: #333333;
+            width: 300px;
+        }
+
+        li {
+            /*position: absolute;*/
+            font-size: 13px;
+            color: #808080;
+            margin-left: 10px;
+            margin-top: 6px;
+            list-style-type: none;
+        }
+
+        li span {
+            position: absolute;
+            font-size: 13px;
+            color: #333333;
+            width: 80%;
+        }
+
+        .money {
+            position: absolute;
+            font-size: 13px;
+            color: #43af80;
+            width: 80%;
+            text-align: right;
+            right: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="views tabs toolbar-through">
+    <!--导航条-->
+    <!-- Second view (for second wrap)-->
+    <div id="view" class="view view-main tab active">
+        <!-- We can make with view with navigation, let's add Top Navbar-->
+        <div class="navbar">
+            <div class="navbar-inner" style="background-color: #38a16d">
+                <div class="left" id="back">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back color-white" style="color: white"></i>
+                        <span style="color: white">返回</span>
+                    </a>
+                </div>
+                <div class="center sliding" style="color: white">订单详情</div>
+            </div>
+        </div>
+
+        <div class="pages navbar-through">
+            <div data-page="index-2" class="page page-on-center">
+                <div class="page-content">
+                    <div style="position:relative;background-color:#fff;width: 100%;height: 74px;border-bottom: 1px solid #e6e6e6">
+                        <img id="hospital_pic" src="" alt="头像" class="hospital_img"/>
+                        <img id="hospital_pic_hu" src="" alt="头像" class="hospital_img" style="width:29px;height: 29px;z-index: 1;"/>
+                        <div id="hopital_name" class="message hospital_name"><span id="hospital_type"></span></div>
+                        <div class="message hospital_subContent">科室：<span id="hospital_departments"></span></div>
+                        <div class="message hospital_subContent" style="top: 50px;">类型：<span id="hospital_nurse"></span></div>
+                    </div>
+
+                    <div style="position: relative;margin-top: 10px;width: 100%;height: 108px;background-color: #fff;border-top: 1px solid #e6e6e6;border-bottom: 1px solid #e6e6e6">
+                        <ui>
+                            <li class="message">患者姓名：<span id="user_name"></span></li>
+                            <li>陪护日期：<span id="user_time"></span></li>
+                            <li>联系电话：<span id="user_phone"></span></li>
+                            <li>服务人员：<span id="user_subDet"></span></li>
+                        </ui>
+                    </div>
+
+                    <div style="position: relative;margin-top: 10px;width: 100%;height: 140px;background-color: #fff;border-top: 1px solid #e6e6e6;border-bottom: 1px solid #e6e6e6">
+                        <ui>
+                            <li class="message">服务总价<span class="money" id="allmoney">￥0.00</span></li>
+                            <li>服务费<span class="money" id="service_money">￥0.00</span></li>
+                            <li>诊疗金<span class="money" id="reduce_money">￥0.00</span></li>
+                            <li>专车费<span class="money" id="car_money">￥0.00</span></li>
+                            <li>陪诊费<span class="money" id="accompanying_money">￥0.00</span></li>
+                        </ui>
+                    </div>
+
+                    <!--<div style="position: fixed;display: flex;height: 49px;width: 100%;background-color: #393d3b;bottom: 0">-->
+                        <!--<p id="money" class="message" style="position: absolute;line-height: 33px;font-size: 13px;color: #fff">服务费：99元</p>-->
+                        <!--<div style="position: absolute;right: 0;width: 105px;height: 49px;background-color: #26d086;font-size: 16px;color: #fff;text-align: center;line-height: 49px">立即付款</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript" src="../js/framework7.min.js"></script>
+<script type="text/javascript" src="../js/my-app.js"></script>
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/ekang.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script>
+    $(function () {
+
+        var nurse = {
+            getOrderDetail: function () {
+                $.ajax({
+                    type: 'GET',
+                    url: textUrl + '/diagnosis/orderdetail/',
+                    data: {         // 需要于客户端同步
+                        uid: $.cookie("local_userId"),
+                        order_id: getQueryString("orderId")
+                    },
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    success: function (result) {
+                        if (result.ret == 0) {
+                            var data = result.data;
+
+                            $('#hospital_pic').attr('src',data.pic);
+                            $('#hopital_name').html(data.hospital_name+"&nbsp&nbsp");
+                            $('#hopital_type').html(data.type_text);
+                            $('#hospital_departments').html(data.department_name);
+                            $('#hospital_nurse').html(data.product_type);
+                            $('#user_name').html(data.family_name);
+                            $('#user_time').html(data.appointment_time);
+                            $('#user_phone').html(data.link_mobile);
+                            $('#user_subDet').html(data.service_mobile);
+                            $('#allmoney').html("￥&nbsp"+data.total_amount);
+                            $('#service_money').html("￥&nbsp"+data.service_fee);
+                            $('#reduce_money').html("-￥&nbsp"+data.reduce_price);
+                            if(data.car_fee){
+                                $('#car_money').html("￥&nbsp"+data.car_fee);
+                            }else{
+                                $('#car_money').html("￥&nbsp0.00");
+                            }
+
+                            if(data.accompanying_fee){
+                                $('#accompanying_money').html("￥&nbsp"+data.accompanying_fee);
+                            }else{
+                                $('#accompanying_money').html("￥&nbsp0.00");
+                            }
+
+                            $('#money').html("服务费："+data.total_amount+"元");
+
+
+                            if(data.type == 1){     //1挂号；2陪诊；3表示预约床位;4.找护工;5表示就是住宿;6体检
+                                $('#hospital_pic_hu').attr('src',"../img/nurse_img/hu.png");
+                            }
+                        } else {
+                            alert(result.msg);
+                        }
+                    }
+                });
+            }
+        };
+
+        $('#back').click(function () {
+            history.back();
+        });
+
+        nurse.getOrderDetail();
+    });
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script src="../js/weixin2.js"></script>
+</body>
+</html>

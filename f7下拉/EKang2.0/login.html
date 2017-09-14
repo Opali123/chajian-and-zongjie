@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <title>登陆</title>
+    <link rel="stylesheet" href="css/ekang.css"/>
+    <link rel="stylesheet" href="css/reset.min.css"/>
+
+    <style type="text/css">
+
+        @media screen and (min-width: 600px) and (max-width: 900px) {
+
+        }
+        .exit {
+            position: absolute;
+            top: 26px;
+            right: 22px;
+            width: 0.36rem;
+            height: 0.36rem;
+        }
+
+        .logo{
+            position: absolute;
+            top: 10%;
+            left: 35%;
+            width: 30%;
+        }
+        .content-phone{
+            position: relative;
+            height: auto;
+            overflow: hidden;
+            width: 90%;
+            margin: auto;
+            margin-top: 75%;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5%;
+        }
+        .content-phone img{
+            width: 5%;
+            float: left;
+        }
+        .content-phone input{
+            width: 80%;
+            float: left;
+            border: none;
+            font-size: 4vw;
+            background: none;
+            margin-left: 2%;
+        }
+        .content-password{
+            position: relative;
+            height: auto;
+            overflow: hidden;
+            width: 90%;
+            margin: auto;
+            margin-top: 5%;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5%;
+        }
+        .content-password img{
+            width: 5%;
+            float: left;
+            margin-top: 4%;
+        }
+        .content-password input{
+            width: 80%;
+            float: left;
+            border: none;
+            font-size: 4vw;
+            background: none;
+            margin-top: 4%;
+            margin-left: 2%;
+        }
+        #sendCodeBtn{
+            position: absolute;
+            padding: 3% 5%;
+            background: none;
+            border:  1px solid #26d086;
+            color: #26d086;
+            right: 5%;
+            display: block;
+            width: 34%;
+            border-radius: 10px;
+            top:-5%;
+
+        }
+        #loginBtn{
+            width: 90%;
+            font-size: 5vw;
+            text-align: center;
+            background: #26d086;
+            border-radius: 30px;
+            border: none;
+            padding: 2% 0;
+            color: #fff;
+            margin-top: 4%;
+        }
+
+    </style>
+
+</head>
+<body style=" width: 100%; height: 100%">
+
+    <div style="width: 100%;height: 100%;text-align: center;">
+        <img src="img/exit-2.png" alt="退出" class="exit"/>
+        <img src="img/hand-right.png" alt="logo" class="logo"/>
+
+        <div class="content-phone">
+            <img src="img/ico_ures_sj.png" alt="手机" class="content-phone-img"/>
+            <input type="text" placeholder="请输入手机号码" class="content-phone-text" id="phone-text"/>
+        </div>
+
+        <div class="content-password">
+            <img src="img/Locked.png" alt="密码" class="content-phone-img"/>
+            <input type="text" placeholder="请输入验证码" class="content-phone-text" id="passwork-text" style="width: 40%"/>
+            <!--<span class="btn" id="sendCodeBtn">获取验证码</span>-->
+            <input type="button" class="btn" id="sendCodeBtn" value="获取验证码" />
+        </div>
+
+        <button class="login-btn" id="loginBtn">登陆</button>
+
+    </div>
+
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/ekang.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script>
+
+        $(function() {
+            var app = {
+                //发送验证码
+                sendCode: function (phone) {
+                    $.ajax({
+                        type: 'GET',
+                        url: textUrl + 'user/sendCode/login',
+                        data: {
+                            cell: phone
+                        },
+                        dataType: 'jsonp',
+                        jsonp: 'callback',
+                        success: function (result) {
+                            if (result.ret == 0) {
+                                $.jTip('验证码发送成功', 2000);
+                            }else{
+                                alert(result.msg);
+                            }
+                        }
+                    });
+                },
+                //登陆
+                getWechatLogin: function (phone,password) {
+                    $.ajax({
+                        type: 'post',
+                        url: textUrl + 'user/wechatLogin/login',
+                        data: {
+                            cell: $('#phone-text').val(),
+                            code: $('#passwork-text').val()
+                        },
+                        dataType: 'jsonp',
+                        jsonp: 'callback',
+                        success: function (result) {
+                            if (result.ret == 0) {
+                                $.cookie('local_userId', result.data.uid, { expires: 7,path: '/' });
+                                history.back();
+                            }else{
+                                alert(result.msg);
+                            }
+                        }
+                    });
+                },
+            };
+
+            $('#sendCodeBtn').on('click',function(){
+
+                var phone_text = $('#phone-text').val();
+
+                if(phone_text == ""){
+                    alert("请填写手机号");
+                    return;
+                }
+                if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone_text))){
+                    alert("请输入正确的手机号");
+                    document.mobileform.mobile.focus();
+                    return false;
+                }
+                app.sendCode(phone_text);
+                time(this);
+            });
+
+            var wait=60;
+            function time(o) {
+                if (wait == 0) {
+                    o.removeAttribute("disabled");
+                    o.value = "获取验证码";
+                    wait = 60;
+                } else {
+                    o.setAttribute("disabled", true);
+                    o.value="重新发送(" + wait + ")";
+                    wait--;
+                    setTimeout(function() {
+                                time(o)
+                            },
+                            1000)
+                }
+            }
+
+            $('#loginBtn').on('click',function(){
+
+                var phone_text = $('#phone-text').val();
+                var password_text = $('#passwork-text').val();
+
+                // 验证手机号
+                if(phone_text == ""){
+                    alert("请填写手机号");
+                    return;
+                }
+                if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone_text))){
+                    alert("请输入正确的手机号");
+                    document.mobileform.mobile.focus();
+                    return false;
+                }
+                // 验证验证码
+                if(password_text == ""){
+                    alert("请输入验证码");
+                    return;
+                }
+
+                app.getWechatLogin(phone_text,password_text);
+            });
+
+            $('.exit').click(function () {
+                history.back();
+            });
+
+        });
+
+    </script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+    <script src="js/weixin2.js"></script>
+</body>
+
+</html>

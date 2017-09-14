@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" http://www.w3.org/TR/html4/loose.dtd>
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>JQzoom 2 Demo</title>
+<meta charset="utf-8">
+<script src="../js/jquery-1.6.js"></script>
+<script src="../js/jquery.jqzoom-core.js"></script>
+<link rel="stylesheet" href="../css/jquery.jqzoom.css" type="text/css">
+</head>
+<script type="text/javascript">
+$(function(){
+    $('.jqzoom').jqzoom({
+            zoomType: 'standard',
+            lens:true,
+            preloadImages: true,
+            alwaysOn:false,
+			zoomWidth: 200,
+			zoomHeight: 200,
+			imageOpacity: 0.2,
+        });
+})
+
+</script>
+<body>
+
+<div class="clearfix" id="content" style="margin-top:100px;margin-left:350px; height:500px;width:500px;" >
+   
+   <div class="clearfix">
+        <a href="images/da/da1.jpg" class="jqzoom" rel='gal1'  title="" >
+            <img src="images/zhong/z1.jpg"  title=""  style="border: 4px solid #666;">
+        </a>
+    </div>
+	
+	<div class="clearfix" >
+		<ul id="thumblist" class="clearfix" >
+			<li><a class="zoomThumbActive" href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: './images/zhong/z1.jpg',largeimage: './images/da/da1.jpg'}"><img src='./images/xiao/xiao1.jpg'></a></li>
+			<li><a  href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: './images/zhong/z2.jpg',largeimage: './images/da/da2.jpg'}"><img src='./images/xiao/xiao2.jpg'></a></li>
+			<li><a href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: './images/zhong/z3.jpg',largeimage: './images/da/da3.jpg'}"><img src='./images/xiao/xiao3.jpg'></a></li>
+			<li><a  href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: './images/zhong/z2.jpg',largeimage: './images/da/da2.jpg'}"><img src='./images/xiao/xiao2.jpg'></a></li>
+			<li><a href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: './images/zhong/z3.jpg',largeimage: './images/da/da3.jpg'}"><img src='./images/xiao/xiao3.jpg'></a></li>
+		</ul>
+	</div>
+//rel   smallimage  中间那张图的路径 
+//rel   largeimage  最大的图片的路径
+//li img    缩略图
+</div>
+
+
+</body>
+</html>

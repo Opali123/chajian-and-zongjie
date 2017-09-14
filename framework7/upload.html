@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+</head>
+<link rel="stylesheet" href="css/framework7.ios.min.css">
+<link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+<link rel="stylesheet" href="css/my-app.css">
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/framework7.min.js"></script>
+<script type="text/javascript" src="js/my-app.js"></script>
+<script>
+    $(function(){
+        var myApp = new Framework7();
+        var $$ = Dom7;
+// 随意编造的内容
+        var songs = ['Yellow Submarine', 'Don\'t Stop Me Now', 'Billie Jean', 'Californication'];
+        var authors = ['Beatles', 'Queen', 'Michael Jackson', 'Red Hot Chili Peppers'];
+// 下拉刷新页面
+        var ptrContent = $$('.pull-to-refresh-content');
+// 添加'refresh'监听器
+        ptrContent.on('refresh', function (e) {
+//            // 模拟2s的加载过程
+            setTimeout(function () {
+                //加载执行的事件
+                // 加载完毕需要重置
+                myApp.pullToRefreshDone();
+            }, 1000);
+        });
+        // 加载flag
+        flag()
+    });
+    function flag(){
+        var loading = false;
+// 上次加载的序号
+        var lastIndex = $$('.list-block li').length;
+// 最多可加载的条目
+        var maxItems = 60;
+// 每次加载添加多少条目
+        var itemsPerLoad = 20;
+// 注册'infinite'事件处理函数
+        $$('.infinite-scroll').on('infinite', function () {
+            // 如果正在加载，则退出
+            if (loading) return;
+            // 设置flag
+            loading = true;
+            // 模拟1s的加载过程
+            setTimeout(function () {
+                // 重置加载flag
+                loading = false;
+                if (lastIndex >= maxItems) {
+                    // 加载完毕，则注销无限加载事件，以防不必要的加载
+                    myApp.detachInfiniteScroll($$('.infinite-scroll'));
+                    // 删除加载提示符
+                    $$('.infinite-scroll-preloader').remove();
+                    return;
+                }
+                // 生成新条目的HTML
+                var html = '';
+                for (var i = lastIndex + 1; i <= lastIndex + itemsPerLoad; i++) {
+                    html += '<li class="item-content"><div class="item-inner"><div class="item-title">Item ' + i + '</div></div></li>';
+                }
+                // 添加新条目
+                $$('.list-block ul').append(html);
+                // 更新最后加载的序号
+                lastIndex = $$('.list-block li').length;
+            }, 1000);
+        });
+    }
+</script>
+<style>
+    .infinite-scroll-preloader {
+        margin-top:-20px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .infinite-scroll-preloader .preloader {
+        width:34px;
+        height:34px;
+    }
+    li{
+        height: 80px;
+        background: red;
+    }
+</style>
+<body>
+<div class="views">
+    <div class="view view-main" data-page="home">
+        <div class="pages navbar-through">
+            <div data-page="home" class="page">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="left"></div>
+                        <div class="center" style="left: 0px;">Pull To Refresh</div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <div class="page-content pull-to-refresh-content infinite-scroll">
+                    <div class="pull-to-refresh-layer">
+                        <div class="preloader"></div>
+                        <div class="pull-to-refresh-arrow"></div>
+                    </div>
+                    <div class="list-block">
+                        <ul>
+                            <li class="item-content">
+                                213231
+                            </li>
+                            <li class="item-content">
+                                213231
+                            </li>
+                            <li class="item-content">
+                                213231
+                            </li>
+                            <li class="item-content">
+                                213231
+                            </li>
+                            <li class="item-content">
+                                213231
+                            </li>
+                            <li class="item-content">
+                                213231
+                            </li>
+                            <li class="item-content">
+                                213231
+                            </li>
+                            <li class="item-content">
+                                213231
+                            </li>
+                            <li class="item-content">
+                                213231
+                            </li>
+                            <li class="item-content">
+                                213231
+                            </li>
+                       </ul>
+                    </div>
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

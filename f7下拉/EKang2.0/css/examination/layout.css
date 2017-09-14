@@ -1,0 +1,922 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0px; padding:0px;/* pointer-events: none;*/}
+img{
+    display: block;
+}
+.ui-loader{
+    display: none;
+}
+/*高级体检*/
+.main{
+    width:100%;
+}
+.main .tijian{
+    width:100%;
+    height: auto;
+    overflow: hidden;
+}
+.main .tijian img{
+    height: auto;
+    overflow: hidden;
+    width: 90%;
+    margin: 3% auto;
+}
+/*体检*/
+.main .tijian2{
+    width:100%;
+    height: 100%;
+    overflow: hidden;
+}
+.main .tijian2 .routine{
+    width: 95%;
+    height: auto;
+    margin: 7% auto;
+    position: relative;
+}
+.main .tijian2 .routine img{
+    width: 100%;
+}
+/*.main .tijian2 .routine a{
+    width: 30%;
+    height: 10vw;
+    background: rgba(0,0,0,.5);
+    position: absolute;
+    top:17vw;
+    left:35%;
+    color: #fff;
+    font-size: 4vw;
+    text-align: center;
+    line-height: 10vw;
+    border-radius: 60vw;
+}*/
+
+/*体检详情*/
+.tijian_for{
+    width: 100%;
+}
+.tijian_for .tit{
+    width: 90%;
+    margin: 3% auto;
+    font-size: 5vw;
+    color: #000;
+    font-weight: bold;
+}
+.tijian_for .con{
+    width: 90%;
+    margin: auto;
+    font-size: 5vw;
+    line-height: 7vw;
+    letter-spacing: 0.2vw;
+    margin-bottom: 15vw;
+}
+.tijian_for .con img{
+    width: 100%;
+}
+.tijian_for .foot{
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+}
+.tijian_for .foot .left{
+    width: 70%;
+    height: 15vw;
+    line-height: 15vw;
+    text-indent: 1em;
+    background: #393d3b;
+    float: left;
+    color:#fff;
+    font-size: 4vw;
+}
+.tijian_for .foot .right{
+    width: 30%;
+    height: 15vw;
+    line-height: 15vw;
+    text-align: center;
+    background: #26d086;
+    float: right;
+    color: #fff;
+    font-size: 4vw;
+}
+.tijian_for .foot .right a{
+    color: #fff;
+}
+/*order_status*/
+.order_status{
+    width: 100%;
+}
+.order_status .left{
+    float: left;
+    margin-left: 5%;
+    margin-top: 10%;
+}
+.order_status .left dl dt{
+    width: 6vw;
+    height: 6vw;
+    background: #d9d9d9;
+    border-radius:100px;
+}
+.order_status .left dl dd{
+    width: 1px;
+    height: 25vw;
+    background: #d9d9d9;
+    margin-left: 3vw;
+}
+.order_status .right{
+    width: 80%;
+    float: left;
+    margin-left: 5%;
+}
+.order_status .right .status1{
+    width: 100%;
+    background: #f5f5f5;
+    padding-top: 3%;
+    margin-top: 8%;
+}
+.order_status .right .status1 .con{
+    width: 90%;
+    margin: auto;
+}
+.order_status .right .status1 .con .top{
+    font-size: 5vw;
+    color: #000;
+
+}
+.order_status .right .status1 .con .top .pl{
+    font-size: 4vw;
+    float: left;
+}
+.order_status .right .status1 .con .top .pr{
+    font-size: 3.5vw;
+    float: right;
+}
+.order_status .right .status1 .number{
+    clear: both;
+    font-size: 4vw;
+    color: #404040;
+    padding: 3% 0;
+    line-height: 7vw;
+}
+/*消息通知*/
+.notice{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.notice .tz{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+.notice .tz .time{
+    width: 33%;
+    background: #d0d0d4;
+    color: #fff;
+    text-align: center;
+    margin: auto;
+    padding: 3% 0;
+    font-size: 3.5vw;
+    border-radius: 5px;
+    margin: 5% auto;
+}
+.notice .con{
+    width: 90%;
+    height: auto;
+    overflow: hidden;
+    margin: auto;
+    margin-top: 4%;
+}
+.notice .con .left{
+    width: 15%;
+    float: left;
+}
+.notice .con .left img{
+    width: 100%;
+}
+.notice .con .right{
+    width: 84%;
+    float: right;
+}
+.notice .con .right .top{
+    color: #707070;
+    font-size: 3.8vw;
+    margin-left: 5%;
+}
+.notice .con .right .bottom{
+    width: 100%;
+}
+.notice .con .right .bottom img{
+    width: 5%;
+    float: left;
+    margin-top: 5%;
+    z-index: 2;
+    position: relative;
+}
+.notice .con .right .bottom .news{
+    margin-top: 3%;
+    width: 91%;
+    float: left;
+    border: 1px solid #eaeaea;
+    font-size: 4vw;
+    color:#333;
+    border-radius: 5px;
+    line-height: 7vw;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-left: 3%;
+    margin-left: -1px;
+    z-index: 1;
+    position: relative;
+    background: #fff;
+}
+/*国际医疗*/
+.main .gj_care{
+    width:100%;
+    height: 100%;
+    overflow: hidden;
+}
+/*.main .gj_care .routine{
+    width: 90%;
+    height: auto;
+    margin: 5% auto;
+    position: relative;
+}
+.main .gj_care .routine .bj{
+    width: 100%;
+}
+.main .gj_care .routine .label{
+    width: 36%;
+    position: absolute;
+    top:9%;
+    left:-1%;
+}
+.main .gj_care .routine p{
+    position: absolute;
+    font-size: 5vw;
+    top:15%;
+    color:#fff;
+    left:4%;
+}
+.main .gj_care .routine a{
+
+    height: 10vw;
+
+    position: absolute;
+    bottom:2vw;
+    right:5%;
+    color: #fff;
+    font-size: 4.5vw;
+    text-align: center;
+    line-height: 10vw;
+    border-radius: 60vw;
+}*/
+.routine img{
+    width: 95%;
+    margin: 7% auto;
+}
+/*国际会诊*/
+.gj_examine{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.gj_examine .con{
+    width: 94%;
+    height: auto;
+    overflow: hidden;
+    margin:auto;
+    margin-top: 14%;
+}
+.gj_examine .con .img_l{
+    width: 45%;
+    float: left;
+}
+.gj_examine .con .img_r{
+    width: 45%;
+    float: right;
+}
+.jt img{
+    position: fixed;
+}
+.jt1{
+    float: left;
+    width: 7%;
+    -webkit-transform: rotate(180deg);
+    margin-top: 20%;
+    margin-left: 1%;
+}
+.jt2{
+    top:31%;
+    left:73%;
+    width: 7%;
+    -webkit-transform: rotate(270deg);
+}
+.jt3{
+    float: left;
+    width: 7%;
+
+    margin-top: 20%;
+    margin-left: 1%;
+
+}
+.jt4{
+    top:65%;
+    left:20%;
+    width: 7%;
+    -webkit-transform: rotate(270deg);
+
+}
+.jt5{
+    float: left;
+    width: 7%;
+    -webkit-transform: rotate(180deg);
+    margin-top: 20%;
+    margin-left: 1%;
+
+}
+/*个人中心*/
+.individual_center{
+    width: 100%;
+    height: 100%;
+    background: #ebebeb;
+    position: absolute;
+}
+.individual_center .head_portrait{
+    width: 100%;
+    height: 75px;
+    overflow: hidden;
+    background: #fff;
+    margin-top: 20px;
+}
+.individual_center .head_portrait .left{
+    float: left;
+    font-size: 16px;
+    color: #656565;
+    line-height: 75px;
+    margin-left: 4%;
+
+}
+.individual_center .head_portrait .right{
+    float: right;
+
+}
+.individual_center .head_portrait .right .tx{
+    width: 60px;
+    height: 60px;
+    float: left;
+    margin-top: 7px;
+    background: url("../images/img_2_03.jpg") center center;
+    background-size: 60px 60px;
+    border-radius: 100px;
+}
+.individual_center .head_portrait .right .jt{
+    width: 24px;
+    height: 24px;
+    float: left;
+    margin-top: 25px;
+}
+.individual_center .name{
+    width: 100%;
+    height: 44px;
+    overflow: hidden;
+    background: #fff;
+    margin-top: 10px;
+}
+.individual_center .name .left{
+    float: left;
+    font-size: 16px;
+    color: #656565;
+    line-height: 44px;
+    margin-left: 4%;
+
+}
+.individual_center .name .right{
+    float: right;
+
+}
+.individual_center .name .right p{
+    font-size: 16px;
+    line-height: 44px;
+    float: left;
+    color: #808080;
+}
+.individual_center .name .right input{
+    font-size: 16px;
+    line-height: 44px;
+    float: left;
+    color: #808080;
+    border: none;
+    display: block;
+    float: left;
+    width: 200px;
+    text-align: right;
+    font-family:Arial,"微软雅黑";
+}
+.individual_center .name .right .jt{
+    width: 24px;
+    height: 24px;
+    float: left;
+    margin-top: 11px;
+}
+
+
+.input-file{margin: 0 auto 0px auto; width:100%; height: 75px; opacity: 0; background:#000; background-size: 100% auto; margin-top:19px;}
+input[type="file"]{z-index: 10; width: 100%; height: 100%;opacity: 0;}
+.relative{
+    position:relative
+}
+
+.absolute{
+    position:absolute
+}
+
+
+.individual_center .phone{
+    width: 100%;
+    height: 44px;
+    overflow: hidden;
+    background: #fff;
+    margin-top: 10px;
+}
+.individual_center .phone .left{
+    float: left;
+    font-size: 16px;
+    color: #656565;
+    line-height: 44px;
+    margin-left: 4%;
+
+}
+.individual_center .phone .right{
+    float: right;
+
+}
+.individual_center .phone .right p{
+    font-size: 16px;
+    line-height: 44px;
+    float: left;
+    color: #808080;
+}
+
+.individual_center .phone .right .jt{
+    width: 24px;
+    height: 24px;
+    float: left;
+    margin-top: 11px;
+}
+#individual_submit{
+    display: block;
+    width: 30%;
+    position: fixed;
+    left:35%;
+    bottom: 5%;
+    font-size: 4vw;
+    border: none;
+    background: #38A16D;
+    color: #fff;
+    font-family:Arial,"微软雅黑";
+    padding: 3% 0;
+    border-radius: 5px;
+}
+.check_detailed{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    background: #e6e6e6;
+    font-family: '微软雅黑';
+}
+.check_detailed .table{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    background: #ffffff;
+    padding-bottom: 3%;
+}
+.check_detailed .table .title{
+    width: 100%;
+    margin-top: 3%;
+    height: auto;
+    overflow: hidden;
+}
+.check_detailed .table .title img{
+    width: 15%;
+    float: left;
+}
+.check_detailed .table .title p{
+    width: 60%;
+    float: left;
+    margin-left: 3%;
+    font-size: 5vw;
+    color: #000;
+}
+.check_detailed .table .form{
+    width: 94%;
+    border: 1px solid #999999;
+    margin: auto;
+    margin-top: 3%;
+    height: auto;
+    overflow: hidden;
+}
+.check_detailed .table .form .one{
+    width: 100%;
+    margin-top: 2%;
+    height: auto;
+    overflow: hidden;
+}
+.check_detailed .table .form .one p{
+    width: 40%;
+    float: left;
+    height: auto;
+    overflow: hidden;
+    color: #000;
+    text-align: center;
+}
+.check_detailed .detailed_cost{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    background: #ffffff;
+    margin-top: 3%;
+}
+.check_detailed .detailed_cost .title{
+    width: 100%;
+    margin-top: 3%;
+    height: auto;
+    overflow: hidden;
+}
+.check_detailed .detailed_cost .title img{
+    width: 15%;
+    float: left;
+}
+.check_detailed .detailed_cost .title p{
+    width: 60%;
+    float: left;
+    margin-left: 3%;
+    font-size: 5vw;
+    color: #000;
+}
+.detailed_cost .list{
+    width: 92%;
+    margin: auto;
+    margin-top: 5%;
+}
+.detailed_cost .list li{
+    line-height: 8vw;
+}
+.check_detailed .technological_process{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    background: #ffffff;
+    margin-top: 3%;
+}
+.check_detailed .technological_process .title{
+    width: 100%;
+    margin-top: 3%;
+    height: auto;
+    overflow: hidden;
+}
+.check_detailed .technological_process .title img{
+    width: 15%;
+    float: left;
+}
+.check_detailed .technological_process .title p{
+    width: 60%;
+    float: left;
+    margin-left: 3%;
+    font-size: 5vw;
+    color: #000;
+}
+.technological_process .list{
+    width: 94%;
+    margin: auto;
+    margin-top: 5%;
+}
+.technological_process .list li{
+
+}
+.technological_process .con{
+    width: 94%;
+    margin: 5% auto;
+}
+
+.technological_process .infor{
+    width: 94%;
+    margin:3% auto;
+    height: auto;
+    overflow: hidden;
+}
+.technological_process .infor dl{
+    width: 100%;
+}
+.technological_process .infor dl dt{
+    color: #000;
+    font-size: 4vw;
+    margin-bottom: 3%;
+}
+.technological_process .infor dl dd{
+    color: #666;
+    margin-top: 1%;
+}
+.technological_process .infor dl dd b{
+    font-size: 4vw;
+
+}
+.technological_process .infor .margint dd{
+    margin-top: 4%;
+}
+.check_detailed .explain{
+    width: 94%;
+    margin: auto;
+    height: auto;
+    overflow: hidden;
+    margin-top: 8%;
+    margin-bottom: 30%;
+}
+.check_detailed .explain .p1{
+    width: 5%;
+    float: left;
+    margin-top: -1%;
+    font-size: 7vw;
+    color: red;
+}
+.check_detailed .explain .p2{
+    width: 93%;
+    float: right;
+}
+.technological_process .bot_sub{
+    width: 80%;
+    padding: 2%;
+    font-size: 5vw;
+    color: #fff;
+    background: #1ec5b3;
+    border-radius: 50px;
+    border: none;
+    display: block;
+    margin: auto;
+    margin-top: 4%;
+    margin-bottom: 10%;
+}
+
+.appointment{
+    width: 100%;
+}
+.appointment .appointment_table{
+    width: 92%;
+    margin: auto;
+    margin-top: 3%;
+}
+.appointment .appointment_table .name{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+}
+.appointment .appointment_table .name label{
+    width: 19%;
+    float: left;
+    font-size: 4vw;
+    height: 11vw;
+    line-height: 11vw;
+}
+.appointment .appointment_table .name input{
+    width: 76%;
+    border: none;
+    height: 11vw;
+    text-indent: 1em;
+    font-size: 4vw;
+    background: #fff;
+    margin-left: 3%;
+    float: left;
+}
+.appointment .appointment_table .name p{
+    position: absolute;
+    font-size: 7vw;
+    right: 4%;
+    top:19%;
+    color: red;
+}
+.appointment .appointment_table .sex{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    margin-top: 4%;
+}
+.appointment .appointment_table .sex label{
+    width: 19%;
+    float: left;
+    font-size: 4vw;
+    height: 11vw;
+    line-height: 11vw;
+}
+.appointment .appointment_table .sex div{
+    width: 36.5%;
+    border: none;
+    height: 11vw;
+    font-size: 4vw;
+    background: #fff;
+    margin-left: 3%;
+    float: left;
+    line-height: 11vw;
+    text-align: center;
+}
+.appointment .appointment_table .sex div.hover{
+    -webkit-animation:sexhover 0.5s linear 0s forwards;
+}
+@-webkit-keyframes sexhover{
+    0% {background: #fff;color: #000;}
+   100% {background: #1ec5b3;color: #fff;}
+}
+.appointment .appointment_table .age{
+    margin-top: 4%;
+}
+.appointment .appointment_table .phone{
+    margin-top: 4%;
+}
+.appointment .appointment_table textarea{
+    width: 98%;
+    margin: auto;
+    margin-top: 4%;
+    border: none;
+    min-height: 30vw;
+    max-height: 30vw;
+    font-size: 4vw;
+    text-indent: 1em;
+    padding-top: 1%;
+}
+.appointment .appointment_sub{
+    width: 80%;
+    padding: 2%;
+    font-size: 5vw;
+    color: #fff;
+    background: #1ec5b3;
+    border-radius: 50px;
+    border: none;
+    display: block;
+    margin: auto;
+    margin-top: 30%;
+}
+.hospitalinfor{
+    width: 100%;
+}
+.hospitalinfor .banner{
+    overflow: hidden;
+    height: auto;
+    position: relative;
+
+}
+.hospitalinfor .banner .win{
+    position:absolute;
+    left:0;
+    z-index: 1;
+}
+.hospitalinfor .banner .win img{
+    float: left;
+}
+.hospitalinfor .banner .num{
+    position: absolute;
+    right: 2%;
+    top: 34vw;
+    padding: 1% 4%;
+    background: rgba(0,0,0,.5);
+    z-index: 2;
+    border-radius: 15px;
+}
+.hospitalinfor .banner .num p{
+    float: left;
+    color: #fff;
+    font-size: 4vw;
+}
+.hospitalinfor .tab{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    -webik-box-sizing:border-box;
+}
+.hospitalinfor .tab .top{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    -webik-box-sizing:border-box;
+}
+.hospitalinfor .tab .top ul{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    -webik-box-sizing:border-box;
+    background: #fff;
+}
+.hospitalinfor .tab .top ul li{
+    position: relative;
+    width: 33.333%;
+    height: auto;
+    float: left;
+    border-right: 1px solid #e3e3e3;
+    box-sizing:border-box; -moz-box-sizing:border-box;-webik-box-sizing:border-box;
+    text-align: center;
+    margin: 3% 0;
+    padding: 2% 0;
+    font-size: 4vw;
+}
+.hospitalinfor .tab .top ul li.hover{
+    color: #1ec5b3;
+    -webkit-animation:lihover 1s linear 0s forwards;
+}
+@-webkit-keyframes lihover {
+    0%{
+        color: #666;
+    }
+    100%{
+        color: #1ec5b3;
+    }
+}
+.hospitalinfor .tab .top ul li .bot_bor{
+    width: 0%;
+    position: absolute;
+    bottom: -30%;
+    left:20%;
+    height: 2px;
+    background: #1ec5b3;
+    display: none;
+}
+.hospitalinfor .tab .top ul li .bot_bor.hover{
+    -webkit-animation:bot_borhover 0.5s linear 0s forwards;
+}
+@-webkit-keyframes bot_borhover {
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 60%;
+    }
+}
+.hospitalinfor .bot_submit{
+    width: 100%;
+    height:auto;
+    background: #fff;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+}
+.hospitalinfor .bot_submit button{
+    width: 80%;
+    padding: 3% 0;
+    margin: auto;
+    margin-top: 4%;
+    border: none;
+    background: #1ec5b3;
+    color: #fff;
+    font-size: 5vw;
+    display: block;
+    border-radius: 40px;
+    margin-bottom: 4%;
+}
+
+.bot_button{
+    width: 100%;
+    height:auto;
+    background: #fff;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+}
+.bot_button button{
+    width: 80%;
+    padding: 3% 0;
+    margin: auto;
+    margin-top: 4%;
+    border: none;
+    background: #1ec5b3;
+    color: #fff;
+    font-size: 5vw;
+    display: block;
+    border-radius: 40px;
+    margin-bottom: 4%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

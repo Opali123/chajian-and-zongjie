@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+</head>
+<link rel="stylesheet" href="css/framework7.ios.min.css">
+<link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+<link rel="stylesheet" href="css/my-app.css">
+
+<script src="js/jquery.min.js"></script>
+<body>
+<div class="views">
+    <div class="view view-main" data-page="home">
+        <div class="pages">
+            <div data-page="home" class="page navbar-fixed">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="left"></div>
+                        <div class="center" style="left: 0px;">Pull To Refresh</div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <div class="page-content pull-to-refresh-content transitioning" style="">
+                    <div class="pull-to-refresh-layer">
+                        <div class="preloader"></div>
+                        <div class="pull-to-refresh-arrow"></div>
+                    </div>
+                    <div class="list-block media-list">
+                        <ul>
+                            <li class="item-content">
+                                <div class="item-media"><img src="http://hhhhold.com/88/d/jpg?1" width="44"></div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">Yellow Submarine</div>
+                                    </div>
+                                    <div class="item-subtitle">Beatles</div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-media"><img src="http://hhhhold.com/88/d/jpg?2" width="44"></div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">Don't Stop Me Now</div>
+                                    </div>
+                                    <div class="item-subtitle">Queen</div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-media"><img src="http://hhhhold.com/88/d/jpg?3" width="44"></div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">Billie Jean</div>
+                                    </div>
+                                    <div class="item-subtitle">Michael Jackson</div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="list-block-label">
+                            <p>Just pull page down to let the magic happen.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/framework7.min.js"></script>
+<script type="text/javascript" src="js/my-app.js"></script>
+<script>
+    $(function(){
+        var myApp = new Framework7();
+        var $$ = Dom7;
+// 随意编造的内容
+        var songs = ['Yellow Submarine', 'Don\'t Stop Me Now', 'Billie Jean', 'Californication'];
+        var authors = ['Beatles', 'Queen', 'Michael Jackson', 'Red Hot Chili Peppers'];
+// 下拉刷新页面
+        var ptrContent = $$('.pull-to-refresh-content');
+// 添加'refresh'监听器
+        ptrContent.on('refresh', function (e) {
+//            // 模拟2s的加载过程
+            setTimeout(function () {
+                // 随机图片
+                var picURL = 'http://hhhhold.com/88/d/jpg?' + Math.round(Math.random() * 100);
+                // 随机音乐
+                var song = songs[Math.floor(Math.random() * songs.length)];
+                // 随机作者
+                var author = authors[Math.floor(Math.random() * authors.length)];
+                // 列表元素的HTML字符串
+                var itemHTML = '<li class="item-content">' +
+                        '<div class="item-media"><img src="' + picURL + '" width="44"/></div>' +
+                        '<div class="item-inner">' +
+                        '<div class="item-title-row">' +
+                        '<div class="item-title">' + song + '</div>' +
+                        '</div>' +
+                        '<div class="item-subtitle">' + author + '</div>' +
+                        '</div>' +
+                        '</li>';
+                // 前插新列表元素
+                ptrContent.find('ul').prepend(itemHTML);
+                // 加载完毕需要重置
+                myApp.pullToRefreshDone();
+            }, 1000);
+        });
+    })
+</script>
+</body>
+</html>

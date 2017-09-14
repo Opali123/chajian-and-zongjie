@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+</head>
+<script>
+    window.onload = function(){
+        function displayinfor(aregs){
+            var output = '';
+//            if(typeof aregs.name=='string'){
+//                output+= 'name:'+aregs.name
+//            }
+//            if(typeof aregs.age=='number'){
+//                output+= 'name:'+aregs.age
+//            }
+            output+='姓名:'+aregs.name+' '+'年龄:'+aregs.age
+            console.log(output);
+        }
+        displayinfor({
+                name:'阿斯蒂',
+                age:30
+        })
+    }
+</script>
+<body>
+<div draggable="true">132</div>
+<input type="text" size="80">
+</body>
+</html>

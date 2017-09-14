@@ -1,0 +1,58 @@
+.user-img {
+    position: absolute;
+    width: 76px;
+    height: 76px;
+    top: 15px;
+    left: 50%;
+    margin-left: -38px;
+    border-radius: 76px;
+    border: 2px solid #daf0e6;
+}
+
+.user-setup {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    top: 15px;
+    right: 10px;
+}
+
+.user-name {
+    position: absolute;
+    width: 100%;
+    top: 90px;
+    font-size: 13px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.user-detailInformation {
+    height: 38px;
+    text-align: center;
+    line-height: 38px;
+    font-size: 12px;
+    color: #fff;
+}
+
+.user-achievement {
+    background: url(../../img/mypage_img/iconfont-576chengjiu.png) no-repeat 30px center transparent;
+    background-size: 18px 18px;
+}
+
+.user-income {
+    background: url(../../img/mypage_img/iconfont-qian.png) no-repeat 30px center transparent;
+    background-size: 18px 18px;
+}
+
+li {
+    width: 100%;
+    height: 45px;
+    border-bottom: 1px solid #e6e6e6;
+    font-size: 14px;
+    color: #333333;
+    /*background: url(../../img/mypage_img/iconfont-icon.png) no-repeat 10px center transparent;*/
+    /*background-size: 18px 18px;*/
+    padding-left: 45px;
+    text-align: left;
+    line-height: 45px;
+}

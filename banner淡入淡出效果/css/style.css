@@ -1,0 +1,47 @@
+body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div,dl,dt,dd,p,label{margin:0;padding:0;border:0;}
+.hhh.bbb{overflow-y: hidden;}
+a{color:#000000;text-decoration:none;}
+a:hover{color:#d40000;}
+a:active{color:#7A2123;}
+a img{ border:0;}
+ul,ol,li{ list-style: none; }
+input{padding: 0;margin: 0;}
+.clearfix:after{content:".";height:1px;display:block; visibility:hidden;}
+.clearfix{zoom:1;display:block;display:inline-block;}
+.clear{clear: both;}
+body{font-size:12px;font-family:"microsoft yahei", "SimSun"; line-height:22px;min-width: 1222px;}
+
+
+
+
+body,ul,ol,li,h1,h2,h3,h4,h5,h6,p,input,table,td,th{ margin:0;padding:0;border: none;}
+table{ border-collapse: collapse;}
+.clearfix{zoom:1;-display:inline-block;}
+.clearfix:after{content: '';display: inline;clear: both;}
+img{ vertical-align:top;}
+.bm{ border: 1px solid #dcdcdc;margin:24px auto 0;width:1220px;}
+
+/*焦点图*/
+.sh_slide{position:relative;width:900px;height:360px;overflow:hidden;}
+.slide_txt{position: absolute;top: 0;left: 0;width:830px;height:50px;color: #000;z-index: 100;background: url(../images/index_bg08.png) repeat 0 0;line-height: 50px;padding-left: 70px;font-size: 14px;font-family: "microsoft yahei";}
+.slide_txt p{float: left;height: 27px;line-height: 27px;margin-top: 13px;}
+.slide_bor{border-right: 1px dashed #b6b5b6;padding-right: 15px;margin-right: 15px;}
+.slide_num{padding: 5px;background: url(../images/index_bg06.png) no-repeat 0 3px;margin:0 2px;color: #333;}
+.slide_beg{margin-left: 10px;}
+.slide_end{margin-right: 10px;}
+.sh_slide p.prev,.sh_slide p.next{width:50px;height:50px;cursor:pointer;position: absolute;top: 155px;background:url(../images/index_bg07.png) no-repeat 0 0;display: none;}
+.sh_slide p.prev{left: 0;}
+.sh_slide p.next{background-position: 0 -68px;right:0;}
+.sh_slide .slideNum{height:14px;z-index:99;overflow: hidden;position: absolute;bottom: 14px;right: 180px;}
+.sh_slide .slideNum li{float:left;margin:0 4px;display:inline;width:14px;height:14px;background:url(../images/index_bg07.png) no-repeat -4px -152px;overflow:hidden;cursor:pointer;line-height: 9999px;}
+.sh_slide .slideNum li.current{background-position:-4px -186px;}
+.sh_slide .list{position:relative;height:360px;overflow:hidden;}
+.sh_slide .list li{position:absolute;top:0;left:0;width:100%;height:360px;}
+.sh_slide .list li a{width:100%;height:360px;display: block;background-position: top center;background-repeat: no-repeat;}
+.sh_slide .list li.current a{opacity:1;filter:alpha(opacity=100);}
+
+.ulist_02{height: 212px;overflow: hidden;border: 1px solid #eee;border-left: none;}
+.ulist_02 li{float: left;width: 223px;border-left: 1px solid #eee;text-align: center;height: 212px;overflow: hidden;}
+.ulist_02 li h2{padding-top: 18px;line-height: 30px;font-weight: 400;}
+.ulist_02 li p{color: #999;}
+

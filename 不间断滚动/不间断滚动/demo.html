@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>Jquery实现图片列表横向和纵向不间断滚动插件</title>
+<meta name="author" content="Jquery-School" />
+<meta name="Copyright" content="Jquery-School,www.jq-school.com" />
+<meta name="keywords" content="Jquery,Jquery资源,前端设计,div+css" />
+<script src="jquery-1.7.2.js" type="text/javascript"></script>
+<script src="jQuery-jcMarquee.js"></script>
+<style>
+
+ul,li{list-style:none}
+#Marquee_x { overflow:hidden; width: 580px; } 
+#Marquee_x ul li ,#Marquee_x ul li div{ float:left;} 
+/* 横向滚动必须让所有li左浮动 */
+#Marquee_y { overflow:hidden; height:500px; width:200px; } 
+
+</style>
+<script>
+$(function(){
+    $('#Marquee_x').jcMarquee({ 'marquee':'x','margin_right':'10px','speed':10 });
+	
+	$('#Marquee_y').jcMarquee({ 'marquee':'y','margin_bottom':'10px','speed':5 });
+});
+</script>
+</head>
+<body>
+<div style=" width:750px; margin:50px auto;">
+ <h1>横向不间断滚动</h1>
+  
+  <div id="Marquee_x">
+    <ul>
+      <li>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片1" /></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片2"/></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片3"/></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片4" /></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片5"/></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片6"/></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片7" /></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片8"/></div>
+      </li>
+    </ul>
+  </div>
+  
+  
+  <div style="clear:both;"></div>
+   <h1>纵向不间断滚动</h1>
+   
+  <div id="Marquee_y">
+    <ul>
+      <li>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片9" /></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片10"/></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片11"/></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片12" /></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片13"/></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片14"/></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片15" /></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片16"/></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片17" /></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片18"/></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片19"/></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片20" /></div>
+        <div><img height="128" width="128" src="http://www.jq-school.com/images/ppt.png" alt="图片21"/></div>
+      </li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>

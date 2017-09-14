@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+           Remove this if you use the .htaccess -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="ChongMing" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="full-screen" content="yes">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="360-fullscreen" content="true">
+    <title>Title</title>
+</head>
+<script src="js/jquery.min.js"></script>
+<script>
+    $(function(){
+
+        $(window).scroll(function(){
+
+            var scrollTop = $(this).scrollTop();
+            var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+            if(scrollTop + windowHeight == scrollHeight){
+//                alert("you are in the bottom");
+//                alert(21)
+                $('img').show()
+                    setInterval(function(){
+                        $('img').hide()
+                    },1000)
+
+            }
+        });
+    });
+</script>
+<style>
+    *{
+        margin: 0;
+        padding:0;
+    }
+    ul li{
+        background: #ccc;
+    }
+</style>
+<body>
+<ul>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+    <li>21333333333333333</li>
+</ul>
+<img style=" display: none; width: 10%; position: fixed; bottom: 2%; left: 45%;" src="lod.gif">
+</body>
+</html>

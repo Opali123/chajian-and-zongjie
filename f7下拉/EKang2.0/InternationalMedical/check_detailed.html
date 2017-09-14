@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="description" content="" />
+<meta name="author" content="ChongMing" />
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="full-screen" content="yes">
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-fullscreen" content="true">
+<meta name="360-fullscreen" content="true">
+<title>体检明细</title>
+</head>
+<link href="../css/reset.min.css" rel="stylesheet" type="text/css" />
+<link href="../css/examination/layout.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="../css/ekang.css"/>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.mobile-1.4.3.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/ekang.js"></script>
+<script>
+    $(function(){
+        var package_id = getQueryString('package_id')
+        var physical_id = getQueryString('physical_id')
+        $.ajax({
+            type:'GET',
+            url:'http://ekang.ren/wish/index/package_detail?package_id='+package_id,
+            data:{
+
+            },
+            dataType:'jsonp',
+            jsonp:'callback',
+            success:function(res){
+                if(res.ret==0){
+                    console.log(res.data)
+                    document.getElementById('check_detailed').innerHTML=res.data.intro;
+                    $('.bot_button button').click(function(){
+                        location.href='international_appointment.html?package_id='+package_id+'&physical_id='+physical_id
+                    });
+                    //执行成功
+                }else{
+                    alert(res.msg)
+                    //执行失败
+                }
+            }
+        });
+    });
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+</script>
+<script>
+    $(function(){
+        $('#back').click(function(){
+            history.go(-1)
+        })
+    });
+</script>
+<body>
+<!--// 导航条-->
+<div class="header_top" style="width: 100%;height: 45px;background-color: #38a16d;position: fixed;z-index: 10000">
+    <h1 class="nav-title" style="font-size: 18px;">体检明细</h1>
+    <img src="../img/BackIcon.png" alt="返回" class="nav-backImg" id="back"/>
+</div>
+<div class="top45" style=" width: 100%; height: 45px"></div>
+<div id="check_detailed"></div>
+<div class="bot_button"><button class="bot_sub">立即预约</button></div>
+<!--<div class="check_detailed">-->
+    <!--<div class="table">-->
+        <!--<div class="title">-->
+            <!--<img src="../img/icon1_02.jpg">-->
+            <!--<p>赴日体检套餐价格表</p>-->
+        <!--</div>-->
+        <!--<div class="form">-->
+            <!--<div class="one">-->
+                <!--<p style=" opacity: 0; width: 20%;">1</p>-->
+                <!--<p>体检费用 原价<br>(元/人民币)</p>-->
+                <!--<p>结算价 85折<br>(元/人民币)</p>-->
+            <!--</div>-->
+            <!--<div class="one" style=" padding: 7% 0;">-->
+                <!--<p style=" width: 20%; font-size: 5vw;">男</p>-->
+                <!--<p><s style=" color: #999;">46680.00</s></p>-->
+                <!--<p>39678.00</p>-->
+            <!--</div>-->
+            <!--<div class="one" style=" padding-bottom: 5%;">-->
+                <!--<p style=" width: 20%; font-size: 5vw;">女</p>-->
+                <!--<p><s style=" color: #999;">49980.00</s></p>-->
+                <!--<p>42483.00</p>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="detailed_cost">-->
+        <!--<div class="title">-->
+            <!--<img src="../img/icon1_02.jpg">-->
+            <!--<p>费用包含</p>-->
+        <!--</div>-->
+        <!--<ul class="list">-->
+            <!--<li>1）指定体检套餐的体检费用</li>-->
+            <!--<li>2）体检前日专业医疗翻译在酒店进行体检事前说明会</li>-->
+            <!--<li>3）体检当日专业医疗翻译全程陪同体</li>-->
+            <!--<li>4）体检结束后医生面谈（当日检查出来结果的部分进行说明并答疑）</li>-->
+            <!--<li>5）体检后40日左右，中日文双语报告书寄送到客户指定地址</li>-->
+        <!--</ul>-->
+    <!--</div>-->
+    <!--<div class="technological_process">-->
+        <!--<div class="title">-->
+            <!--<img src="../img/icon1_02.jpg">-->
+            <!--<p>赴日体检服务流程</p>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<ul class="list">&ndash;&gt;-->
+            <!--&lt;!&ndash;<li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="left">专业咨询</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<p class="right">专业的体检顾问提供咨询，详细了介您的体检需求</p>&ndash;&gt;-->
+            <!--&lt;!&ndash;</li>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+        <!--<img class="con" src="../img/img_14_03.jpg">-->
+    <!--</div>-->
+    <!--<div class="technological_process">-->
+        <!--<div class="title">-->
+            <!--<img src="../img/icon1_02.jpg">-->
+            <!--<p>预定须知</p>-->
+        <!--</div>-->
+        <!--<div class="infor">-->
+            <!--<dl>-->
+                <!--<dt>一、套餐价格包括</dt>-->
+                <!--<dd><b>◇</b>体检费用</dd>-->
+                <!--<dd><b>◇</b>体检前问诊服务</dd>-->
+                <!--<dd><b>◇</b>医院内医疗翻译全程陪同</dd>-->
+                <!--<dd><b>◇</b>体检报告书中文翻译服务</dd>-->
+                <!--<dd><b>◇</b>快递到客人指定地址（体检后5周左右</dd>-->
+            <!--</dl>-->
+            <!--<dl style=" margin-top: 3%">-->
+                <!--<dt>二、关于取消</dt>-->
+                <!--<dd>①体检当天 ~ 体检前15天内取消取消费用为体检套餐费用的 100%</dd>-->
+                <!--<dd>②体检前 15天至 30天内取消取消费用为体检套餐费用的 50%</dd>-->
+                <!--<dd>③各医院情况或有不同，以服务合同为准。</dd>-->
+            <!--</dl>-->
+            <!--<dl style=" margin-top: 3%">-->
+                <!--<dt>三、特别说明</dt>-->
+                <!--<dd><b>◇</b>必须在体检开始前15 分钟到达体检中心。</dd>-->
+                <!--<dd><b>◇</b>如果有迟到的情况发生，将无条件取消已经购买的体检套餐并且不予退还已经支付的体检费用与服务费用。</dd>-->
+            <!--</dl>-->
+            <!--<dl class="margint" style=" margin-top: 3%">-->
+                <!--<dt>四、预约体检前是否已确认以下信息？</dt>-->
+                <!--<dd><b style=" color: #0066cc;">体内是否有金属</b>（涉及检查：MRI＝核磁共振）</dd>-->
+                <!--<dd>有没有幽闭恐惧症＝狭窄空间恐惧症（涉及检查：MRI、CT、PET-CT。比如不能坐电梯，不能乘地铁。注意：狭窄空间恐惧，与处于拥挤人群中的不适感是不同的。）</dd>-->
+                <!--<dd>造影剂过敏（涉及检查：CT。主要是心脏加强 CT 扫描时所使用的造影剂。</dd>-->
+                <!--<dd>PET-CT 时所使 用的FDG 造影剂＝示踪剂，基本没有副作用。）</dd>-->
+                <!--<dd>有无糖尿病，是否在治疗（涉及检查：PET-CT。如在治疗，需要向医院进行说明。不代表不能做检查。请把糖化血红蛋白（HbA1c）的数值调整在6.5 以下。）</dd>-->
+                <!--<dd>是否有血液恐惧症（涉及检查：抽血等。在PET-CT 检查中也需要注射造影剂，因此不仅是抽血，如果对注射感到恐惧，有可能无法接受体检）</dd>-->
+                <!--<dd>其他（涉及检查：PET-CT。女性处于经期或目前有正在服用的药物的情况下，请事先与本公司商量。）</dd>-->
+            <!--</dl>-->
+        <!--</div>-->
+        <!--<div class="explain">-->
+            <!--<p class="p1">*</p>-->
+            <!--<p class="p2">说明：日本体检机构需要提前40日预约申请，并且缴纳全额体检费用才能有效保留预约。</p>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!---->
+<!--</div>-->
+</body>
+</html>

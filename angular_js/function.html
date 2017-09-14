@@ -1,0 +1,38 @@
+<!doctype html>
+<html ng-app>
+<head>
+    <meta charset="utf-8">
+</head>
+<script src="js/angular-1.3.0.js"></script>
+<script src="controllers.js"></script>
+<body>
+<div ng-include="'email.html'"></div>
+<div ng-controller="HelloAngular">
+    <p>{{greeting.text}}</p>
+    <button ng-click="text1()">{{greeting.text}}</button>
+    <ul ng-controller="arr">
+        <li ng-repeat="names in name">
+            {{names}}
+        </li>
+    </ul>
+</div>
+<div ng-controller="suoyin">
+    <p>{{index}}</p>
+    <button ng-click="on()">点击啊</button>
+    <button ng-click="bot()">点击啊</button>
+</div>
+<div ng-controller="names">
+    <input ng-model="firstname">
+    <input ng-model="lastname">
+    <h2>{{fullname()}}</h2>
+    <div ng-controller="jsq">
+         <input ng-model="price">
+         <input ng-model="num">
+        <h3>{{zj()}}</h3>
+    </div>
+</div>
+<div ng-controller="customersCtrl">
+    <button ng-click="sss()">请求</button>
+</div>
+</body>
+</html>

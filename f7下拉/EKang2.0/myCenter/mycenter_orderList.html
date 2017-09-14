@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>我的订单</title>
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="../css/framework7.ios.min.css">
+    <link rel="stylesheet" href="../css/framework7.ios.colors.min.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="../css/my-app.css">
+    <link rel="stylesheet" href="../css/ekang.css"/>
+    <style type="text/css">
+
+        .order_num {
+            position: relative;
+            width: 100%;
+            height: 25px;
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #e6e6e6;
+        }
+        .order_num span {
+            position: absolute;
+            color: #808080;
+            font-size: 11px;
+            left: 10px;
+            top: 3px;
+        }
+        .order_num img{
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            right: 10px;
+            top: 2px;
+        }
+        /*医院详情*/
+        .hospital_img {
+            position: absolute;
+            width: 54px;
+            height: 54px;
+            border-radius: 4px;
+            left: 10px;
+            top: 10px;
+            z-index: 0;
+        }
+
+        .hospital_name {
+            position: absolute;
+            font-size: 14px;
+            color: #333333;
+            top: 8px;
+            left: 70px;
+            font-weight: bold;
+        }
+
+        .hospital_name span {
+            position: absolute;
+            width: 33px;
+            height: 16px;
+            line-height: 16px;
+            font-size: 12px;
+            background-color: #f95e64;
+            color: white;
+            text-align: center;
+            border-radius: 3px;
+        }
+
+        .hospital_subContent {
+            position: absolute;
+            font-size: 12px;
+            color: #808080;
+            left: 70px;
+            top: 29px;
+        }
+
+        .hospital_subContent span {
+            position: absolute;
+            font-size: 12px;
+            color: #333333;
+            width: 300px;
+        }
+
+        .pay_detail {
+            position: relative;
+            width: 100%;
+            background-color: #fff;
+        }
+
+        .pay_detail span {
+            position: absolute;
+            color: #808080;
+            font-size: 11px;
+            left: 10px;
+            top: 6px;
+        }
+
+        .pay_detail div {
+            position: absolute;
+            color: #808080;
+            font-size: 11px;
+            right: 10px;
+            top: 6px;
+        }
+
+        .pay_detail button {
+            position: absolute;
+            display: block;
+            right: 10px;
+            top: 30px;
+            color: #fff;
+            font-size: 12px;
+            border-radius: 4px;
+            height: 28px;
+            width: 85px;
+            border: none;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="views tabs toolbar-through">
+    <!--导航条-->
+    <!-- Second view (for second wrap)-->
+    <div id="view" class="view view-main tab active">
+        <!-- We can make with view with navigation, let's add Top Navbar-->
+        <div class="navbar">
+            <div class="navbar-inner" style="background-color: #38a16d">
+                <div class="left" id="back">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back color-white" style="color: white"></i>
+                        <span style="color: white">返回</span>
+                    </a>
+                </div>
+                <div class="center sliding" style="color: white">我的订单</div>
+            </div>
+        </div>
+
+        <div class="pages navbar-through">
+            <div data-page="index-2" class="page page-on-center">
+                <div class="page-content pull-to-refresh-content infinite-scroll">
+                    <!-- 默认的下拉刷新层 -->
+                    <div class="pull-to-refresh-layer">
+                        <div class="preloader"></div>
+                        <div class="pull-to-refresh-arrow"></div>
+                    </div>
+                    <div id="contentList"></div>
+
+                    <!-- 加载提示符 -->
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript" src="../js/framework7.min.js"></script>
+<script type="text/javascript" src="../js/my-app.js"></script>
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/ekang.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script>
+    var mycenter;
+    var pageIndex = 1;
+    $(function () {
+        mycenter = {
+            getOrderlist: function () {
+                $.ajax({
+                    type: 'GET',
+                    url: textUrl + '/diagnosis/orderList',
+                    data: {         // 需要于客户端同步
+                        uid: $.cookie("local_userId"),
+                        page_size : '15',
+                        page_index : pageIndex
+                    },
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    success: function (result) {
+
+                        if (result.ret == 0) {
+
+                            var items = '';
+                            $.each(result.data, function (i, o) {
+                                //console.log(o.pic)
+                                items  += '<div style="margin-top: 10px" >';
+                                items  += '<div class="order_num">';
+                                items  += '<span>订单号：'+ o.order_no+'</span>';
+                                items  += '<img src="../img/mypage_img/icon_delete.png" alt="删除" onclick="deleteOrder('+o.order_id+')"/>';
+                                items  += '</div>';
+                                items  += '<div style="position:relative;background-color:#fff;width: 100%;height: 74px;border-bottom: 1px solid #e6e6e6" data-doc="'+ o.doctor_id+'" data-id="'+o.order_id+'" data-index="'+o.status+'" onclick="evaluation($(this))" >';
+                                items  += '<img id="hospital_pic" src="'+ o.pic+'" class="hospital_img"/>';
+                                if(o.type == 1){     //1挂号；2陪诊；3表示预约床位;4.找护工;5表示就是住宿;6体检
+                                    items  += '<img id="hospital_pic_hu" src="../img/nurse_img/hu.png" class="hospital_img" style="width:29px;height: 29px;z-index: 1;"/>';
+                                }
+                                items  += '<div id="hopital_name" class="message hospital_name">'+ o.hospital_name+'&nbsp&nbsp<span id="hospital_type">'+ o.type_text+'</span></div>';
+                                items  += '<div class="message hospital_subContent">科室：'+ o.department_name+'<span id="hospital_departments"></span></div>';
+                                items  += '<div class="message hospital_subContent" style="top: 48px;">类型：'+ o.diagnosis_type_name+'<span id="hospital_nurse"></span></div>';
+                                items  += '</div>';
+                                if(o.status == 1){ //1表示未付款；2表示已付款；3表示已派单；4表示已完成；5表示已关闭;6已退款;7是退款中
+                                    items  += '<div class="pay_detail" style="height: 65px">';
+                                    items  += '<button data-doc="'+ o.doctor_id+'" data-id="'+o.order_id+'" data-index="'+o.status+'" onclick="evaluation($(this))" value="立即付款" style="background-color: #f95e64">立即付款</button>';
+                                }else if(o.status == 4){
+                                    items  += '<div class="pay_detail" style="height: 65px">';
+                                    items  += '<button type="button" value="评价医生" style="background-color: #43AF80;">评价医生</button>';
+                                }else{
+                                    items  += '<div class="pay_detail" style="height: 30px">';
+                                }
+                                items  += '<span>'+ o.status_text+'</span>';
+                                items  += '<div>订单金额：'+ o.total_amount+'元</div>';
+                                items  += '</div>';
+                                items  += '</div>';
+
+                            });
+
+                            // 加载完毕需要重置
+                            myApp.pullToRefreshDone();
+
+                            // 加载数据
+                            // 重置加载flag
+                            loading = false;
+                            if (lastIndex >= maxItems) {
+                                // 加载完毕，则注销无限加载事件，以防不必要的加载
+                                myApp.detachInfiniteScroll($('.infinite-scroll'));
+                                // 删除加载提示符
+                                $('.infinite-scroll-preloader').remove();
+                                return;
+                            }
+                            // 如果正在加载，则退出
+                            if (pageIndex >1 ){
+                                // 添加新条目
+                                $('#contentList').append(items);
+                            }else{
+                                $('#contentList').html(items);
+                            }
+
+                            // 更新最后加载的序号
+                            lastIndex = $('#contentList').length;
+
+                            if(result.data.length <= 20){
+                                $('.infinite-scroll-preloader').hide();
+                            }else{
+                                $('.infinite-scroll-preloader').show();
+                            }
+
+                        } else {
+                            alert(result.msg);
+                        }
+                    }
+                });
+            },
+        };
+
+        $('#back').click(function () {
+            history.back();
+        });
+        mycenter.getOrderlist();
+
+
+        // 刷新
+        var myApp = new Framework7();
+        var $$ = Dom7;
+        // 下拉刷新页面
+        var ptrContent = $$('.pull-to-refresh-content');
+        // 添加'refresh'监听器
+        ptrContent.on('refresh', function (e) {
+
+            pageIndex=1;
+            mycenter.getOrderlist();
+        });
+
+        // 加载数据
+        var loading = false;
+        // 上次加载的序号
+        var lastIndex = $('#contentList').length;
+        // 最多可加载的条目
+        var maxItems = 20;
+        // 注册'infinite'事件处理函数
+        $$('.infinite-scroll').on('infinite', function () {
+            // 如果正在加载，则退出
+            if (loading) return;
+            // 设置flag
+            loading = true;
+            pageIndex++;
+            mycenter.getOrderlist();
+        });
+    });
+
+    function deleteOrder (o) {
+        $.ajax({
+            type: 'POST',
+            url: textUrl + '/diagnosis/cancel_order',
+            data: {         // 需要于客户端同步
+                uid : $.cookie("local_userId"),
+                order_id : o
+            },
+            dataType: 'jsonp',
+            jsonp: 'callback',
+            success: function (result) {
+                if (result.ret == 0) {
+                    mycenter.getOrderlist();
+                } else {
+                    alert(result.msg);
+                }
+            }
+        });
+    }
+
+    function evaluation (e) {
+        var orderId = e.data("id");
+        var status = e.data("index");
+        var doctorId = e.data("doc");
+
+        if(status == 1){ //1表示未付款；2表示已付款；3表示已派单；4表示已完成；5表示已关闭;6已退款;7是退款中
+            location.href = "../hospital_nurse/nurse_payorder.html?order_id="+orderId;
+        }else if(status == 4){
+            location.href = "mycenter_orderevaluation.html?doctor_id="+doctorId;
+        }else{
+            location.href = "order_detail.html?orderId="+orderId;
+        }
+    }
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script src="../js/weixin2.js"></script>
+</body>
+</html>

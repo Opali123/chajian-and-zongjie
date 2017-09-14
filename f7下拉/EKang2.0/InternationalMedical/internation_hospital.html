@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="ChongMing" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="full-screen" content="yes">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="360-fullscreen" content="true">
+    <title>海外就医</title>
+</head>
+<link href="../css/reset.min.css" rel="stylesheet" type="text/css" />
+<link href="../css/examination/layout.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="../css/ekang.css"/>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.mobile-1.4.3.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/ekang.js"></script>
+
+<script>
+    $(function(){
+        $.ajax({
+            type:'GET',
+            url:textUrl+'wish/index/physical_list',
+            data:{
+            },
+            dataType:'jsonp',
+            jsonp:'callback',
+            success:function(res){
+                if(res.ret==0){
+                    console.log(res.data)
+                    var data_l = res.data.length;
+
+                    for(var i=0;i<data_l;i++){
+                        var imgurl = res.data[i].pic
+                        document.getElementById('img_list').innerHTML+='<div class="routine"><img src="'+imgurl+'"/></div>'
+                        $('#img_list .routine').click(function(){
+                            var index = $(this).index();
+                            var id = res.data[index].id
+                            location.href='hospitalinfor.html?physical_id='+id
+                        });
+                    }
+                    //请求成功
+                }else{
+                    //请求失败
+                    alert(res.msg)
+                }
+            }
+        });
+    });
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script src="../js/weixin2.js"></script>
+<script>
+    $(function(){
+       $('#back').click(function(){
+           history.go(-1)
+       })
+    });
+</script>
+<body>
+
+<!--// 导航条-->
+<div class="header_top" style="width: 100%;height: 45px;background-color: #38a16d;position: fixed;z-index: 10000">
+    <h1 class="nav-title" style="font-size: 18px;">海外就医</h1>
+    <img src="../img/BackIcon.png" alt="返回" class="nav-backImg" id="back"/>
+</div>
+<div class="top45" style=" width: 100%; height: 45px"></div>
+<div class="main">
+    <div class="gj_care" id="img_list">
+
+    </div>
+</div>
+</body>
+</html>

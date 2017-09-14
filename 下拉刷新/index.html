@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery手机端上拉刷新下拉加载更多页面 - 爱编程w2bc.com</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/pullToRefresh.css" />
+<script src="js/iscroll.js"></script>
+<script src="js/pullToRefresh.js"></script>
+<style type="text/css">
+        .fdad{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <ul>
+        <li>row 10</li>
+        <li>row 9</li>
+        <li>row 8</li>
+        <li>row 7</li>
+        <li></li>
+        <li>row 5</li>
+        <li>row 4</li>
+        <li>row 3</li>
+        <li>row 2</li>
+        <li>row 1</li>
+    </ul>
+</div>
+<script>
+        refresher.init({
+            id: "wrapper",
+            pullDownAction: Refresh,
+            pullUpAction: Load
+        });
+        var generatedCount = 0;
+        function Refresh() {
+            setTimeout(function () {
+
+                wrapper.refresh();
+            }, 1000);
+        }
+        function Load() {
+            setTimeout(function () {
+                var el, li, i;
+                el = document.querySelector("#wrapper ul");
+                for (i = 0; i < 2; i++) {
+                    li = document.createElement('li');
+                    li.appendChild(document.createTextNode('async row ' + (++generatedCount)));
+                    el.appendChild(li, el.childNodes[0]);
+                }
+                wrapper.refresh();
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

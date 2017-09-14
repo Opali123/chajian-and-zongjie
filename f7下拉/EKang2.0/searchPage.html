@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>搜索</title>
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="css/framework7.ios.min.css">
+    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="css/my-app.css">
+    <link rel="stylesheet" href="css/ekang.css"/>
+    <style type="text/css">
+        /*医生列表*/
+        .top-user-img {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            top:10px;
+            left: 10px;
+        }
+        .top-user-name {
+            position: absolute;
+            font-size: 14px;
+            color: #333333;
+            left: 62px;
+            top: 10px;
+        }
+        .top-user-detail {
+            position: absolute;
+            font-size: 11px;
+            color: #333333;
+            left: 62px;
+            top: 31px;
+        }
+        .top-user-recommended {
+            position: absolute;
+            text-align: center;
+            width: 35px;
+            height: 35px;
+            right: 15px;
+            top: 11px;
+            border: 1px solid #ffa028;
+            color: #ffa028;
+            border-radius: 35px;
+        }
+
+        .top-user-recommended .recommend {font-size: 12px;top: 21px;line-height: 25px}
+        .top-user-recommended .recommend1 {font-size: 5px;line-height: 0;width: 26px;margin-left: 6px;}
+
+    </style>
+</head>
+<body>
+
+<div class="views tab toolbar-through">
+    <!--导航条-->
+    <!-- Second view (for second wrap)-->
+    <div id="view" class="view view-main tab active">
+        <!-- We can make with view with navigation, let's add Top Navbar-->
+        <div class="navbar">
+            <div class="navbar-inner" style="background-color: #38a16d">
+                <div class="left" id="back">
+                    <i class="icon icon-back color-white" style="color: white"></i>
+                    <span style="color: white">返回</span>
+                </div>
+                <div class="center sliding" style="color: white">搜索</div>
+            </div>
+        </div>
+
+        <!--<div data-page="form" class="page page-on-center">-->
+
+            <!--&lt;!&ndash; Scrollable page content&ndash;&gt;-->
+            <!--<div class="page-content">-->
+                <!--<br/>-->
+
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="pages navbar-through">
+            <div data-page="apple-news" class="page">
+                <!-- Search bar -->
+                <form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
+                    <div class="searchbar-input">
+                        <input type="search" placeholder="搜索" id="searchtext">
+                        <a href="#" class="searchbar-clear"></a>
+                    </div>
+                    <a href="#" class="searchbar-cancel">取消</a>
+                </form>
+                <!-- Search bar overlay -->
+                <div class="searchbar-overlay"></div>
+
+                <div class="page-content pull-to-refresh-content infinite-scroll">
+                    <!-- 默认的下拉刷新层 -->
+                    <div class="pull-to-refresh-layer">
+                        <div class="preloader"></div>
+                        <div class="pull-to-refresh-arrow"></div>
+                    </div>
+
+                    <div class="content-block searchbar-not-found" id="searchNo">
+                        没有你搜索到的内容
+                    </div>
+                    <div id="searchList" >
+                    </div>
+
+                    <!-- 加载提示符 -->
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript" src="js/framework7.min.js"></script>
+<script type="text/javascript" src="js/my-app.js"></script>
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/ekang.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script>
+
+    $(function () {
+        var pageIndex = 1;// 页码
+
+        var app = {
+            searchContent: function ( content) {
+                $.ajax({
+                    type: 'GET',
+                    url: textUrl + '/search/index',
+                    data: {         // 需要于客户端同步
+                        uid : '',
+                        search_content : content,
+                        longitude: $.cookie("longitude"),
+                        latitude: $.cookie("latitude"),
+                        page_size: 20,
+                        page_index: pageIndex
+                    },
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    success: function (result) {
+                        if (result.ret == 0) {
+                            if(result.data.length == 0){
+                                $('#searchNo').show();
+                            }else{
+                                $('#searchNo').hide();
+                            }
+                            var searchArr = result.data;
+                            var item = '';
+                            $.each(searchArr, function (i, o) {
+                                if(o.type == 1) {       // 医生列表
+                                    item += '<div onclick="docterDetail('+o.doctor_id+')" style="position: relative;height: 60px;width: 100%;background-color: white;border-bottom: 1px solid #e6e6e6">';
+                                    item += '<img src="' + o.avatar_file + '" alt="头像" class="top-user-img"/>';
+                                    item += '<span class="message top-user-name">' + o.user_name +'</span>';
+                                    item += '<span class="message top-user-name" style="left: 111px;top: 13px;font-size: 11px;color: #808080">' + o.job_name + '</span>';
+                                    item += '<span class="message top-user-detail">' + o.hospital_name + ' &nbsp;' + o.department_name + '</span>';
+                                    item += '<div class="top-user-recommended">';
+                                    item += '<span class="recommend">'+ o.rec_index +'</span>';
+                                    item += '<span class="recommend1 message">推荐</span>';
+                                    item += '</div>';
+                                    item += '</div>';
+
+                                }else if(o.type == 2){      // 医院列表
+                                    item += '<div data-id="'+ o.id+'" onclick="hospitalDetail($(this))" style="position:relative;background-color: white;width: 100%;height: 61px;border-bottom: 1px solid #e6e6e6">';
+                                    item += '<img src="'+o.pic+'" alt="头像" class="left-box" style="position: absolute;left:10px;width: 40px;height: 40px;border-radius: 4px;top:10px"/>';
+                                    item += '<div style="position: absolute;font-size: 14px;color: #333333;top: 11px;left: 60px; width: 80%" class="message">'+o.hospital_name+'&nbsp&nbsp<span style="position: absolute;width: 33px;height: 16px;font-size: 12px;background-color: #f95e64;color: white;text-align: center;border-radius: 2px">'+o.type_text+'</span></div>';
+                                    item += '<span style="position: absolute;font-size: 12px;color: #808080;top: 31px;left: 60px" class="message">'+o.direction+'</span>';
+                                    item += '<span class="message" style="position: absolute;text-align: right;font-size: 12px;color: #808080;right: 10px;top: 31px;background: url(img/icon_position.png) no-repeat right center transparent; background-size: 9px 13px;background-position: 0 0;">&nbsp&nbsp&nbsp&nbsp&nbsp'+o.distance+'</span>';
+                                    item += '</div>';
+                                }
+                            });
+
+//                            $('#searchList').html(item);
+
+                            myApp.pullToRefreshDone();
+
+                            // 加载数据
+                            // 重置加载flag
+                            loading = false;
+                            if (lastIndex >= maxItems) {
+                                // 加载完毕，则注销无限加载事件，以防不必要的加载
+                                myApp.detachInfiniteScroll($('.infinite-scroll'));
+                                // 删除加载提示符
+                                $('.infinite-scroll-preloader').remove();
+                                return;
+                            }
+                            // 如果正在加载，则退出
+                            if (pageIndex >1 ){
+                                // 添加新条目
+                                $('#searchList').append(item);
+                            }else{
+                                $('#searchList').html(item);
+                            }
+
+
+
+                            // 更新最后加载的序号
+                            lastIndex = $('#searchList').length;
+
+                            if(result.data.length <= 20){
+                                $('.infinite-scroll-preloader').hide();
+                            }else{
+                                $('.infinite-scroll-preloader').show();
+                            }
+
+                        } else {
+                            alert(result.msg);
+                        }
+                    }
+                });
+            }
+        };
+
+        $('#searchtext').keyup(function () {
+            app.searchContent($('#searchtext').val());
+        });
+
+        $('#back').on('click', function () {
+            location.href = "index.html";
+        });
+
+        // 刷新
+        var myApp = new Framework7();
+        var $$ = Dom7;
+        // 下拉刷新页面
+        var ptrContent = $$('.pull-to-refresh-content');
+        // 添加'refresh'监听器
+        ptrContent.on('refresh', function (e) {
+            pageIndex=1;
+            app.searchContent($('#searchtext').val());
+        });
+
+        // 加载数据
+        var loading = false;
+        // 上次加载的序号
+        var lastIndex = $('#doctorItems').length;
+        // 最多可加载的条目
+        var maxItems = 20;
+        // 注册'infinite'事件处理函数
+        $$('.infinite-scroll').on('infinite', function () {
+            // 如果正在加载，则退出
+            if (loading) return;
+            // 设置flag
+            loading = true;
+            pageIndex++;
+            app.searchContent($('#searchtext').val());
+        });
+    });
+
+    function hospitalDetail(o){
+        var id = o.data("id");
+
+        location.href = "hospitalInformation/hospitalDetail.html?type=1&hospitalId="+id;
+    }
+
+    function docterDetail(id){
+        location.href = "chooseDoctor/docterDetail.html?docterId="+id;
+    }
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script src="js/weixin2.js"></script>
+</body>
+
+</html>

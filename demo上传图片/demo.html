@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<meta name="description" content="" />
+<meta name="author" content="star" />
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="full-screen" content="yes">
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-fullscreen" content="true">
+<meta name="360-fullscreen" content="true">
+</head>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.mobile-1.4.3.js"></script>
+<script type="text/javascript">
+$(function(){
+	var $container = $('.input-file');
+    $container.on('change','input[name="photoFile"]',function(e){
+     var $this = $(this),
+				file = null,
+				freader = null;
+				for(var i=0;i<e.target.files.length;i++){
+					file = e.target.files.item(i);
+					//不是图片 跳出这一次循环
+					if(!(/^image\/.*$/i.test(file.type)));
+					{
+						continue;
+					}
+					//实例化FileReader API
+					freader = new FileReader();
+					freader.readAsDataURL(file);
+					freader.onload = function(e){
+						 /*$('.paizhao').attr('src','' + e.target.result + '');*/
+						 var len = $('.list>li').length + 1
+						 $('.list').append('<li><input type="hidden" val="'+e.target.result+'""><img class="cha" src="jian_03.png"><img class="tu" name="name'+len+'" src=""></li>');
+						 $('.list>li').last().children('.tu').attr('src','' + e.target.result + '');
+						 $('.list>li .cha').click(function(){
+								$(this).parent().remove();
+						  });
+						  if($('.list>li').length>5){
+						     $('.list>li').last().remove();
+							 alert('最多上传5张');
+						  }
+						 $('input[name="blessingpic"]').val(e.target.result);
+					}
+				}
+  });
+});
+</script>
+<style>
+/*去除蓝色边框*/
+a,button,input,textarea,span,div,em,i,img{-webkit-tap-highlight-color: rgba(0,0,0,0);
+-webkit-tap-highlight-color: transparent; /* For some Androids */
+ outline: none;
+ -moz-outline-style: none;
+}
+span{ float:left; width:95px; height:50px; line-height:50px; text-align:center; color:#900;}
+.input-file{margin: 0 auto 0px auto; width:50px; height:50px; background:url(icon14_05.png) top center no-repeat; background-size: 100% auto; float:left;}
+input[type="file"]{z-index: 10; width:50px; height:50px; opacity:0;}
+.absolute{
+	position:absolute
+}
+.relative{
+	position:relative
+}
+.create .ban .paizhao{ width:50px; height:50px; overflow:hidden;}
+.list>li{ width:50px; height:50px; position:relative; list-style:none; float:left; margin-left:5%;}
+.list>li .cha{ width:20px; height:20px; position:absolute; top:0px; right:0px;}
+.list>li .tu{ width:50px; height:50px; overflow:hidden;}
+@media screen and (max-width: 500px) {
+}
+</style>
+<body>
+<span>上传图片：</span>
+<div class="input-file relative">
+    <input class="absolute" type="file" id="photoFile" name="photoFile">
+</div>
+<input type="hidden" id="blessingpic" name="blessingpic">
+<ul class="list">
+</ul>
+</body>
+</html>

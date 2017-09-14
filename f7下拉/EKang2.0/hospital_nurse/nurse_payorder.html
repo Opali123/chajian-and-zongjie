@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>订单确认</title>
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="../css/framework7.ios.min.css">
+    <link rel="stylesheet" href="../css/framework7.ios.colors.min.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="../css/my-app.css">
+    <link rel="stylesheet" href="../css/ekang.css"/>
+    <script src="ap.js"></script>
+    <script src="pingpp.js"></script>
+    <style type="text/css">
+        .hospital_img {
+            position: absolute;
+            width: 54px;
+            height: 54px;
+            border-radius: 4px;
+            left: 10px;
+            top: 10px;
+            z-index: 0;
+        }
+
+        .hospital_name {
+            position: absolute;
+            font-size: 14px;
+            color: #333333;
+            top: 10px;
+            left: 70px;
+            font-weight: bold;
+            /*width: 80%;*/
+        }
+
+        .hospital_name span {
+            position: absolute;
+            width: 33px;
+            height: 16px;
+            line-height: 16px;
+            font-size: 12px;
+            background-color: #f95e64;
+            color: white;
+            text-align: center;
+            border-radius: 3px;
+        }
+
+        .hospital_subContent {
+            position: absolute;
+            font-size: 12px;
+            color: #808080;
+            left: 70px;
+            top: 30px;
+        }
+
+        .hospital_subContent span {
+            position: absolute;
+            font-size: 12px;
+            color: #333333;
+            width: 300px;
+        }
+
+        li {
+            /*position: absolute;*/
+            font-size: 13px;
+            color: #808080;
+            margin-left: 10px;
+            margin-top: 6px;
+            list-style-type: none;
+        }
+
+        li span {
+            position: absolute;
+            font-size: 13px;
+            color: #333333;
+            width: 80%;
+        }
+
+        .money {
+            position: absolute;
+            font-size: 13px;
+            color: #43af80;
+            width: 80%;
+            text-align: right;
+            right: 15px;
+        }
+
+        .order_pay{
+            width: 100%;
+            background-color: white;
+        }
+        .order_pay dl{
+            margin: 0;
+            width: 100%;
+            height: 50px;
+            border-bottom: 1px solid #d9d9d9;
+        }
+        .order_pay dl dt{
+            width:auto;
+        }
+        .order_pay dl dt img{
+            width: 30px;
+            height: 30px;
+            margin-top: 10px;
+            margin-left: 5px;
+            float: left;
+        }
+        .order_pay dl dt p{
+            float: left;
+            font-size: 15px;
+            color: #333;
+            height: 50px;
+            line-height: 50px;
+            margin:0 0 0 6px;
+        }
+        .order_pay dl dd{
+            width:16px;
+            height:16px;
+            border-radius:100px;
+
+            float: right;
+            margin-right:5px;
+            margin-top:17px;
+
+            background: none;
+            border: 1px solid #cdcdcd;
+        }
+        .order_pay dl dd.hover{
+            background:#43af80;
+            border: 1px solid #43af80;
+        }
+    </style>
+</head>
+<body>
+
+<div class="views tabs toolbar-through">
+    <!--导航条-->
+    <!-- Second view (for second wrap)-->
+    <div id="view" class="view view-main tab active">
+        <!-- We can make with view with navigation, let's add Top Navbar-->
+        <div class="navbar">
+            <div class="navbar-inner" style="background-color: #38a16d">
+                <div class="left" id="back">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back color-white" style="color: white"></i>
+                        <span style="color: white">返回</span>
+                    </a>
+                </div>
+                <div class="center sliding" style="color: white">订单确认</div>
+            </div>
+        </div>
+
+        <div class="pages navbar-through">
+            <div data-page="index-2" class="page page-on-center">
+                <div class="page-content">
+                    <div>
+                        <div style="position:relative;background-color:#fff;width: 100%;height: 74px;border-bottom: 1px solid #e6e6e6">
+                        <img id="hospital_pic" src="" class="hospital_img"/>
+                        <img id="hospital_pic_hu" src="../img/nurse_img/icon_label.png" class="hospital_img" style="width:29px;height: 29px;z-index: 1;"/>
+                        <div id="hopital_name" class="message hospital_name"><span id="hospital_type"></span></div>
+                        <div class="message hospital_subContent">科室：<span id="hospital_departments"></span></div>
+                        <div class="message hospital_subContent" style="top: 50px;">类型：<span id="hospital_nurse"></span></div>
+                        <p style=" color: #fff; font-size: 12px; position: absolute; top: -1px; left: 11px; z-index:99;" id="corner">
+                        </p>
+                    </div>
+                        <div style="position: relative;margin-top: 10px;width: 100%;height: 108px;background-color: #fff;border-top: 1px solid #e6e6e6;border-bottom: 1px solid #e6e6e6">
+                            <ui>
+                                <li class="message">患者姓名：<span id="user_name"></span></li>
+                                <li>陪护日期：<span id="user_time"></span></li>
+                                <li>联系电话：<span id="user_phone"></span></li>
+                                <li>服务人员：<span id="user_subDet"></span></li>
+                            </ui>
+                        </div>
+                        <div class="order_pay" style="margin-top: 10px">
+                            <dl id="weixin">
+                                <dt>
+                                    <img src="../img/nurse_img/weinxin.png">
+                                <p>微信</p>
+                                </dt>
+                                <dd class="hover"></dd>
+                            </dl>
+                            <dl id="alipay">
+                                <dt>
+                                    <img src="../img/nurse_img/zhifubao.png">
+                                <p>支付宝</p>
+                                </dt>
+                                <dd></dd>
+                            </dl>
+                        </div>
+                        <div style="position: relative;margin-top: 10px;width: 100%;height: 140px;background-color: #fff;border-top: 1px solid #e6e6e6;border-bottom: 1px solid #e6e6e6">
+                            <ui>
+                                <li class="message">服务总价<span class="money" id="allmoney">￥0.00</span></li>
+                                <li>服务费<span class="money" id="service_money">￥0.00</span></li>
+                                <li>诊疗金<span class="money" id="reduce_money">￥0.00</span></li>
+                                <li>服务费<span class="money">￥0.00</span></li>
+                                <li>诊疗金<span class="money" >￥0.00</span></li>
+                            </ui>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="position: fixed;height: 49px;width: 100%;background-color: #393d3b;bottom: 0;z-index: 100000;">
+        <p id="money" class="message" style="position: absolute;line-height: 33px;font-size: 13px;color: #fff">服务费：99元</p>
+        <div id="submit_money" style="position: absolute;right: 0;width: 105px;height: 49px;background-color: #26d086;font-size: 16px;color: #fff;text-align: center;line-height: 49px">立即付款</div>
+    </div>
+</div>
+<script type="text/javascript" src="../js/framework7.min.js"></script>
+<script type="text/javascript" src="../js/my-app.js"></script>
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/ekang.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="http://www.ekangjiuyi.com/public/wechat/js/pingpp.js"></script>
+<script>
+    $(function () {
+        var pay_type = "wx_pub";
+        var code ;
+        var money = $('#money').text()
+        var nurse = {
+            getOrderDetail: function () {
+                $.ajax({
+                    type: 'GET',
+                    url: textUrl + '/diagnosis/orderdetail/',
+                    data: {         // 需要于客户端同步
+                        uid: $.cookie("local_userId"),
+                        order_id: getQueryString("order_id")
+                    },
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    success: function (result) {
+
+                        if (result.ret == 0) {
+
+                            console.log(result.data)
+                            var data = result.data;
+
+                            $('#hospital_pic').attr('src',data.pic);
+                            $('#hopital_name').html(data.hospital_name+"&nbsp&nbsp");
+                            $('#hopital_type').html(data.type_text);
+                            $('#hospital_departments').html(data.department_name);
+                            $('#hospital_nurse').html(data.product_type);
+                            $('#user_name').html(data.family_name);
+                            $('#user_time').html(data.appointment_time);
+                            $('#user_phone').html(data.link_mobile);
+                            $('#user_subDet').html(data.service_mobile);
+                            $('#allmoney').html("￥&nbsp"+data.total_amount);
+                            $('#service_money').html("￥&nbsp"+data.service_fee);
+                            $('#reduce_money').html("-￥&nbsp"+data.reduce_price);
+                            $('#money').html("服务费："+data.total_amount+"元");
+                            $('#corner').html(data.short_name)
+                            if(data.type == 1){     //1挂号；2陪诊；3表示预约床位;4.找护工;5表示就是住宿;6体检
+                               // $('#hospital_pic_hu').attr('src',"../img/nurse_img/hu.png");
+                        }
+                            if(data.doctor_name){
+                                $('#hospital_departments').html(data.department_name+'-'+data.doctor_name);
+                                //$('#hospital_pic_hu').attr('src',"");
+                            }else{
+
+                            }
+                        } else {
+                            alert(result.msg);
+                        }
+                    }
+                });
+            },
+            // 获取支付产生的change
+            getchange: function () {
+                $.ajax({
+                    type: 'GET',
+                    url:  textUrl + '/diagnosis/getcharge/',
+                    data: {         // 需要于客户端同步
+                        uid: $.cookie("local_userId"),
+                        order_id: getQueryString("order_id"),
+                        pay_method:pay_type
+                    },
+                  dataType: 'jsonp',
+                  jsonp: 'callback',
+                    success: function (result) {
+                        if(pay_type == "alipay_wap"){
+                            pingpp.createPayment(result.data.charge, function(result, err) {
+                                if (result=="success") {
+                                    location.href = 'http://www.ekangjiuyi.net/EKang2.0/myCenter/mycenter_orderList.html?uid='+$.cookie("local_userId")+'';
+                                } else {
+//                                    $.jTip("支付失败",3000);
+//                                    history.back();
+                                }
+                            });
+                        }else{
+
+                            var url = result.data.location_url;
+
+                            location.href = url;
+                        }
+                    }
+                });
+            },
+            // 获取支付产生的change
+            submitchange: function () {
+                $.ajax({
+                    type: 'GET',
+                    url:  textUrl + '/diagnosis/getcharge/',
+                    data: {         // 需要于客户端同步
+                        uid: $.cookie("local_userId"),
+                        order_id: getQueryString("order_id"),
+                        pay_method:"wx_pub",
+                        code : code
+                    },
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    success: function (result) {
+                        pingpp.createPayment(result.data.charge, function(result, err) {
+                            if (result=="success") {
+                                //location.href = "../myCenter/order_detail.html?orderId="+getQueryString("order_id");
+                                //_AP.pay('https://mclient.alipay.com/service/rest.htm');
+//                                e.preventDefault();
+//                                e.stopPropagation();
+//                                e.stopImmediatePropagation();
+//                                //ele.href 是GET到支付宝收银台的URL
+//                                _AP.pay(e.target.href);
+//                                return false;
+                            } else {
+                                alert(result.data.msg)
+//                                $.jTip("支付失败",3000);
+//                                history.back();
+                            }
+                        });
+                    }
+                });
+            }
+        };
+        code = getQueryString("code");
+        if(code){
+            nurse.submitchange();
+        }
+        // 选择支付方式
+        $('.order_pay dl').click(function(){
+            $(this).children('dd').addClass('hover').parents('dl').siblings().children('dd').removeClass('hover')
+        });
+        var browser = {
+            versions: function () {
+                var u = navigator.userAgent, app = navigator.appVersion;
+                return {     //移动终端浏览器版本信息
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+                    iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                };
+            }(),
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        }
+        if (browser.versions.mobile) {//判断是否是移动设备打开。browser代码在下面
+            var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+            if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                pay_type = "wx_pub";
+                $('.order_pay dl').eq(0).children('dd').addClass('hover').parents('dl').siblings().children('dd').removeClass('hover')
+            }else {
+                $('.order_pay dl').eq(1).children('dd').addClass('hover').parents('dl').siblings().children('dd').removeClass('hover')
+                pay_type = "alipay_wap";
+            }
+            //否则就是PC浏览器打开
+        }
+        $('#weixin').click(function () {
+            pay_type = "wx_pub";
+        });
+        $('#alipay').click(function () {
+            pay_type = "alipay_wap";
+        });
+        nurse.getOrderDetail();
+        $('#submit_money').click(function (e) {
+            // weixin
+//            e.preventDefault();
+//            e.stopPropagation();
+//            e.stopImmediatePropagation();
+//            var href = e.target.href
+//            alert(href)
+//            //ele.href 是GET到支付宝收银台的URL
+//            _AP.pay(e.target.href);
+//            return false;
+            nurse.getchange();
+        });
+        $('#back').click(function () {
+            history.back();
+        });
+    });
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script src="../js/weixin2.js"></script>
+</body>
+</html>

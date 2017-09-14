@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>医院详情</title>
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="../css/framework7.ios.min.css">
+    <link rel="stylesheet" href="../css/framework7.ios.colors.min.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="../css/my-app.css">
+    <link rel="stylesheet" href="../css/ekang.css"/>
+    <style type="text/css">
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+        }
+
+        .tabs-choose {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            height: 35px;
+            line-height: 35px;
+            margin-top: 10px;
+            /*padding: 5px;*/
+            border-top: 1px solid #EDEDED;
+            border-bottom: 1px solid #EDEDED;
+            /*position: fixed;*/
+            background-color: #f0f0f0;
+            width: 100%;
+            z-index: 1001;
+        }
+
+        .tabs-choose div {
+            /*display: flex;*/
+            /*-webkit-box-flex: 1;*/
+            /*-moz-box-flex: 1;*/
+            /*-webkit-flex: 1;*/
+            /*-ms-flex: 1;*/
+            /*flex: 1;*/
+            background-origin: content-box;
+            /*padding: 0 15%;*/
+            width: 50%;
+            height: 35px;
+            font-size: 14px;
+            text-align: center;
+            color: #333333;
+        }
+
+        /*active {*/
+            /*color:#424242;*/
+        /*}*/
+
+        #departmentItems {
+            background-color: #fff;
+        }
+
+        .item-active {
+            background-color: #fff;
+        }
+        .item-activeRight {
+            background-color: #ecf7f2;
+        }
+        .item-content {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+        }
+        .item-content div {
+            -webkit-box-flex: 1;
+            -moz-box-flex: 1;
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            float: left;
+            width:50%;
+            color: #333333;
+        }
+        .item-left {
+            padding: 0;
+            height: 480px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background-color: #eee;
+        }
+        .item-right {
+            padding: 0;
+            height: 480px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background-color: #fff;
+            margin-left:-1px;
+        }
+        .list {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        .sel-popup {
+            position: fixed;
+            z-index: 1000;
+            width: 100%;
+            height: 100%;
+        }
+        .list-item {
+            border: 1px solid #E8E8E8;
+            display: block;
+            margin-top: -1px;
+            padding: 10px 15px;
+        }
+        .list-item-p-tb15 {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+        .list-item-norightborder{
+            border-right:1px solid #fff;
+        }
+        .list-item-noborder {
+            border: 1px solid #fff;
+        }
+        #departmentRight .list-item {
+            border-left: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="views tabs toolbar-through">
+    <!--导航条-->
+    <!-- Second view (for second wrap)-->
+    <div id="view" class="view view-main tab active">
+        <!-- We can make with view with navigation, let's add Top Navbar-->
+        <div class="navbar">
+            <div class="navbar-inner" style="background-color: #38a16d">
+                <div class="left" id="back">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back color-white" style="color: white"></i>
+                        <span style="color: white">返回</span>
+                    </a>
+                </div>
+                <div class="center sliding" style="color: white">医院详情</div>
+            </div>
+        </div>
+        <div class="pages navbar-through">
+            <div data-page="index-2" class="page page-on-center">
+                <div class="page-content" style="background-color: #fff">
+                    <div id="top-content" style="position:relative;width: 100%;height: 61px;border-bottom: 1px solid #e6e6e6">
+                    </div>
+                    <!--选择-->
+                    <div class="tabs-choose text-center" >
+                        <div id="dropdownDepartment" style="border-right: 1px solid #EDEDED;background-color: #fff;color: #43af80">选择科室</div>
+                        <div id="dropdownHospital">医院简介</div>
+                    </div>
+                    <div style="margin-top: 0">
+                        <!--选择-->
+                        <div class="sel-popup" style="display:block;height: 800px;">
+                            <div id="departmentItems" class= "item-content" style="display:block;">
+                                <div class="text-center item-left list" id="departmentLeft"></div>
+                                <div class="text-center item-right list" id="departmentRight"></div>
+                            </div>
+                        </div>
+                        <div id="Introduction" style="display:none;width: 98%;padding:0 5px;">
+                            <p style="font-size: 13px;color: #666666" id="introduction-content">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../js/framework7.min.js"></script>
+<script type="text/javascript" src="../js/my-app.js"></script>
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/ekang.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script>
+    $(function () {
+        var $departmentItems = $('#departmentItems'),
+            $introductionItems = $('#Introduction');
+            childNodes = [];
+        var hospitalid = getQueryString("hospitalId");
+        var type = getQueryString("type");
+        var option = {
+            getDepartment: function () {
+                $.ajax({
+                    type: 'GET',
+                    url: textUrl+'/hospital/hospitalDepartment',
+                    data: {
+                        uid:$.cookie("local_userId"),
+                        hospital_id:hospitalid,
+                        page_size: '500',
+                        page_index: 1,
+                        sid: '',
+                        longitude: $.cookie("longitude"),
+                        latitude: $.cookie("latitude")
+                    },
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    success: function (result) {
+                        $('#departmentRight').html('');
+                        if (result.ret == 0) {
+                            var itemLeft = '';
+                            childNodes = [];
+                            var hospital_detailData = result.data.hospital_detail;
+                            $('#introduction-content').html(hospital_detailData.detail);
+                            var items = '';
+                            items += '<img src="'+hospital_detailData.pic+'" alt="头像" class="left-box" style="position: absolute;width: 40px;height: 40px;border-radius: 4px;top:10px;left: 10px;"/>';
+                            items += '<div style="position: absolute;font-size: 14px;color: #333333;top: 11px;left: 56px; width: 80%" class="message">'+hospital_detailData.hospital_name+'&nbsp&nbsp<span style="position: absolute;width: 33px;height: 16px;font-size: 12px;background-color: #f95e64;color: white;text-align: center;border-radius: 2px">'+hospital_detailData.type_text+'</span></div>';
+                            items += '<span style="position: absolute;font-size: 12px;color: #808080;top: 31px;left: 56px" class="message">'+hospital_detailData.direction+'</span>';
+                            items += '<span class="message" style="position: absolute;text-align: right;font-size: 12px;color: #808080;right: 15px;top: 31px;background: url(../img/icon_position.png) no-repeat right center transparent; background-size: 9px 13px;background-position: 0 0;">&nbsp&nbsp&nbsp&nbsp&nbsp'+hospital_detailData.distance+'</span>';
+                            $('#top-content').html(items);
+//列表默认状态
+                            //将医院名称和医院id保存到本地
+                            $.cookie('hospital_name', hospital_detailData.hospital_name, { expires: 7,path: '/' });
+                            $.cookie('hospital_id', hospitalid, { expires: 7,path: '/' });
+                            $.each(result.data.department_list, function (i, o) {
+                                var data = o.parent_department;
+                                childNodes.push(o.child_department);
+                                itemLeft += '<a class="list-item text-left list-item-p-tb15 list-item-norightborder" data-id="' + data.id + '" data-index="' + i + '">' + data.title + '</a>';
+                            });
+                            $('#departmentLeft').html(itemLeft);
+                            //list默认状态
+                            $('#departmentLeft a').eq(0).addClass('item-active')
+                            var currentIndex = $('#departmentLeft a').eq(0).data('index');
+                            option.getChildDepart(currentIndex);
+                            $('#departmentLeft a').on('click', function () {
+                                $('.item-active').removeClass('item-active');
+                                $(this).addClass('item-active');
+                                var currentIndex = $(this).data('index');
+                                option.getChildDepart(currentIndex);
+                            });
+                        }
+                    }
+                });
+            },
+            // 获取子城市
+            getChildDepart: function (index) {
+                var item = '';
+                $.each(childNodes[index], function (i, data) {
+                    item += '<a class="list-item list-item-noborder text-left list-item-p-tb15" data-id="' + data.id + '" data-name="'+data.title+'">' + data.title + '</a>';
+                });
+                $('#departmentRight').html(item);
+                $('#departmentRight a').on('click', function () {
+                    $('.item-activeRight').removeClass('item-activeRight');
+                    $(this).addClass('item-activeRight');
+                    var department_id = $(this).data('id');
+                    var department_name = $(this).data('name');
+                    $.cookie('department_id', department_id, { expires: 7,path: '/' });
+                    $.cookie('department_name', department_name, { expires: 7,path: '/' });
+
+                    if($.cookie("local_userId")){
+                        if(type == 1){
+                            location.href = "hospital_orders.html";
+                        }else{
+                            history.go(-2);
+                        }
+                    }else{
+                        location.href = "../login.html";
+                    }
+                });
+            },
+        };
+        $('#dropdownDepartment').on('click', function () {
+            $('#dropdownHospital').css('background-color','#f0f0f0');
+            $('#dropdownHospital').css('color','#333333');
+            $('#dropdownDepartment').css('background-color','#fff');
+            $('#dropdownDepartment').css('color','#43af80');
+            if (!$departmentItems.is(':visible')) {
+                $departmentItems.show();
+                $introductionItems.hide();
+            }
+        });
+        $('#dropdownHospital').on('click', function () {
+            $('#dropdownDepartment').css('background-color','#f0f0f0');
+            $('#dropdownDepartment').css('color','#333333');
+            $('#dropdownHospital').css('background-color','#fff');
+            $('#dropdownHospital').css('color','#43af80');
+            if (!$introductionItems.is(':visible')) {
+                $introductionItems.show();
+                $departmentItems.hide();
+            }
+        });
+        option.getDepartment();
+        $('#back').on('click', function () {
+            history.back();
+//            if(type == 1){
+//
+//            }
+        });
+    });
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script src="../js/weixin2.js"></script>
+</body>
+</html>

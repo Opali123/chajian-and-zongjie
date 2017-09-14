@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+
+<html lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <title>床位手术</title>
+    <link href="../css/ekang.css" rel="stylesheet" />
+    <link href="../css/chooseDoctor_css/style.css" rel="stylesheet" />
+    <link href="../css/chooseDoctor_css/styleProgress.css" rel="stylesheet" />
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+            color: #6C6C6C;
+            overflow: scroll;
+        }
+
+        .reservation {
+            background-color: #ffffff;
+            border-bottom: solid 1px #e6e6e6;
+        }
+
+        .reservation_title {
+            padding: 7px;
+            color: #43af80;
+            font-size: 13px;
+            border-bottom: solid 1px #e6e6e6;
+        }
+
+        .reservation_title img{
+            width: 12px;
+            height: 12px;
+            margin-right:5px;
+
+        }
+        .reservation_table {
+            text-align: center;
+            padding: 7px;
+        }
+
+        #reservation_table a {
+            /* color: #FFFFFF;*/
+        }
+
+        .special_border {
+            border-collapse: inherit;
+            border-spacing: 1px;
+        }
+
+        .reservation table {
+            width: 100%;
+            background-color: #e6e6e6;
+        }
+
+        .reservation td {
+            background-color: white;
+            text-align: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .reservation .font {
+            font-size: 11px;
+            color: #4a4a4a;
+        }
+
+        .reservation .num {
+            font-size: 7px;
+            color: #939393;
+        }
+
+        .reservation .title {
+            font-size: 11px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        .reservation_time{
+            font-family:STHeiti;
+            font-weight: inherit;
+            text-align: center;
+            font-size: 13px;
+            margin-top: 10px;
+            color: #79807d;
+            font-style: inherit;
+        }
+
+        .commment_list img{
+            width: 15%;
+            margin-left: 10px;
+            margin-top: 10px;
+            float: left;
+        }
+        #ul_one li{
+            display: none;
+        }
+        #ul_one li.hover{
+            display: block;
+        }
+        #ul_two li{
+            display: none;
+        }
+        #ul_two li.hover{
+            display: block;
+        }
+        #scroll_two .spot{
+            width: 20vw;
+            height: auto;
+            overflow: hidden;
+            margin: auto;
+        }
+        #scroll_two .spot li{
+            width: 3vw;
+            height: 3vw;
+            border-radius: 100px;
+            background: #D9E9E6;
+            float: left;
+            overflow: hidden;
+            margin-left: 2vw;
+        }
+        #scroll_two .spot li.hover{
+            background: #43af80;
+        }
+        #scroll_one .spot{
+            width: 20vw;
+            height: auto;
+            overflow: hidden;
+            margin: auto;
+        }
+        #scroll_one .spot li{
+            width: 3vw;
+            height: 3vw;
+            border-radius: 100px;
+            background: #D9E9E6;
+            float: left;
+            overflow: hidden;
+            margin-left: 2vw;
+        }
+        #scroll_one .spot li.hover{
+            background: #43af80;
+        }
+
+        .backView {
+            width: 100%;
+            height: 50px;
+            margin-top: 10px;
+            background-color: #fff;
+            border-top: 1px solid #dddddd;
+            border-bottom: 1px solid #dddddd;
+            list-style-type: none;
+        }
+
+        .li-title {
+            position: absolute;
+            color: #333333;
+            font-size: 14px;
+            left: 12px;
+            line-height: 50px;
+            /*font-weight: bold;*/
+        }
+
+        .choose {
+            float:left;
+            margin:0 10px;
+            display:inline;
+            color: #333333;
+            font-size: 14px;
+            margin-top: 13px;
+            height: 24px;
+            line-height: 24px;
+            border-radius: 12px;
+        }
+
+        .choose-on {
+            background-color: #43af80;
+            color: #fff;
+        }
+
+        #nures_time ::-webkit-input-placeholder { color: #333333;text-align: right }
+
+        ::-webkit-input-placeholder { color: #b3b3b3;}
+        input:-moz-placeholder { color: #b3b3b3; }
+
+        .li-text {
+            position: absolute;
+            color: #b3b3b3;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            line-height: 45px;
+            right: 0;
+            width: 60%;
+            text-align: right;
+            background-color: rgba(102, 102, 102, 0);
+        }
+
+        .li-title-detail {
+            position:absolute;
+            color: #b3b3b3;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            right: 0;
+            text-align: left;
+            /*background-color:#009688;*/
+            width: 94%;
+            height: 79px;
+            left: 10px;
+            top: 5px;
+        }
+
+        .icon-right {
+            background: url(../img/right_24.png) no-repeat 98% center transparent;
+            background-color: #fff;
+            background-size: 12px 12px;
+        }
+
+        .tabs-choose {
+            /*height: 50px;*/
+            line-height: 50px;
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0);
+            right: 25px;
+            color: #333333;
+        }
+
+        .tabs-choose div {
+            background-origin: content-box;
+            font-size: 14px;
+            text-align: right;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<!--// 导航条-->
+<div style="width: 100%;height: 45px;background-color: #38a16d;position: fixed;z-index: 10000">
+    <h1 class="nav-title" style="font-size: 18px;line-height: 45px">床位手术</h1>
+    <img src="../img/BackIcon.png" alt="返回" class="nav-backImg" id="back"/>
+</div>
+
+<!-- 预约日期 -->
+<div class="reservation">
+    <div style="height: 45px;width: 100% "></div>
+    <ui>
+        <li id="hospitalDetail" style="margin-top: 0;border-top: none" class="icon-right backView">
+            <span class="li-title">选择医院科室</span>
+            <div id="departmentDetail" class="tabs-choose text-center"></div>
+        </li>
+    </ui>
+
+    <!-- 希望住院时间-->
+    <div class="reservation_title" style="margin-top: 10px;border-top: 1px solid #e6e6e6;">
+        <img src="../img/doctorDetail/docter/矩形-3@2x.png">
+        希望住院时间
+    </div>
+
+    <!--滚动-->
+    <div class="container" id="scroll_one" style="height: 210px;border-bottom: 1px solid #e6e6e6">
+        <section class="sample" data-slidizle>
+
+            <ul class="slider-content" id="ul_one" data-slidizle-content>
+
+                <li class="slider-item hover">
+
+                    <div class="reservation_time" id="table_time_01">
+                        日期
+                    </div>
+                    <div class="reservation_table">
+                        <table id="table01" class="special_border" cellspacing="1" cellpadding="5">
+                            <tr>
+                                <td class="t_l_radius"><img src="../img/doctorDetail/calendar.png" width="18" height="18" /></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="t_r_radius"></td>
+                            </tr>
+                            <tr>
+                                <td class="title">上午</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">下午</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </li>
+
+                <li class="slider-item">
+
+                    <div class="reservation_time" id="table_time_02">
+                        日期
+                    </div>
+                    <div class="reservation_table">
+                        <table id="table02" class="special_border" cellspacing="1" cellpadding="5">
+                            <tr>
+                                <td class="t_l_radius"><img src="../img/doctorDetail/calendar.png" alt="" width="18" height="18" /></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="t_r_radius"></td>
+                            </tr>
+                            <tr>
+                                <td class="title">上午</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">下午</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </li>
+
+
+                <li class="slider-item">
+                    <div class="reservation_time" id="table_time_03">
+                        日期
+
+                    </div>
+                    <div class="reservation_table">
+                        <table id="table03" class="special_border" cellspacing="1" cellpadding="5">
+                            <tr>
+                                <td class="t_l_radius"><img src="../img/doctorDetail/calendar.png" width="18" height="18" /></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="t_r_radius"></td>
+                            </tr>
+                            <tr>
+                                <td class="title">上午</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">下午</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </li>
+
+            </ul>
+
+            <!-- 下面三个点 -->
+            <ul class="slider-navigation spot" data-slidizle-navigation>
+                <li class="hover"></li>
+                <li></li>
+                <li></li>
+            </ul>
+
+        </section>
+    </div>
+
+    <ui>
+        <li id="hospital_doctor" style="margin-top: 10px;" class="icon-right backView">
+            <span class="li-title">选择主刀大夫（可不选）</span>
+            <div id="doctor_name" class="tabs-choose text-center"></div>
+        </li>
+    </ui>
+
+    <!-- 希望手术时间-->
+    <div class="reservation_title" style="margin-top: 10px;border-top: 1px solid #e6e6e6">
+        <img src="../img/doctorDetail/docter/矩形-3@2x.png">
+        希望手术时间
+    </div>
+
+    <!--滚动-->
+    <div class="container" id="scroll_two" style="height: 210px;border-bottom: 1px solid #e6e6e6">
+        <section class="sample" data-slidizle>
+
+            <ul class="slider-content" id="ul_two" data-slidizle-content>
+
+                <li class="slider-item hover">
+
+                    <div class="reservation_time" id="table_time_01_2">
+                        日期
+                    </div>
+                    <div class="reservation_table">
+                        <table id="table01_2" class="special_border" cellspacing="1" cellpadding="5">
+                            <tr>
+                                <td class="t_l_radius"><img src="../img/doctorDetail/calendar.png" width="18" height="18" /></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="t_r_radius"></td>
+                            </tr>
+                            <tr>
+                                <td class="title">上午</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">下午</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </li>
+
+                <li class="slider-item">
+
+                    <div class="reservation_time" id="table_time_02_2">
+                        日期
+                    </div>
+                    <div class="reservation_table">
+                        <table id="table02_2" class="special_border" cellspacing="1" cellpadding="5">
+                            <tr>
+                                <td class="t_l_radius"><img src="../img/doctorDetail/calendar.png" alt="" width="18" height="18" /></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="t_r_radius"></td>
+                            </tr>
+                            <tr>
+                                <td class="title">上午</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">下午</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </li>
+
+
+                <li class="slider-item">
+                    <div class="reservation_time" id="table_time_03_2">
+                        日期
+
+                    </div>
+                    <div class="reservation_table">
+                        <table id="table03_2" class="special_border" cellspacing="1" cellpadding="5">
+                            <tr>
+                                <td class="t_l_radius"><img src="../img/doctorDetail/calendar.png" width="18" height="18" /></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="t_r_radius"></td>
+                            </tr>
+                            <tr>
+                                <td class="title">上午</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="title">下午</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </li>
+
+            </ul>
+
+            <!-- 下面三个点 -->
+            <ul class="slider-navigation spot" data-slidizle-navigation>
+                <li class="hover"></li>
+                <li></li>
+                <li></li>
+            </ul>
+
+        </section>
+    </div>
+
+
+    <ui>
+        <li class="icon-right backView" id="choosePeople" style="margin-top: 10px">
+            <span class="li-title">就诊患者</span>
+            <div class="tabs-choose text-center" id="user_name">点击选择</div>
+
+        </li>
+        <li class="backView">
+            <input placeholder="请填写确诊疾病" type="text" id="disease" class="tabs-choose text-center" style="width: 90%;text-align:left;border: none;background-color: rgba(0, 0, 0, 0);line-height: 45px">
+
+        </li>
+        <li class="backView">
+            <span class="li-title">备用联系人</span>
+            <input type="number" id="mobile" placeholder="请输入备用联系人手机号" class="li-text"/>
+        </li>
+        <li class="backView" style="position:relative;height: 89px">
+            <textarea id="disease_detail" class="li-title-detail" placeholder="请简单的描述患者的病情或就诊经历"></textarea>
+        </li>
+    </ui>
+
+    <p class="message" style="font-size: 12px;color: #999999">&nbsp&nbsp&nbsp&nbsp预约床位和手术的服务费价格根据医院的具体情况而定价格范围在500-40000之间</p>
+    <br/>
+    <br/>
+    <div style="position: fixed;display: flex;height: 49px;width: 100%;background-color: #393d3b;bottom: 0">
+        <div id="submitOrder" style="position: absolute;right: 0;width: 100%;height: 49px;background-color: #26d086;font-size: 16px;color: #fff;text-align: center;line-height: 49px">立即预约</div>
+    </div>
+</div>
+
+<script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+<script src="../js/ekang.js"></script>
+<!--<script src="../js/jquery.slidizle.js"></script>-->
+<script src="../js/jquery.cookie.js"></script>
+
+<script>
+
+    $(function () {
+
+        //初始化滚动条
+//        $('[data-slidizle]').slidizle({
+//            beforeChange : function(api) {
+//                console.log('previous', api.getPreviousSlide().index());
+//                console.log('current', api.getCurrentSlide().index());
+//                console.log('next', api.getNextSlide().index());
+//                console.log('previous active', api.getPreviousActiveSlide().index());
+//            }
+//        });
+
+        var department_id;
+        var hospital_id;
+        var doctor_id;
+
+        var time;
+        var appointment_time;
+
+        var time_2;
+        var appointment_time_2;
+
+        // 选择医院科室
+        if($.cookie("hospital_name")){
+            $('#departmentDetail').html($.cookie("hospital_name")+$.cookie("department_name"));
+
+            hospital_id = $.cookie("hospital_id");
+            department_id = $.cookie("department_id");
+
+        }else{
+            $('#departmentDetail').html("请选择医院科室");
+        }
+
+        // 用户
+        if($.cookie("username")){
+            $('#user_name').html($.cookie("username"));
+        }
+
+
+        // 医生
+        if($.cookie("doctor_name")){
+            $('#doctor_name').html($.cookie("doctor_name"));
+            doctor_id = $.cookie("doctor_id")
+        }
+
+        // 选择医院科室
+        $('#hospitalDetail').on('click', function () {
+            location.href = "../hospitalInformation/hospitalList.html";
+        });
+
+        // 就诊人
+        $('#choosePeople').on('click', function () {
+            location.href = "../addPeople/contactPeople.html";
+        });
+
+        // 主刀医生
+        $('#hospital_doctor').click(function () {
+            if($.cookie("hospital_name")){
+                location.href = "../chooseDoctor/hospital_doctor.html?hospital-id="+hospital_id+"&department-id="+department_id+"";
+            }else{
+                alert("请选择医院科室");
+                return;
+            }
+
+        });
+
+        $('#back').click(function () {
+            history.back();
+        });
+
+        var app = {
+            getworktime: function () {
+                $.ajax({
+                    type: 'GET',
+                    url: textUrl + '/index/getWorkTime',
+                    data: {         // 需要于客户端同步
+                        uid : ''
+                    },
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    success: function (result) {
+                        if (result.ret == 0) {
+
+                            ///////医生排版信息
+                            var workTime = result.data;
+
+                            var now_data = workTime.now_week;
+
+                            for (var now_index in now_data) {
+
+                                var obj = now_data[now_index];
+
+                                loadData("table01", obj, parseInt(now_index) + parseInt(1));
+                                loadData_2("table01_2", obj, parseInt(now_index) + parseInt(1));
+
+                                if(now_index==0){
+
+                                    $("#table_time_01").text(obj.current_year);
+                                    $("#table_time_01_2").text(obj.current_year);
+                                }
+                            }
+
+                            var next_data = workTime.next_week;
+                            for (var next_index in next_data) {
+
+
+                                var obj = next_data[next_index];
+
+                                loadData("table02", obj, parseInt(next_index) + parseInt(1));
+                                loadData_2("table02_2", obj, parseInt(next_index) + parseInt(1));
+
+                                if(next_index==0){
+
+                                    $("#table_time_02").text(obj.current_year);
+                                    $("#table_time_02_2").text(obj.current_year);
+                                }
+
+                            }
+
+
+                            var next_next_data = workTime.next_next_week;
+                            for (var next_next_index in next_next_data) {
+
+                                var obj = next_next_data[next_next_index];
+
+                                loadData("table03", obj, parseInt(next_next_index) + parseInt(1));
+                                loadData_2("table03_2", obj, parseInt(next_next_index) + parseInt(1));
+
+                                if(next_next_index==0){
+
+                                    $("#table_time_03").text(obj.current_year);
+                                    $("#table_time_03_2").text(obj.current_year);
+                                }
+                            }
+                        } else {
+                            alert(result.msg);
+                        }
+                    }
+                });
+            },
+            subOrder: function () {
+                $.ajax({
+                    type: 'POST',
+                    url: textUrl + '/diagnosis/submitOrder/',
+                    data: {         // 需要于客户端同步
+                        family_id : $.cookie("userId"),
+                        hospital_id : $.cookie("hospital_id"),
+                        department_id : $.cookie("department_id"),
+                        doctor_id : doctor_id,
+                        appointment_type : "5",
+                        type : '3',
+                        uid : $.cookie("local_userId"),
+                        appointment_time: $.myTime.DateToUnix("2016-"+appointment_time),
+                        diagnosis_time : $.myTime.DateToUnix("2016-"+appointment_time_2),
+                        mobile : $('#mobile').val(),
+                        hospital_day_time : time,
+                        operation_day_time:time_2,
+                        disease:$('#disease').val(),
+                        memo : $('#disease_detail').val()
+                    },
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    success: function (result) {
+                        if (result.ret == 0) {
+//                            var order = result.data.order_id;
+//                            location.href = "../hospital_nurse/nurse_payorder.html?order_id="+order;
+                            alert("预约信息提交成功，请等待客服人员联系您。如有疑问，请拨打：4006-305060");
+                            history.back();
+                        } else {
+                            alert(result.msg);
+                        }
+                    }
+                });
+            }
+        };
+
+        /**
+         * 加载排班表数据
+         */
+        function loadData(tableId, obj, index) {
+
+            //设置表头日期
+            $("#" + tableId + " tr:eq(0) td:eq(" + index + ")").html('<span class="font">' + obj.week_text + '</span><br/><span class="num">' + obj.date + '</span>');
+
+            //设置上午
+            if (obj.am == 0) {
+                $("#" + tableId + " tr:eq(1) td:eq(" + index + ")").css("background-color", "#fff");
+                $("#" + tableId + " tr:eq(1) td:eq(" + index + ")").html("");
+            } else {
+                $("#" + tableId + " tr:eq(1) td:eq(" + index + ")").css("background-color", "#fff");
+                $("#" + tableId + " tr:eq(1) td:eq(" + index + ")").on('click', function () {
+                    $('#ul_one td').css("background-color", "#fff");
+                    $(this).addClass($(this).css("background-color", "#43AF80"));
+                    $(this).html('<span class="font" style="color: #fff">' + obj.week_text + '</span><br/><span class="num" style="color: #fff">上午</span>');
+                    appointment_time = obj.date;
+                    time = 1;
+                });
+            }
+
+            //设置下午
+            if (obj.pm == 0) {
+                $("#" + tableId + " tr:eq(2) td:eq(" + index + ")").css("background-color", "#fff");
+                $("#" + tableId + " tr:eq(2) td:eq(" + index + ")").html("");
+            } else {
+                $("#" + tableId + " tr:eq(2) td:eq(" + index + ")").css("background-color", "#fff");
+                $("#" + tableId + " tr:eq(2) td:eq(" + index + ")").on('click', function () {
+                    $('#ul_one td').css("background-color", "#fff");
+                    $(this).addClass($(this).css("background-color", "#43AF80"));
+                    $(this).html('<span class="font" style="color: #fff">' + obj.week_text + '</span><br/><span class="num" style="color: #fff">下午</span>');
+                    appointment_time = obj.date;
+                    time = 2;
+                });
+//                $("#" + tableId + " tr:eq(2) td:eq(" + index + ")").html('<a href="doctor_appointment.html?am=2&day='+obj.day+'&time='+obj.date+'" style="color: white;font-size: 11px">立即<br/>预约</a>');
+            }
+
+        }
+
+        /**
+         * 加载排班表数据
+         */
+        function loadData_2(tableId, obj, index) {
+
+            //设置表头日期
+            $("#" + tableId + " tr:eq(0) td:eq(" + index + ")").html('<span class="font">' + obj.week_text + '</span><br/><span class="num">' + obj.date + '</span>');
+
+            //设置上午
+            if (obj.am == 0) {
+                $("#" + tableId + " tr:eq(1) td:eq(" + index + ")").css("background-color", "#fff");
+                $("#" + tableId + " tr:eq(1) td:eq(" + index + ")").html("");
+            } else {
+                $("#" + tableId + " tr:eq(1) td:eq(" + index + ")").css("background-color", "#fff");
+                $("#" + tableId + " tr:eq(1) td:eq(" + index + ")").on('click', function () {
+                    $('#ul_two td').css("background-color", "#fff");
+                    $(this).addClass($(this).css("background-color", "#43AF80"));
+                    $(this).html('<span class="font" style="color: #fff">' + obj.week_text + '</span><br/><span class="num" style="color: #fff">上午</span>');
+                    appointment_time_2 = obj.date;
+                    time_2 = 1;
+                });
+            }
+
+            //设置下午
+            if (obj.pm == 0) {
+                $("#" + tableId + " tr:eq(2) td:eq(" + index + ")").css("background-color", "#fff");
+                $("#" + tableId + " tr:eq(2) td:eq(" + index + ")").html("");
+            } else {
+                $("#" + tableId + " tr:eq(2) td:eq(" + index + ")").css("background-color", "#fff");
+                $("#" + tableId + " tr:eq(2) td:eq(" + index + ")").on('click', function () {
+                    $('#ul_two td').css("background-color", "#fff");
+                    $(this).addClass($(this).css("background-color", "#43AF80"));
+                    $(this).html('<span class="font" style="color: #fff">' + obj.week_text + '</span><br/><span class="num" style="color: #fff">下午</span>');
+                    appointment_time_2 = obj.date;
+                    time_2 = 2;
+                });
+//                $("#" + tableId + " tr:eq(2) td:eq(" + index + ")").html('<a href="doctor_appointment.html?am=2&day='+obj.day+'&time='+obj.date+'" style="color: white;font-size: 11px">立即<br/>预约</a>');
+            }
+
+        }
+
+        app.getworktime();
+
+        $('#submitOrder').click(function () {
+
+            if(!appointment_time && appointment_time_2){
+                alert("请填写您需要预约的项目时间");
+                return;
+            }
+
+            if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test($('#mobile').val()))){
+                alert("请输入正确的手机号");
+                document.mobileform.mobile.focus();
+                return false;
+            }
+            if($('#disease').val().length == 0){
+                alert("请填写确诊疾病");
+                return;
+            }
+//            if($('#disease_detail').val().length == 0){
+//                alert("请简单的描述患者的病情或就诊经历");
+//                return;
+//            }
+
+            app.subOrder();
+        });
+
+    });
+</script>
+<script>
+    $(function(){
+        //滑动
+
+        function scrolbody(obj){
+            var x,x2=0,index=0;
+            obj.get(0).addEventListener('touchstart',function(e){
+                x=e.touches[0].pageX;
+                x2=x
+            });
+            obj.get(0).addEventListener('touchmove',function(e){
+                //e.preventDefault();
+                x2=e.touches[0].pageX;
+            })
+            obj.get(0).addEventListener('touchend',function(e){
+
+                if(x-x2>20 &&  index<2 ){
+                    index+=1;
+                    $('#ul_one li').eq(index).addClass('hover').siblings().removeClass('hover')
+                    $('#scroll_one .spot li').eq(index).addClass('hover').siblings().removeClass('hover')
+                }else if(x2-x>20 &&  index>0 ) {
+                    index -= 1;
+                    $('#ul_one li').eq(index).addClass('hover').siblings().removeClass('hover')
+                    $('#scroll_one .spot li').eq(index).addClass('hover').siblings().removeClass('hover')
+                }
+            },false);
+        }
+        function scrolbody2(obj){
+            var x,x2=0,index=0;
+            obj.get(0).addEventListener('touchstart',function(e){
+                x=e.touches[0].pageX;
+                x2=x
+            },false);
+            obj.get(0).addEventListener('touchmove',function(e){
+                e.preventDefault();
+                x2=e.touches[0].pageX;
+            },false)
+            obj.get(0).addEventListener('touchend',function(e){
+
+                if(x-x2>20 &&  index<2 ){
+                    index+=1;
+                    $('#ul_two li').eq(index).addClass('hover').siblings().removeClass('hover')
+                    $('#scroll_two .spot li').eq(index).addClass('hover').siblings().removeClass('hover')
+
+                }else if(x2-x>20 &&  index>0 ) {
+                    index -= 1;
+                    $('#ul_two li').eq(index).addClass('hover').siblings().removeClass('hover')
+                    $('#scroll_two .spot li').eq(index).addClass('hover').siblings().removeClass('hover')
+                }
+            });
+        }
+        scrolbody($('#scroll_one'))
+        scrolbody2($('#scroll_two'))
+    })
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script src="../js/weixin2.js"></script>
+</body>
+</html>

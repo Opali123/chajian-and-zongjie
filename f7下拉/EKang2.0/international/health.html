@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="description" content="" />
+<meta name="author" content="ChongMing" />
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="full-screen" content="yes">
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-fullscreen" content="true">
+<meta name="360-fullscreen" content="true">
+<title>我的健康</title>
+<link href="../css/reset.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../css/ekang.css"/>
+<style type="text/css">
+        @charset "utf-8";
+        img{
+            display: block;
+        }
+        .useInfor{
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+
+        }
+        .useInfor .tit{
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            border-bottom: 1px solid #dfdfdf;
+        }
+        .useInfor .tit img{
+            width: 5%;
+            float: left;
+            margin: 3% 2%;
+        }
+        .useInfor .tit p{
+            font-size: 5vw;
+            float: left;
+            line-height: 12vw;
+
+        }
+        .useInfor .con{
+            width: 100%;
+            margin-top: 3%;
+            border-top: 1px solid #dfdfdf;
+            height: auto;
+            overflow: hidden;
+        }
+        .useInfor .con dl{
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            border-bottom: 1px solid #dfdfdf;
+        }
+        .useInfor .con dl dt{
+            width: 30%;
+            height: auto;
+            overflow: hidden;
+            float: left;
+            font-size: 4vw;
+            text-indent: 2em;
+            line-height: 12vw;
+            height:12vw;
+        }
+        .useInfor .con dl dd{
+            width: 70%;
+            float: left;
+            height: 12vw;
+            line-height: 12vw;
+        }
+        .useInfor .con dl dd input{
+            width: 100%;
+            font-size: 4vw;
+            display: block;
+            border: none;
+            height:10vw;
+
+        }
+        .useInfor .con .jc_time dt{
+            width: 50%;
+            height: auto;
+            overflow: hidden;
+            float: left;
+            font-size: 4vw;
+            text-indent: 2em;
+        }
+        .useInfor .con dl dd{
+            width: 50%;
+            float: left;
+        }
+        .useInfor .con .six{
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            border-bottom: 1px solid #dfdfdf;
+        }
+        .useInfor .con .six dt{
+            width: 30%;
+            height: auto;
+            overflow: hidden;
+            float: left;
+            font-size: 4vw;
+            text-indent: 2em;
+            line-height: 12vw;
+
+        }
+        .useInfor .con .six dd{
+            width: 70%;
+            float: left;
+        }
+        .useInfor .con .six dd .man{
+
+            width: 40%;
+            height: auto;
+            overflow: hidden;
+            float: left;
+        }
+        .useInfor .con .six dd .man p{
+            font-size: 4vw;
+            float: left;
+            line-height: 12vw;
+        }
+        .useInfor .con .six dd .man input{
+            float: left;
+            font-size: 4vw;
+            width: 5vw;
+            height: 5vw;
+            line-height: 12vw;
+            border: none;
+            margin-top: 12%;
+            margin-right: 5%;
+        }
+        .useInfor .con .six dd .woman{
+
+            width: 40%;
+            height: auto;
+            overflow: hidden;
+            float: left;
+        }
+        .useInfor .con .six dd .woman p{
+            font-size: 4vw;
+            float: left;
+            line-height: 12vw;
+        }
+        .useInfor .con .six dd .woman input{
+            float: left;
+            font-size: 4vw;
+            width: 5vw;
+            height: 5vw;
+            line-height: 12vw;
+            border: none;
+            margin-top: 12%;
+            margin-right: 5%;
+        }
+        .next_step{
+            width: 100%;
+            height: 50px;
+
+            text-align: center;
+            line-height: 50px;
+            background: #37a26c;
+            color: #fff;
+            font-size: 4vw;
+        }
+        .sc_picture{
+            margin-top: 5%;
+            width: 100%;
+            height: 225px;
+            border: 1px solid #dfdfdf;
+        }
+        .sc_picture .upload{
+            width: 150px;
+            height: 150px;
+            background: #999;
+            margin: auto;
+            margin-top: 20px;
+
+
+        }
+        .input-file{margin: 0 auto 0px auto; width:150px; height: 150px; background:url(../images/icon_6_03.png) top center no-repeat; background-size: 100% auto; margin-top:-149px;}
+        input[type="file"]{z-index: 10; width: 100%; height: 100%;opacity: 0;}
+    </style>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/main.js"></script>
+<script>
+    $(function(){
+
+        $('#health').click(function(){
+            var name = $('#name').val();
+            var code = $('#code').val();
+            var phone = $('#phone').val();
+            var addressV =$('#address').val();
+            var be_ill = $('#be_ill').val();
+            var performance = $('#performance').val();
+            var picval = $('#blessingpic').val()
+            if(!obj.name.test(name)){
+                alert('请填写姓名');
+                return;
+            }
+            if(!obj.Idnumber.test(code)){
+                alert('请填写身份证号');
+                return;
+            }
+            if(!obj.phone.test(phone)){
+                alert('请填写手机号');
+                return;
+            }
+            if(addressV==''){
+                alert('请填写家庭住址');
+                return;
+            }
+            if(be_ill==''){
+                alert('请填写所患疾病');
+                return;
+            }
+            if(performance==''){
+                alert('请填写患症表现');
+                return;
+            };
+            $.ajax({
+                type : 'post',
+                url : 'http://ekang.ren/user/myHealth',
+                data:{
+                    uid:1,
+                    user_name:name,
+                    identify_card:code,
+                    mobile:phone,
+                    address:addressV,
+                    disease:be_ill,
+                    symptom:performance,
+                    pic:picval
+                },
+                dataType : 'json',
+                success : function(res) {
+                    console.log(res);
+                    if(res.ret==0){
+                        location.href='http://www.ekangjiuyi.net/EKang2.0/index.html'
+                    }else{
+                        alert(res.msg)
+                    }
+                }
+            });
+        });
+    });
+    obj={
+        "phone":/^(((13[0-9]{1})|(14[0-9]{1})|(17[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/,
+        "email":/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/,
+        "name":/^[\u4e00-\u9fa5]+$/,
+        "num":/^[1-9]+[0-9]*]*$/,
+        "Idnumber":/^\d{17}[\w\d]$/,
+    };
+</script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+    <script src="../js/weixin2.js"></script>
+</head>
+<body style="background-color: white">
+<!--// 导航条-->
+<div style="width: 100%;height: 45px;line-height: 45px;background-color: #38a16d;position: fixed;z-index: 10000">
+    <h1 class="nav-title" style="font-size: 18px;">我的健康</h1>
+    <img src="../img/BackIcon.png" alt="返回" class="nav-backImg" id="back"/>
+</div>
+<div class="useInfor" style="padding-top: 45px">
+    <div class="tit">
+        <img src="../img/icon-medical.png" />
+        <p>患者资料</p>
+    </div>
+    <div class="con">
+        <dl class="name">
+            <dt>姓名</dt>
+            <dd><input id="name" type="text" placeholder="请输入您的姓名"></dd>
+        </dl>
+        <dl class="name">
+            <dt>身份证号</dt>
+            <dd><input id="code" type="text" placeholder="请输入您的身份证号"></dd>
+        </dl>
+
+        <dl class="phone">
+            <dt>电话</dt>
+            <dd><input type="text" id="phone" placeholder="输入患者本人电话"></dd>
+        </dl>
+        <dl class="address">
+            <dt>家庭住址</dt>
+            <dd><input type="text" id="address" placeholder="输入患者本人住址"></dd>
+        </dl>
+        <dl class="phone">
+            <dt>所患疾病</dt>
+            <dd><input type="text" id="be_ill" placeholder="输入患者所患疾病"></dd>
+        </dl>
+        <dl class="phone">
+            <dt>症状表现</dt>
+            <dd style=" height: auto;"><textarea id="performance" style=" height: 90px; width: 100%; margin-top: 3%"></textarea></dd>
+        </dl>
+
+    </div>
+    <div class="sc_picture">
+        <div class="upload">
+
+        </div>
+        <div class="input-file relative">
+            <input class="absolute" type="file" id="photoFile" name="photoFile">
+        </div>
+        <input type="hidden" id="blessingpic" name="blessingpic">
+        <p style=" width: 80%; font-size: 3.5vw; margin: auto; color: #999999; margin-top: 4px; "><注意事项>所发片字的图像不要分辨率低的JPEG形式，而要世界标准的DICOM FORMAT形式</p>
+    </div>
+    <div class="next_step" id="health">提交</div>
+</div>
+</body>
+</html>

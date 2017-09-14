@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="description" content="" />
+<meta name="author" content="ChongMing" />
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="full-screen" content="yes">
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-fullscreen" content="true">
+<meta name="360-fullscreen" content="true">
+<title>科室列表</title>
+</head>
+<link href="../css/reset.min.css" rel="stylesheet" type="text/css" />
+<link href="../css/examination/layout.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="../css/ekang.css"/>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.mobile-1.4.3.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/ekang.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script>
+    $(function(){
+
+        //departmentsList()
+        $.ajax({
+            type:'GET',
+            url:textUrl + '/hospital/department?',
+            data:{
+            },
+            dataType:'jsonp',
+            jsonp:'callback',
+            success: function (result) {
+                if (result.ret == 0) {
+                    data = result.data
+                    console.log(data)
+                    var arrL = result.data.length
+                    for(var i= 0;i<arrL;i++){
+                        document.getElementById('dl_left').innerHTML+='<li>'+data[i].department_name+'</li>'
+                    }
+                    var cd_name1 = data[0].child_department
+                    var cd_l =  data[0].child_department.length
+                    for(var s= 0;s<cd_l;s++){
+                        document.getElementById('dl_right').innerHTML+='<li>'+cd_name1[s].name+'</li>'
+                    }
+                    $('#dl_left li').eq(0).addClass('hover')
+                    $('#dl_left li').click(function(){
+                        $('#dl_right').html('')
+                        var index = $(this).index()
+                        cd_name2 = data[index].child_department
+                        var cd_l2 =  data[index].child_department.length
+                        $('#dl_left li').eq(index).addClass('hover').siblings().removeClass('hover')
+                        for(var o= 0;o< cd_l2;o++){
+                            document.getElementById('dl_right').innerHTML+='<li>'+cd_name2[o].name+'</li>'
+                        }
+                        $('#dl_right li').click(function(){
+                            //console.log(12)
+
+                            var text = $(this).text();
+                            var index = $(this).index();
+                            var index2 = cd_name2[index].id
+                            $.cookie('departmentname',text, { expires: 7,path: '/' });
+                            location.href = "doctorList.html?departmentid="+index2;
+                        })
+                    });
+                    $('#dl_right li').click(function(){
+                        //console.log(12)
+
+                        var text = $(this).text();
+                        var index = $(this).index();
+                        var index3 = data[0].child_department[index].id
+                        $.cookie('departmentname',text, { expires: 7,path: '/' });
+                        location.href = "doctorList.html?departmentid="+index3;
+                    })
+                }else{
+                    alert(result.msg)
+                }
+            }
+        });
+
+    });
+    function departmentsList(){
+
+    }
+</script>
+<script src="../js/preve.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script src="../js/weixin2.js"></script>
+<style>
+    .departments_list{
+        width: 100%;
+        height: 100%;
+
+        overflow: hidden;
+    }
+    .departments_list .left{
+        float: left;
+        position: fixed;
+        width: 40%;
+        height: 100%;
+        left:0;
+        overflow-y: scroll;
+        border-right: 1px solid #d9d9d9;
+    }
+    .departments_list .left li{
+        width: 100%;
+
+        text-align: left;
+        text-indent: 1em;
+        font-size: 4vw;
+        background: #f0f0f0;
+        border-bottom: #d9d9d9 1px solid;
+        height: 10vw;
+        overflow-y: hidden;
+        line-height: 10vw;
+    }
+    .departments_list .right{
+        float: left;
+        width: 60%;
+        height: 100%;
+        position: fixed;
+        right:0;
+        background: #fff;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    .departments_list .right li{
+        width: 100%;
+        text-align: left;
+        text-indent: 1em;
+        font-size: 4vw;
+        background: #fff;
+        border-bottom: #fff 1px solid;
+        height: 10vw;
+        line-height: 10vw;
+        overflow: hidden;
+        border-left: 1px solid #d9d9d9;
+    }
+    .departments_list .left li.hover{
+        background: #fff;
+    }
+</style>
+<body style=" width: 100%; height: 100%; overflow: hidden;-webkit-overflow-scrolling: touch;">
+<div class="main">
+    <div class="departments_list">
+        <ul class="left" id="dl_left">
+        </ul>
+        <div >
+            <ul class="right" id="dl_right"></ul>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

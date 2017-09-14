@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>修改个人资料</title>
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="../css/framework7.ios.min.css">
+    <link rel="stylesheet" href="../css/framework7.ios.colors.min.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="../css/my-app.css">
+    <link rel="stylesheet" href="../css/ekang.css"/>
+    <style type="text/css">
+        body {
+            background-color: #fff;
+        }
+
+        li {
+            width: 100%;
+            height: 50px;
+            margin-top: 10px;
+            background-color: #fff;
+            border-top: 1px solid #e6e6e6;
+            border-bottom: 1px solid #e6e6e6;
+            list-style-type: none;
+        }
+
+        .li-title {
+            position: absolute;
+            color: #333333;
+            font-size: 16px;
+            left: 12px;
+            line-height: 50px;
+            font-weight: bold;
+        }
+
+        .icon-right {
+            background: url(../img/right_24.png) no-repeat 98% center transparent;
+            background-color: #fff;
+            background-size: 12px 12px;
+        }
+        .tabs-choose {
+            line-height: 50px;
+            position: absolute;
+            background-color: #ffffff;
+            right: 25px;
+            color: #808080;
+        }
+
+        .tabs-choose div {
+            background-origin: content-box;
+            font-size: 15px;
+            text-align: right;
+        }
+
+        .user-img {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            top: 50%;
+            margin-top: -30px;
+            right: 25px;
+            border-radius: 60px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="views tabs toolbar-through">
+    <!--导航条-->
+    <!-- Second view (for second wrap)-->
+    <div id="view" class="view view-main tab active">
+        <!-- We can make with view with navigation, let's add Top Navbar-->
+        <div class="navbar">
+            <div class="navbar-inner" style="background-color: #38a16d">
+                <div class="left" id="back">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back color-white" style="color: white"></i>
+                        <span style="color: white">返回</span>
+                    </a>
+                </div>
+                <div class="center sliding" style="color: white">个人中心</div>
+            </div>
+        </div>
+
+        <div class="pages navbar-through">
+            <div data-page="index-2" class="page page-on-center">
+                <div class="page-content">
+                    <ui>
+                        <li id="user_photo" class="icon-right" style="height: 74px;position: relative">
+                            <span class="li-title" style="line-height: 74px;">头像</span>
+                            <img src="../img/ico_ures_sj.png" alt="头像" class="user-img" id="userimg"/>
+                        </li>
+                        <li class="icon-right" id="creat-picker">
+                            <span class="li-title">昵称</span>
+                            <div id="nures_time" class="tabs-choose text-center">张三</div>
+
+                        </li>
+                        <li class="icon-right">
+                            <span class="li-title">手机</span>
+                            <div class="tabs-choose text-center ">13269329498</div>
+
+                        </li>
+                    </ui>
+
+                    <video id="video" autoplay=""style='width:320px;height:480px'></video>
+                    <div><button id='picture' style="width: 100%;">PICTURE</button></div>
+                    <canvas id="canvas" width="320" height="480"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../js/framework7.min.js"></script>
+<script type="text/javascript" src="../js/my-app.js"></script>
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/ekang.js"></script>
+<script>
+    $(function () {
+        var nurse = {
+            getOrderDetail: function () {
+                $.ajax({
+                    type: 'GET',
+                    url: textUrl + '/diagnosis/submitOrder/',
+                    data: {         // 需要于客户端同步
+
+                    },
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    success: function (result) {
+                        if (result.ret == 0) {
+
+                        } else {
+                            alert(result.msg);
+                        }
+                    }
+                });
+            },
+        };
+
+        // 头像
+        $$('#user_photo').on('click', function () {
+            var buttons = [
+                {
+                    text: '拍照',
+                    bold: true,
+                    onClick: function () {
+                    }
+                },
+                {
+                    text: '从相册选择',
+                    onClick: function () {
+                    }
+                },
+                {
+                    text: '取消',
+                    color: 'red'
+                }
+            ];
+            myApp.actions(buttons);
+
+        });
+
+        var video = document.getElementById("video");
+        var context = canvas.getContext("2d");
+        var errocb = function () {
+            console.log('sth wrong!');
+        }
+
+        if (navigator.getUserMedia) { // 标准的API
+            navigator.getUserMedia({ "video": true }, function (stream) {
+                video.src = stream;
+                video.play();
+            }, errocb);
+        } else if (navigator.webkitGetUserMedia) { // WebKit 核心的API
+            navigator.webkitGetUserMedia({ "video": true }, function (stream) {
+                video.src = window.webkitURL.createObjectURL(stream);
+                video.play();
+            }, errocb);
+        }
+
+        document.getElementById("picture").addEventListener("click", function () {
+            context.drawImage(video, 0, 0, 320, 480);
+        });
+    });
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script src="../js/weixin2.js"></script>
+</body>
+</html>

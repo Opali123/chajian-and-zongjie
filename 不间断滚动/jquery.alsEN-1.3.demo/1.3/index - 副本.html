@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" media="screen" href="css/CSSreset.min.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="css/als_demo.css" />
+		<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+		<script type="text/javascript" src="js/jquery.als-1.3.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#lista1").als({
+					visible_items:4,   //显示个数
+					scrolling_items: 1, //一次滚动几个
+					orientation: "horizontal", //"horizontal" 水平 or "vertical" 垂直
+					circular: "yes",
+					autoscroll: "yes",   //是否自动滚动
+					interval: 1000,    //时间间隔
+					speed: 300,       //切换速度
+					easing: "swing", //("swing" or "linear")
+					direction: "right", //滚动方向
+					start_from: 6      //显示 从第几个开始
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<div id="lista1" class="als-container">
+				<span class="als-prev"><img src="images/thin_left_arrow_333.png" alt="prev" title="previous" /></span>
+				<div class="als-viewport">
+					<ul class="als-wrapper">
+						<li class="als-item"><img src="images/als-images/calculator.png" alt="calculator" title="calculator" />calculator</li>
+						<li class="als-item"><img src="images/als-images/light_bulb.png" alt="light bulb" title="light bulb" />light bulb</li>
+						<li class="als-item"><img src="images/als-images/card.png" alt="card" title="card" />card</li>
+						<li class="als-item"><img src="images/als-images/chess.png" alt="chess" title="chess" />chess</li>
+						<li class="als-item"><img src="images/als-images/clock.png" alt="alarm clock" title="alarm clock" />alarm clock</li>
+						<li class="als-item"><img src="images/als-images/cut.png" alt="scissors" title="scissors" />scissors</li>
+						<li class="als-item"><img src="images/als-images/heart.png" alt="heart" title="heart" />heart</li>
+						<li class="als-item"><img src="images/als-images/map.png" alt="pin" title="pin" />pin</li>
+						<li class="als-item"><img src="images/als-images/mobile_phone.png" alt="mobile phone" title="mobile phone" />mobile phone</li>
+						<li class="als-item"><img src="images/als-images/camera.png" alt="camera" title="camera" />camera</li>
+						<li class="als-item"><img src="images/als-images/music_note.png" alt="music note" title="music note" />music note</li>
+						<li class="als-item"><img src="images/als-images/protection.png" alt="umbrella" title="umbrella" />umbrella</li>
+						<li class="als-item"><img src="images/als-images/television.png" alt="television" title="television" />television</li>
+					</ul>
+				</div>
+				<span class="als-next"><img src="images/thin_right_arrow_333.png" alt="next" title="next" /></span>
+			</div>
+
+		</div>
+
+	</body>
+</html>

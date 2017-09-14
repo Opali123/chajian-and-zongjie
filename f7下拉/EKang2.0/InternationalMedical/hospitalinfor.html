@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="description" content="" />
+<meta name="author" content="ChongMing" />
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="full-screen" content="yes">
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-fullscreen" content="true">
+<meta name="360-fullscreen" content="true">
+<title>医院详情</title>
+</head>
+<link href="../css/reset.min.css" rel="stylesheet" type="text/css" />
+<link href="../css/examination/layout.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="../css/ekang.css"/>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.mobile-1.4.3.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/ekang.js"></script>
+<script>
+    $(function(){
+        $('.hospitalinfor .banner').on('touchmove', function (event) {
+            event.preventDefault();
+        });
+
+        //banner切换
+
+        //tab切换
+        $('.hospitalinfor .tab .bottom .tab_bot').eq(0).show();
+        $('.hospitalinfor .tab .top ul li').click(function(){
+            var index2 = $(this).index()
+            $(this).addClass('hover').siblings().removeClass('hover')
+            $(this).find('div').show().addClass('hover').parent().siblings().find('div').hide().removeClass('hover')
+            $('.hospitalinfor .tab .bottom .tab_bot').eq(index2).fadeIn().siblings().fadeOut()
+        });
+        //
+        var package_id = getQueryString('physical_id')
+        $.ajax({
+            type:'GET',
+            url:textUrl+'/wish/index/hospital_detail?physical_id='+package_id,
+            data:{
+            },
+            dataType:'jsonp',
+            jsonp:'callback',
+            success:function(res){
+                if(res.ret==0){
+                    console.log(res.data)
+                    $('.hospitalinfor .tab .bottom').html(res.data.intro);
+                    $('.bottom .bottom .tab_bot').eq(0).show().siblings().hide();
+                    $('body').css('margin',0)
+                    var img_l = res.data.img.length
+                    for(var i=0;i<img_l;i++){
+                        document.getElementById('banner_win').innerHTML+='<img src="'+res.data.img[i]+'">'
+                        w_w = $(window).width();
+                        img_L = $('.hospitalinfor .banner .win img').length
+                        $('.hospitalinfor .banner').width(w_w);
+                        $('.hospitalinfor .banner .win').width(w_w*img_L);
+                        $('.hospitalinfor .banner .win img').width(w_w);
+                        var img_w = $('.hospitalinfor .banner .win img').width();
+                        $('.hospitalinfor .banner .num .num_r').html(img_L);
+                        $('.hospitalinfor .banner').height(img_w/639*279);
+                    }
+                    var banner_h = $('.hospitalinfor .banner').height();
+                    var header_h = $('#header_top').height();
+//                    var z_h = banner_h+header_h
+//                    $(window).scroll(function(){
+//                        if($(document).scrollTop()>banner_h){
+//                            $('.hospitalinfor .tab .top ul').css('position','fixed')
+//                            $('.hospitalinfor .tab .top ul').css('top',header_h)
+//                            $('.hospitalinfor .tab .top ul').css('z-index',99999)
+//                        }else{
+//                            $('.hospitalinfor .tab .top ul').css('position','static')
+//                        }
+//
+//                    })
+                    //请求成功
+                }else{
+                    //请求失败
+                    alert(res.msg)
+                }
+            }
+        });
+        var index = 0
+        setInterval(function(){
+            if(index<img_L-1){
+                index++
+                $('.hospitalinfor .banner .num .num_l').html(index+1)
+                $('.hospitalinfor .banner .win').animate({'left':-w_w},1000,function(){
+                    $(this).children().first().appendTo($(this))
+                    $(this).css('left','0')
+                })
+            }else{
+                index=0
+                $('.hospitalinfor .banner .num .num_l').html(index+1)
+                $('.hospitalinfor .banner .win').animate({'left':-w_w},1000,function(){
+                    $(this).children().first().appendTo($(this))
+                    $(this).css('left','0')
+                })
+            }
+        },5000)
+        //$('.hospitalinfor .banner .num .num_l').html(index+1)
+        $('.hospitalinfor .banner').swipeleft(function(){
+            if(index<img_L-1){
+                index++
+                $('.hospitalinfor .banner .num .num_l').html(index+1)
+                $('.hospitalinfor .banner .win').animate({'left':-w_w},1000,function(){
+                    $(this).children().first().appendTo($(this))
+                    $(this).css('left','0')
+                })
+            }else{
+                index=0
+                $('.hospitalinfor .banner .num .num_l').html(index+1)
+                $('.hospitalinfor .banner .win').animate({'left':-w_w},1000,function(){
+                    $(this).children().first().appendTo($(this))
+                    $(this).css('left','0')
+                })
+            }
+        });
+        $('.hospitalinfor .banner').swiperight(function(){
+            if(index>0){
+                index--
+                $('.hospitalinfor .banner .num .num_l').html(index+1)
+                $('.hospitalinfor .banner .win').children().last().prependTo($('.hospitalinfor .banner .win'))
+                $('.hospitalinfor .banner .win').css('left',-w_w)
+                $('.hospitalinfor .banner .win').animate({'left':0},1000)
+            }else{
+                index=img_L-1
+                $('.hospitalinfor .banner .num .num_l').html(index+1)
+                $('.hospitalinfor .banner .win').children().last().prependTo($('.hospitalinfor .banner .win'))
+                $('.hospitalinfor .banner .win').css('left',-w_w)
+                $('.hospitalinfor .banner .win').animate({'left':0},1000)
+            }
+        });
+        $('.hospitalinfor .bot_submit button').click(function(){
+            var package_id =getQueryString('physical_id');
+            //var physical_id =getQueryString('physical_id');
+            location.href = 'international_hospitalDetail.html?package_id='+package_id
+        });
+
+        //alert($('.hospitalinfor .tab .top').scrollTop())
+        //alert($('.hospitalinfor .tab .bottom style'))
+
+    });
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+</script>
+<script>
+    $(function(){
+        $('#back').click(function(){
+            history.go(-1)
+        })
+    });
+</script>
+<style>
+
+    .bottom{
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        background: #fff;
+        padding-bottom: 10%;
+    }
+    .bottom .tab_bot{
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+
+    }
+    .bottom .tab_bot .content{
+        width: 94%;
+        height: auto;
+        overflow: hidden;
+        margin: auto;
+        margin-top: 7%;
+    }
+    .bottom .tab_bot .content .left{
+        width: 3.5vw;
+        height: 3.5vw;
+        border-radius: 100%;
+        background: #1ec5b3;
+        float: left;
+        margin-top: 1%;
+        margin-right: 1%;
+    }
+    .bottom .tab_bot .content .right{
+        width: 93%;
+        float: left;
+        color: #666;
+        line-height: 6vw;
+    }
+</style>
+<body style=" width: 100%; overflow-x: hidden; font-family: '微软雅黑">
+<!--// 导航条-->
+<div class="header_top" style="width: 100%;height: 45px;background-color: #38a16d;position: fixed;z-index: 10000">
+    <h1 class="nav-title" style="font-size: 18px;">医院详情</h1>
+    <img src="../img/BackIcon.png" alt="返回" class="nav-backImg" id="back"/>
+</div>
+<div class="top45" style=" width: 100%; height: 45px"></div>
+<div class="hospitalinfor">
+    <div class="banner">
+        <div class="win" id="banner_win">
+            <!--<img src="../img/ban_03.jpg">-->
+            <!--<img src="../img/ban_02.jpg">-->
+            <!--<img src="../img/ban_04.jpg">-->
+            <!--<img src="../img/ban_05.jpg">-->
+            <!--<img src="../img/ban_06.jpg">-->
+        </div>
+        <div class="num">
+            <p class="num_l">1</p>
+            <p class="num_g">/</p>
+            <p class="num_r">1</p>
+        </div>
+    </div>
+    <div class="tab">
+        <div class="top">
+            <ul>
+                <li class="hover"><p>机构介绍</p><div style=" display: block" class="bot_bor hover"></div></li>
+                <li><p>机构特色</p><div class="bot_bor"></div></li>
+                <li><p>体检亮点</p><div class="bot_bor"></div></li>
+            </ul>
+        </div>
+        <div style=" width: 100%; height: 20px; background: #f2f2f2;"></div>
+        <div class="bottom">
+
+            <!--<div class="tab_bot">-->
+                <!--<div style=" width: 100%; height: 20px; color: #333; background: #f2f2f2; border-bottom: 1px solid #ccc;  border-top: 1px solid #ccc;text-indent: 1em; font-weight: bold">机构介绍</div>-->
+                <!--<div class="content">-->
+                    <!--<div class="left"></div>-->
+                    <!--<div class="right">该医院自+B40:N43年作为日本第一家癌症专科医院开设以来一直是癌症治疗领域的先驱者，贯彻“以癌症为核心医疗”的理念，目前已成为拥有700个病床的现代大型医院。</div>-->
+                <!--</div>-->
+                <!--<div class="content">-->
+                    <!--<div class="left"></div>-->
+                    <!--<div class="right">手术件数排名：（2014年.数据来源为读卖新闻医疗部出具的手术件数排名）<br>胃癌日本全国第一-->
+                        <!--<br>大肠癌日本全国第一-->
+                        <!--<br>乳癌日本全国第一-->
+                        <!--<br>前列腺癌日本全国第二-->
+                        <!--<br>肝癌日本全国第二-->
+                        <!--<br>肺癌日本全国第五。</div>-->
+                <!--</div>-->
+                <!--<div class="content">-->
+                    <!--<div class="left"></div>-->
+                    <!--<div class="right">该院不单单只重视针对疾病的治疗治愈，而是从“整体”的角度去把握患者的身体健康。例如为了尽可能减少手术切除部分而热衷于开发“身体机能保存手术”。胃上部有一部分能够分泌生长素，生长素是一种与味觉和食欲息息相关的激素，在胃切除手术中，即时只留下很小的一部分，与全部切除相比，手术后的饮食生活也是天差地别的。与“人体机能”相关的研究目前在世界范围内都有所开展。</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="tab_bot">-->
+                <!--<div style=" width: 100%; height: 20px; color: #333; background: #f2f2f2; border-bottom: 1px solid #ccc; text-indent: 1em;border-top: 1px solid #ccc; font-weight: bold">机构特色</div>-->
+                <!--<div class="content">-->
+                    <!--<div class="left"></div>-->
+                    <!--<div class="right">该院成立于1934年，是日本最早的癌症专科医疗研究机构。成立以来，并设的研究机构与医院密切合作，始终从事最新的诊断学和治疗技术的研究开发，致力于给患者更好更有效的治疗及实现最终攻克癌症之目标。研究会的很多成员是活跃于国际学会等的医生和研究人员。</div>-->
+                <!--</div>-->
+                <!--<div class="content">-->
+                    <!--<div class="left"></div>-->
+                    <!--<div class="right">体检内容包括：医生问诊，血液检查、尿检查，上消化道检查（胃食管、十二指肠），胸部检查，便隐血检查，腹部检查（肝脏、胆囊、胰腺、肾脏），生理学检查。</div>-->
+                <!--</div>-->
+                <!--<div class="content">-->
+                    <!--<div class="left"></div>-->
+                    <!--<div class="right">特色项目：PET-CT癌症早筛的检查。PET-CT技术是目前最为完美、最高档次的医学影像设备，同时也是一种独特的医疗诊断技术，堪称“现代医学高科技之冠”。它可以灵敏地反映各脏器的功能和代谢状况，其检查结果被形象地称为医学影像上的“半透明人”，能发现超早期处于代谢异常状态的恶性肿瘤，使人类早期诊断恶性肿瘤的梦想得以实现，被称之为探测肿瘤的“雷达”。</div>-->
+                <!--</div>-->
+                <!--<div class="content">-->
+                    <!--<div class="left" style=" text-align: center; background: none; color: red">*</div>-->
+                    <!--<div class="right">注意事项：检查开始前的5小时不可以吃任何食物。饮水不受时间限制，但只限于水、茶和白开水。注意不要饮用含糖分的饮品以及牛奶等乳制品。糖块和口香糖等即便是含在嘴里，也会对检查产生影响，请勿食用。</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="tab_bot">-->
+                <!--<div style=" width: 100%; height: 20px; color: #333; background: #f2f2f2; border-bottom: 1px solid #ccc; text-indent: 1em;border-top: 1px solid #ccc; font-weight: bold">体检亮点</div>-->
+                <!--<div class="content">-->
+                    <!--<div class="left"></div>-->
+                    <!--<div class="right">【权威健检】：日本排名第一的癌症治疗中心权威癌症早筛健康体检，先进的设备以及经验丰富的医师守护您的健康；</div>-->
+                <!--</div>-->
+                <!--<div class="content">-->
+                    <!--<div class="left"></div>-->
+                    <!--<div class="right">【贴身服务】：体检两日由随行翻译陪同，让您感受无微不至的服务，帮您与医师进行无障碍的交流，并根据您的要求提供专属化的服务；</div>-->
+                <!--</div>-->
+                <!--<div class="content" style=" margin-bottom: 20%;">-->
+                    <!--<div class="left"></div>-->
+                    <!--<div class="right">【专属体检】：完全预约制的体检服务，健检流程内的专科医生将安排出充裕的时间，在体检过程中无须担心拥挤的环境和长时间的等待；医师在检查的过程中都会与您充分的沟通，了解清楚您的健康状况及需求；</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+    <div class="bot_submit">
+        <button>立即预约</button>
+    </div>
+</div>
+</body>
+</html>

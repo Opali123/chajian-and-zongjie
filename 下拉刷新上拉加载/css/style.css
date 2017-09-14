@@ -1,0 +1,83 @@
+/*系统消息*/
+.system_message{
+    width: 100%;
+    height:auto;
+    overflow: hidden;
+}
+.system_message{
+    width: 100%;
+    height:auto;
+    overflow: hidden;
+}
+.system_message .list{
+    width:100%;
+    height:auto;
+    overflow: hidden;
+}
+.system_message .list dl{
+    width:100%;
+    height:auto;
+    overflow: hidden;
+    background: #fff;
+    border-bottom:1px solid #d9d9d9;
+}
+.system_message .list dl dt{
+    width:70%;
+    height:auto;
+    overflow: hidden;
+    float: left;
+}
+.system_message .list dl dt .img{
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webik-box-sizing:border-box;
+    width:21vw;
+    height: 21vw;
+    float: left;
+
+    margin:2% 0;
+    border:1px solid #e5e5e5;
+    border-radius:100vw;
+    position: relative;
+}
+.system_message .list dl dt .img p{
+    position: absolute;
+    width: 5vw;
+    height: 5vw;
+    background: red;
+    color: #fff;
+    border-radius: 100vw;
+    text-align: center;
+    line-height: 5vw;
+    font-size: 4vw;
+    right: 0vw;
+    top:0vw;
+}
+.system_message .list dl dt .infor{
+    width:67%;
+    float:left;
+    overflow:hidden;
+    margin-left:3%;
+    margin-top:7%;
+}
+.system_message .list dl dt .infor .p_name{
+    font-size:5vw;
+    color:#333;
+}
+.system_message .list dl dt .infor .p_news{
+    font-size:4vw;
+    color:#666;
+    margin-top:10%;
+}
+.system_message .list dl dd{
+    width:30%;
+    height:auto;
+    float: left;
+}
+.system_message .list dl dd .time{
+    font-size:4vw;
+    margin-top:18%;
+    color:#afafaf;
+    text-align:right;
+    margin-right:14%;
+}

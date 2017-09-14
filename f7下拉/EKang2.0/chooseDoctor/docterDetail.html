@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+
+<html lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <title>医生详情</title>
+    <link href="../css/ekang.css" rel="stylesheet" />
+    <link href="../css/chooseDoctor_css/style.css" rel="stylesheet" />
+    <link href="../css/chooseDoctor_css/styleProgress.css" rel="stylesheet" />
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+            color: #6C6C6C;
+        }
+
+        a {
+            text-decoration: none;
+        }
+        a:link,a:visited{
+            text-decoration:none;  /*超链接无下划线*/
+        }
+
+        .list {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .list-item {
+            display: block;
+            margin-top: -1px;
+            padding: 10px 15px;
+        }
+
+
+        .item-content div {
+            -webkit-box-flex: 1;
+            -moz-box-flex: 1;
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            width:50%;
+        }
+
+        #departmentRight .list-item {
+            border-left: 0;
+        }
+
+
+        #doctorItems .list-item {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+        }
+
+        .item-head-img {
+            -webkit-box-ordinal-group: 1;
+            -moz-box-ordinal-group: 1;
+            -ms-flex-order: 1;
+            -webkit-order: 1;
+            order: 1;
+            width: 50px;
+            -moz-box-flex: 1;
+        }
+
+        .item-center-txt {
+            -webkit-box-ordinal-group: 2;
+            -moz-box-ordinal-group: 2;
+            -ms-flex-order: 2;
+            -webkit-order: 2;
+            order: 2;
+            width: 60%;
+            -moz-box-flex: 1;
+        }
+
+        .mr-10 {
+            margin-right: 10px;
+        }
+
+        .text-s10 {
+            font-size: 12px;
+        }
+
+        #doctorItems .list-item div p {
+            margin:  0 0;
+        }
+
+        .head-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .item-right-scor {
+            width:40px;
+            height:40px;
+            border: 1px solid #ffa628;
+            border-radius:50%;
+            order: 3;
+
+        }
+
+        .item-segmentation-line {
+            height: 10px;
+            background-color: #f5f5f5;
+            border-top: 1px solid #e6e6e6;
+            border-bottom: 1px solid #e6e6e6;
+
+        }
+
+        .reservation {
+            background-color: #ffffff;
+            border-bottom: solid 1px #e6e6e6;
+        }
+
+        .reservation_title {
+            padding: 7px;
+            color: #43af80;
+            font-size: 13px;
+            border-bottom: solid 1px #e6e6e6;
+        }
+
+        .reservation_title img{
+            width: 12px;
+            height: 12px;
+            margin-right:5px;
+
+        }
+        .reservation_table {
+            text-align: center;
+            padding: 7px;
+        }
+
+        #reservation_table a {
+           /* color: #FFFFFF;*/
+        }
+
+        .special_border {
+            border-collapse: inherit;
+            border-spacing: 1px;
+        }
+
+        .reservation table {
+            width: 100%;
+            background-color: #e6e6e6;
+        }
+
+        .reservation td {
+            background-color: white;
+            text-align: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .reservation .font {
+            font-size: 11px;
+            color: #4a4a4a;
+        }
+
+        .reservation .num {
+            font-size: 7px;
+            color: #939393;
+        }
+
+        .reservation .title {
+            font-size: 11px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        .reservation_time{
+            font-family:STHeiti;
+            font-weight: inherit;
+            text-align: center;
+            font-size: 13px;
+            margin-top: 10px;
+            color: #79807d;
+            font-style: inherit;
+        }
+        .docterMsg{
+            margin-left: 10px;
+            margin-right: 10px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .detail_msg_btn{
+            width: 100%;
+            height: 35px;
+            line-height: 35px;
+            vertical-align: middle;
+            text-align: center;
+            font-size: 13px;
+            color: #43af80;
+            border-top: solid 1px #e6e6e6;
+            margin-top: 10px;
+        }
+
+        .detail_msg_close{
+            width: 100%;
+            height:70px;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            text-overflow: ellipsis;/* IE/Safari */
+            -ms-text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;/* Opera */
+            -moz-binding: url("ellipsis.xml#ellipsis");/*FireFox*/
+
+        }
+
+        .items_docter_scro{
+            color: #ffa628;
+            font-size: 8px;
+            width: 50px;
+            margin-left: 10px;
+            text-align: center;
+            line-height: 1;
+            height: 50px;
+            margin-top: 8px;
+            float: left;
+
+        }
+
+        .commment_list img{
+            width: 15%;
+            margin-left: 10px;
+            margin-top: 10px;
+            float: left;
+        }
+        .item_comment_content{
+            float: right;
+            width: 80%;
+
+        }
+    </style>
+
+</head>
+<body>
+
+<!--// 导航条-->
+<div style="width: 100%;height: 45px;margin-top: -45px;background-color: #38a16d;position: fixed;z-index: 10000">
+    <h1 class="nav-title" style="font-size: 18px;line-height: 45px">医生详情</h1>
+    <img src="../img/BackIcon.png" alt="返回" class="nav-backImg" id="back"/>
+</div>
+
+<!--医生信息-->
+<div class="list" id="doctorItems" style="margin-top: 45px"></div>
+
+<!--分割线-->
+<div class="item-segmentation-line"></div>
+
+<!-- 预约日期 -->
+<div class="reservation">
+    <div class="reservation_title">
+        <img src="../img/doctorDetail/docter/矩形-3@2x.png">
+        就诊时间
+    </div>
+
+    <!--滚动-->
+    <div class="container" style="height: 210px">
+    <section class="sample" data-slidizle>
+
+        <ul class="slider-content" data-slidizle-content>
+
+            <li class="slider-item">
+
+                <div class="reservation_time" id="table_time_01">
+                    日期
+                </div>
+                <div class="reservation_table">
+                    <table id="table01" class="special_border" cellspacing="1" cellpadding="5">
+                        <tr>
+                            <td class="t_l_radius"><img src="../img/doctorDetail/calendar.png" width="18" height="18" /></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="t_r_radius"></td>
+                        </tr>
+                        <tr>
+                            <td class="title">上午</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="title">下午</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </li>
+
+            <li class="slider-item">
+
+                <div class="reservation_time" id="table_time_02">
+                    日期
+                </div>
+                <div class="reservation_table">
+                    <table id="table02" class="special_border" cellspacing="1" cellpadding="5">
+                        <tr>
+                            <td class="t_l_radius"><img src="../img/doctorDetail/calendar.png" alt="" width="18" height="18" /></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="t_r_radius"></td>
+                        </tr>
+                        <tr>
+                            <td class="title">上午</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="title">下午</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </li>
+
+
+            <li class="slider-item">
+                <div class="reservation_time" id="table_time_03">
+                    日期
+
+                </div>
+                <div class="reservation_table">
+                    <table id="table03" class="special_border" cellspacing="1" cellpadding="5">
+                        <tr>
+                            <td class="t_l_radius"><img src="../img/doctorDetail/calendar.png" width="18" height="18" /></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="t_r_radius"></td>
+                        </tr>
+                        <tr>
+                            <td class="title">上午</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="title">下午</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </li>
+
+        </ul>
+
+<!-- 下面三个点 -->
+        <ul class="slider-navigation" data-slidizle-navigation>
+            <!-- automatically generated navigation -->
+        </ul>
+
+    </section>
+</div>
+
+    <!--分割线-->
+    <div class="item-segmentation-line"></div>
+
+    <!--医生简介-->
+    <div class="reservation_title">
+        <img src="../img/doctorDetail/docter/形状-2@2x.png">
+        医生简介
+    </div>
+
+    <div id="detail_msg" class="detail_msg_close">
+        <!--医生擅长-->
+        <div class="docterMsg">
+            <span style="color: black;font-weight:bold">擅长<br/></span>
+            <span id="docterTag"></span>
+        </div>
+
+        <!--医生从业经历-->
+        <div class="docterMsg">
+            <span style="color: black;font-weight:bold">执业经历<br/></span>
+            <span id="docterDesc"></span>
+        </div>
+
+    </div>
+
+    <!--展开详情-->
+    <div class="detail_msg_btn" onclick="javascript:docter_detail_msg()">
+        <span id="detail_msg_btn">展开详情</span>
+        <img id="detail_msg_img" src="../img/doctorDetail/docter/icon-Extended-arrow@2x.png" style="width: 12px;height: 12px;">
+    </div>
+
+    <!--分割线-->
+    <div class="item-segmentation-line"></div>
+
+    <!--患者评价-->
+    <div class="reservation_title">
+        <img src="../img/doctorDetail/docter/Squared-speech-balloon-with-three-dots@2x.png">
+        患者评价&nbsp&nbsp<span style="color: black;font-size: 12px" id="evaluate_count">(已有10人评价)</span>
+    </div>
+
+    <!-- 推荐度 -->
+    <div style="border-bottom: solid 1px #e6e6e6;height: 49px" id="docter_rate_rec">
+        <div class="items_docter_scro">
+           <span  style="font-size:19px"><span id="items_docter_scro">90</span><span style="font-size: 9px">%</span><br/></span>
+            总推荐度
+        </div>
+    </div>
+
+    <!---评论列表-->
+    <div class="commment_list"></div>
+
+    <!--更多评论-->
+    <div id="doctorComment" class="detail_msg_btn" style="height: 40px;clear: left;line-height: 40px;border-top: none">
+        <span style="margin-top: 10px">查看更多评价</span>
+    </div>
+
+</div>
+
+<script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+<script src="../js/ekang.js"></script>
+<script src="../js/jquery.slidizle.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+
+<script>
+
+    var detailBtnStatu = true;
+    var paramObj = new Object();
+
+    ///展开详情-收起详情按钮
+    function docter_detail_msg(){
+        if (detailBtnStatu == true){
+            $("#detail_msg").removeClass('detail_msg_close');
+            $("#detail_msg_btn").text("收回详情");
+            $("#detail_msg_img").attr('src','../img/doctorDetail/docter/icon-Extended-up@2x.png');
+
+            detailBtnStatu = false;
+        }
+        else
+        {
+            $("#detail_msg").addClass('detail_msg_close');
+            $("#detail_msg_btn").text("展开详情");
+            $("#detail_msg_img").attr('src','../img/doctorDetail/docter/icon-Extended-arrow@2x.png');
+            detailBtnStatu = true;
+        }
+    }
+
+
+    $(function () {
+            var docterId = getQueryString("docterId");
+            var docterMsg = '';
+
+            //初始化滚动条
+            $('[data-slidizle]').slidizle({
+                beforeChange : function(api) {
+                    console.log('previous', api.getPreviousSlide().index());
+                    console.log('current', api.getCurrentSlide().index());
+                    console.log('next', api.getNextSlide().index());
+                    console.log('previous active', api.getPreviousActiveSlide().index());
+                }
+            });
+
+            //获得医生信息
+            function load_docter_msg() {
+                    $.ajax({
+                        url: textUrl+"/doctor/info",
+                        type: "GET",
+                        data: {
+                            uid: '',
+                            doctor_id: docterId
+                        },
+                        dataType: 'jsonp',
+                        jsonp: 'callback',
+                        success: function (result) {
+
+                            ///////医生信息
+                                var item = '';
+                                var returnObj = result.data;
+                                var isnum = returnObj.work_time.now_week[6].is_num
+                                if(isnum==0){
+                                    $('.slider-content li').eq(1).addClass('active').siblings().removeClass('active')
+                                }
+                                paramObj.hospital_id = returnObj.hospital_id;
+                                paramObj.department_id = returnObj.department_id;
+                                paramObj.doctor_id = returnObj.doctor_id;
+
+                                item += '<a class="list-item" href="#">';
+
+                                item += '<div class="item-head-img"><img alt="医生头像" style="width: 40px;height: 40px" src="' + returnObj.avatar_file + '" class="head-img"/></div>';
+
+                                item += '<div class="item-center-txt">';
+
+                                item += '<p class="text-none"><span style="font-size:14px;" class="mr-10">' + returnObj.user_name + '</span><span class="text-sub" style="color: #808080;font-size: 11px;">' + returnObj.job_name + '</span></p>';
+
+                                item += '<p class="text-muted text-s10 text-sub" style="font-size: 11px;">' + returnObj.hospital_name + ' &nbsp;' + returnObj.department_name + '</span></p>';
+
+                                item += '</div>';
+
+                                item += '<div class="item-right-scor">' +
+                                        '<span style="height:25px; line-height:26px;font-size: 12px; display:block; color:#FFF; text-align:center;color: #ffa628">'+returnObj.total_rec_index + '<p style="height:25px; line-height:0; display:block; color:#FFF; text-align:center;color: #ffa628;font-size: 8px">推荐</p></span>' +
+                                        '</div>';
+
+                                item += '</a>';
+
+
+                                $('#doctorItems').append(item);
+
+                                $.jTipHide();
+
+                            ///////医生排版信息
+                            var workTime = returnObj.work_time;
+
+                            var now_data = workTime.now_week;
+
+                            for (var now_index in now_data) {
+
+                                var obj = now_data[now_index];
+
+                                loadData("table01", obj, parseInt(now_index) + parseInt(1));
+
+                                if(now_index==0){
+
+                                    $("#table_time_01").text(obj.current_year);
+                                }
+                            }
+
+                            var next_data = workTime.next_week;
+                            for (var next_index in next_data) {
+
+
+                                var obj = next_data[next_index];
+
+                                loadData("table02", obj, parseInt(next_index) + parseInt(1));
+
+                                if(next_index==0){
+
+                                    $("#table_time_02").text(obj.current_year);
+                                }
+
+                            }
+
+
+                            var next_next_data = workTime.next_next_week;
+                            for (var next_next_index in next_next_data) {
+
+                                var obj = next_next_data[next_next_index];
+
+                                loadData("table03", obj, parseInt(next_next_index) + parseInt(1));
+
+                                if(next_next_index==0){
+
+                                    $("#table_time_03").text(obj.current_year);
+                                }
+                            }
+
+
+                            /////医生简介
+                            $("#docterTag").text(returnObj.tag_content);
+                            $("#docterDesc").text(returnObj.desc);
+
+
+                            ///医生推荐
+                            var strtotal = returnObj.total_rec_index;
+                            $("#items_docter_scro").text(strtotal.replace(/%/, ""));
+
+                            ///患者评价
+                            ///评价数量
+                            $("#evaluate_count").text('(已有'+returnObj.evaluate_count+'人评价)');
+
+                            ////评价头部
+                            var items = '';
+                            ///疗效
+                            var rateIndex = returnObj.rate_index;
+                            var recIndex = returnObj.rec_index;
+
+                            if(rateIndex.length <4){
+                                rateIndex += ')&nbsp;&nbsp;&nbsp;';
+                            }
+                            else
+                            {
+                                rateIndex += ')&nbsp;';
+                            }
+
+                            if(recIndex.length <4){
+                                recIndex += ')&nbsp;&nbsp;&nbsp;';
+                            }
+                            else
+                            {
+                                recIndex += ')&nbsp;';
+                            }
+
+
+                            items += ' <div style=" float: left;width: 70%; margin-top: 5px; margin-left: 10px;"> ' +
+                                    '<div style=" float: left;"> 治疗效果';
+
+                            items += '<span>('+rateIndex+'</span></div>';
+
+                            items += ' <div class="progress" style="margin-top: 5px;"> ' +
+                                    '<span class="orange" style="width: '+returnObj.rate_index+';"><span></span></span>' +
+                                    ' </div> </div>';
+                            //态度
+                            items += ' <div style=" float: left;width: 70%; margin-top: -15px; margin-left: 10px;">' +
+                                    ' <div style=" float: left;"> 治疗态度';
+
+                            items += '<span>('+recIndex+'</span></div>';
+
+                            items += ' <div class="progress" style="margin-top: 5px;"> ' +
+                                    '<span class="orange" style="width: '+returnObj.rec_index+';"><span></span></span>' +
+                                    ' </div> </div>';
+
+
+                            $('#docter_rate_rec').append(items);
+
+                            ///评价内容
+                            var commentList = returnObj.review;
+                            var comment_items = '';
+
+                            for (var comment_index in commentList) {
+                                var obj = commentList[comment_index];
+
+                                comment_items += '<div style="border-bottom: solid 1px #e6e6e6;float: left; width: 100%; ">';
+
+                                comment_items += '<img src="' + obj.avatar_file + '">';
+
+                                comment_items += '<div class="item_comment_content">';
+
+                                comment_items += '<p style="color: #808080;  margin-top: 10px;margin-bottom: 0px;">'+ obj.name+ '&nbsp;&nbsp;&nbsp;'+ obj.c_on + '<br/></p>';
+
+                                comment_items += '<p style="font-size: 14px;margin-bottom: 3px;color: #808080" >疾病:&nbsp;&nbsp;&nbsp;<span style="color: #333333">' + obj.disease +'</span></p>';
+                                var effect;
+                                var attitude;
+                                // 疗效
+                                if(obj.effect == 5){
+                                    effect = "非常满意"
+                                }else if(obj.effect == 4){
+                                    effect = "满意"
+                                }else if(obj.effect == 3){
+                                    effect = "一般"
+                                }else if(obj.effect == 2){
+                                    effect = "不满意"
+                                }else if(obj.effect == 1){
+                                    effect = "非常不满意"
+                                }
+                                // 态度
+                                if(obj.attitude == 5){
+                                    attitude = "非常满意"
+                                }else if(obj.attitude == 4){
+                                    attitude = "满意"
+                                }else if(obj.attitude == 3){
+                                    attitude = "一般"
+                                }else if(obj.attitude == 2){
+                                    attitude = "不满意"
+                                }else if(obj.attitude == 1){
+                                    attitude = "非常不满意"
+                                }
+                                comment_items += '<label style="font-size: 14px;color: #808080;">疗效:&nbsp;&nbsp;&nbsp;<span style="color: #ffac36">'+ effect +'&nbsp;&nbsp;&nbsp;</span>  态度:&nbsp;&nbsp;&nbsp;<span  style="color: #ffac36">'+ attitude +'</span></label>';
+
+                                comment_items += '<p style="color: #333333">'+ obj.review_content +'</p>';
+
+                                comment_items += '</div></div>';
+                            }
+                            $('.commment_list').append(comment_items);
+
+                        }
+                    });
+                }
+
+
+
+         ///计算周几
+            function weekCal(day) {
+                var week;
+                switch (day) {
+                    case 1:
+                        week = '周一';
+                        break;
+                    case 2:
+                        week = '周二';
+                        break;
+                    case 3:
+                        week = '周三';
+                        break;
+                    case 4:
+                        week = '周四';
+                        break;
+                    case 5:
+                        week = '周五';
+                        break;
+                    case 6:
+                        week = '周六';
+                        break;
+                    case 7:
+                        week = '周日';
+                        break;
+                }
+                return week;
+            }
+
+            /**
+             * 加载排班表数据
+             */
+            function loadData(tableId, obj, index) {
+
+                //设置表头日期
+                $("#" + tableId + " tr:eq(0) td:eq(" + index + ")").html('<span class="font">' + weekCal(obj.day) + '</span><br/><span class="num">' + obj.date + '</span>');
+
+                //设置上午
+                if (obj.am == 0) {
+                    $("#" + tableId + " tr:eq(1) td:eq(" + index + ")").css("background-color", "#fff");
+                    $("#" + tableId + " tr:eq(1) td:eq(" + index + ")").html("");
+                } else {
+                    $("#" + tableId + " tr:eq(1) td:eq(" + index + ")").css("background-color", "#43AF80");
+                    $("#" + tableId + " tr:eq(1) td:eq(" + index + ")").html('<a href="#" style="color: white;font-size: 11px">立即<br/>预约</a>');
+                    $("#" + tableId + " tr:eq(1) td:eq(" + index + ")").click(function () {
+                        if($.cookie("local_userId")){
+                            location.href = "doctor_appointment.html?" + $.param(paramObj) + "&am=1&day="+obj.day+"&time="+obj.date+"";
+                        }else{
+                            location.href = "../login.html";
+                        }
+                    });
+                }
+
+                //设置下午
+                if (obj.pm == 0) {
+                    $("#" + tableId + " tr:eq(2) td:eq(" + index + ")").css("background-color", "#fff");
+                    $("#" + tableId + " tr:eq(2) td:eq(" + index + ")").html("");
+                } else {
+                    $("#" + tableId + " tr:eq(2) td:eq(" + index + ")").css("background-color", "#43AF80");
+                    $("#" + tableId + " tr:eq(2) td:eq(" + index + ")").html('<a href="#" style="color: white;font-size: 11px">立即<br/>预约</a>');
+                    $("#" + tableId + " tr:eq(2) td:eq(" + index + ")").click(function () {
+                        if($.cookie("local_userId")){
+                            location.href = "doctor_appointment.html?" + $.param(paramObj) + "&am=2&day="+obj.day+"&time="+obj.date+"";
+                        }else{
+                            location.href = "../login.html";
+                        }
+                    });
+                }
+
+            }
+
+            ///加载医生数据
+            load_docter_msg();
+
+        $('#doctorComment').click(function () {
+            location.href = "doctercommentsDetail.html?docterId="+docterId;
+        });
+
+        $('#back').click(function () {
+            alert(history.length)
+            history.back();
+        });
+    });
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script src="../js/weixin3.js"></script>
+</body>
+</html>

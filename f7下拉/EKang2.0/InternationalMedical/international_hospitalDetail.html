@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="ChongMing" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="full-screen" content="yes">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="360-fullscreen" content="true">
+    <title>套餐列表</title>
+    <style type="text/css">
+        .backView {
+            position: relative;
+            width: 100%;
+            height: auto;
+            /*overflow: hidden;*/
+        }
+        .backView img {
+            display: block;
+            width:95%;
+            margin:5% auto;
+        }
+        .backView .le{
+            position: absolute;
+            color: #fff;
+            font-size: 16vw;
+            top: 2%;
+            left: 7%;
+        }
+        .backView p {
+            position: absolute;
+            color: #333333;
+            font-size: 7vw;
+            right: 5%;
+            top: 19%;
+        }
+        .bot-img {
+            position: absolute;
+            width: 3vw;
+            height: 3vw;
+            border-radius: 3vw;
+            background-color: #47cebf;
+        }
+        .bot-content {
+            position: absolute;
+            color: #666;
+            font-size: 3vw;
+            width: auto;
+            height: auto;
+        }
+        .img-bottom {
+            bottom: 9%;
+        }
+        .img-left1 {
+            left: 29%;
+        }
+        .img-left2{
+            left: 48%;
+        }
+        .img-left3{
+            left: 68%;
+        }
+        .content-bottom {
+            bottom: 11%;
+        }
+        .content-left1{
+            left: 34%;
+        }
+        .content-left2{
+            left: 53%;
+        }
+        .content-left3{
+            left: 73%;
+        }
+
+    </style>
+</head>
+<link href="../css/reset.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="../css/ekang.css"/>
+<body>
+<!--// 导航条-->
+<div class="header_top" style="width: 100%;height: 45px;background-color: #38a16d;position: fixed;z-index: 10000">
+    <h1 class="nav-title" style="font-size: 18px; line-height: 45px">套餐列表</h1>
+    <img src="../img/BackIcon.png" alt="返回" class="nav-backImg" id="back"/>
+</div>
+<div class="top45" style=" width: 100%; height: 45px"></div>
+<div id="contentList">
+
+    <!--<div class="backView">-->
+        <!--<img src="../img/hospitalDetail.png"/>-->
+        <!--<span class="le">B</span>-->
+        <!--<p>综合精密套餐(1日)</p>-->
+        <!--<span class="bot-img img-bottom img-left1"></span><span class="bot-content content-bottom content-left1">癌症</span>-->
+        <!--<span class="bot-img img-bottom img-left2"></span><span class="bot-content content-bottom content-left2">心脏</span>-->
+        <!--<span class="bot-img img-bottom img-left3"></span><span class="bot-content content-bottom content-left3">抗衰老检查</span>-->
+    <!--</div>-->
+</div>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.mobile-1.4.3.js"></script>
+<script src="../js/ekang.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script src="../js/weixin2.js"></script>
+<script>
+    $(function(){
+        var physical_id = getQueryString('package_id')
+        $.ajax({
+            type:'GET',
+            url:textUrl+'/wish/index/physical_detail_list?physical_id='+physical_id,
+            data:{
+            },
+            dataType:'jsonp',
+            jsonp:'callback',
+            success:function(res){
+                if(res.ret==0){
+                    console.log(res.data)
+                    var items = '';
+                    var dataArr = res.data;
+                    for(var i=0;i<dataArr.length;i++){
+                        var data = res.data[i];
+                        items += '<div class="backView" style="margin-top: 7%;">';
+                        items += '<img src="../img/hospitalDetail.png"/>';
+                        items += '<span class="le">'+data.letter+'</span>';
+                        items += '<p>'+data.name+'('+data.cost_day+'日)</p>';
+                        if(data.position.length == 1){
+                            items += '<span class="bot-img img-bottom img-left1"></span><span class="bot-content content-bottom content-left1">'+data.position[0]+'</span>';
+                        }else if(data.position.length == 2){
+                            items += '<span class="bot-img img-bottom img-left1"></span><span class="bot-content content-bottom content-left1">'+data.position[0]+'</span>';
+                            items += '<span class="bot-img img-bottom img-left2"></span><span class="bot-content content-bottom content-left2">'+data.position[1]+'</span>';
+                        }else if(data.position.length == 3){
+                            items += '<span class="bot-img img-bottom img-left1"></span><span class="bot-content content-bottom content-left1">'+data.position[0]+'</span>';
+                            items += '<span class="bot-img img-bottom img-left2"></span><span class="bot-content content-bottom content-left2">'+data.position[1]+'</span>';
+                            items += '<span class="bot-img img-bottom img-left3"></span><span class="bot-content content-bottom content-left3">'+data.position[2]+'</span>';
+                        }
+
+                        items += '</div>';
+
+                        $('#contentList').html(items);
+                        $('.backView').click(function(){
+                            index = $(this).index()
+                            var id = res.data[index].id
+                            location.href='check_detailed.html?package_id='+id+'&physical_id='+physical_id
+                        });
+                    }
+                    //请求成功
+                }else{
+                    //请求失败
+                    alert(res.msg)
+                }
+            }
+        });
+    });
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+</script>
+<script>
+    $(function(){
+        $('#back').click(function(){
+            history.go(-1)
+        })
+    });
+</script>
+</body>
+</html>

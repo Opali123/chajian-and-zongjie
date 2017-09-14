@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0px; padding:0px;}
+.but{ position:fixed; top:200px; left:300px;}
+.but button{ font-size:18px; font-weight:500;}
+.but button.hover{ background:#F00;}
+.wrap{ height:100%;}
+.one{ width:100%; height:1000px; background:#C99;}
+.two{ width:100%; height:1000px; background:#36C;}
+.three{ width:100%; height:1000px; background:#933;}
+.four{ width:100%; height:1000px; background:#03C;}
+.five{ width:100%; height:1000px; background:#969;}
+

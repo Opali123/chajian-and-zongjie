@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<title>医生详情</title>
+<link href="../css/ekang.css" rel="stylesheet" />
+<link href="../css/chooseDoctor_css/style.css" rel="stylesheet" />
+<link href="../css/chooseDoctor_css/styleProgress.css" rel="stylesheet" />
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 14px;
+        margin: 0;
+        padding: 0;
+        color: #6C6C6C;
+    }
+    .commment_list img{
+        width: 15%;
+        margin-left: 10px;
+        margin-top: 10px;
+        float: left;
+    }
+    .item_comment_content{
+        float: right;
+        width: 80%;
+    }
+</style>
+</head>
+<body>
+<!--// 导航条-->
+<div style="width: 100%;height: 45px;background-color: #38a16d;position: fixed;z-index: 10000">
+    <h1 class="nav-title" style="font-size: 18px;line-height: 45px">医生评论</h1>
+    <img src="../img/BackIcon.png" alt="返回" class="nav-backImg" id="back"/>
+</div>
+<br/><br/>
+<!---评论列表-->
+<div class="commment_list"></div>
+
+<script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+<script src="../js/ekang.js"></script>
+<script src="../js/jquery.slidizle.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script>
+    $(function () {
+            var docter = getQueryString("docterId");
+            function load_docter_msg() {
+                    $.ajax({
+                        url: textUrl+"/doctor/reviewList",
+                        type: "GET",
+                        data: {
+                            uid: $.cookie("local_userId"),
+                            doctor_id: docter
+                        },
+                        dataType: 'jsonp',
+                        jsonp: 'callback',
+                        success: function (result) {
+
+                            var returnObj = result.data;
+
+                            ///评价内容
+                            var commentList = returnObj;
+                            var comment_items = '';
+                            for (var comment_index in commentList) {
+                                var obj = commentList[comment_index];
+                                comment_items += '<div style="border-bottom: solid 1px #e6e6e6;float: left; width: 100%; ">';
+                                comment_items += '<img src="' + obj.avatar_file + '">';
+                                comment_items += '<div class="item_comment_content">';
+                                comment_items += '<p style="color: #808080;  margin-top: 10px;margin-bottom: 0px;">'+ obj.name+ '&nbsp;&nbsp;&nbsp;'+ obj.c_on + '<br/></p>';
+                                comment_items += '<p style="font-size: 14px;margin-bottom: 3px;color: #808080" >疾病:&nbsp;&nbsp;&nbsp;<span style="color: #333333">' + obj.disease +'</span></p>';
+                                var effect;
+                                var attitude;
+                                // 疗效
+                                if(obj.effect == 5){
+                                    effect = "非常满意"
+                                }else if(obj.effect == 4){
+                                    effect = "满意"
+                                }else if(obj.effect == 3){
+                                    effect = "一般"
+                                }else if(obj.effect == 2){
+                                    effect = "不满意"
+                                }else if(obj.effect == 1){
+                                    effect = "非常不满意"
+                                }
+                                // 态度
+                                if(obj.attitude == 5){
+                                    attitude = "非常满意"
+                                }else if(obj.attitude == 4){
+                                    attitude = "满意"
+                                }else if(obj.attitude == 3){
+                                    attitude = "一般"
+                                }else if(obj.attitude == 2){
+                                    attitude = "不满意"
+                                }else if(obj.attitude == 1){
+                                    attitude = "非常不满意"
+                                }
+
+                                comment_items += '<label style="font-size: 14px;color: #808080;">疗效:&nbsp;&nbsp;&nbsp;<span style="color: #ffac36">'+ effect +'&nbsp;&nbsp;&nbsp;</span>  态度:&nbsp;&nbsp;&nbsp;<span  style="color: #ffac36">'+ attitude +'</span></label>';
+                                comment_items += '<p style="color: #333333">'+ obj.review_content +'</p>';
+                                comment_items += '</div></div>';
+                            }
+                            $('.commment_list').append(comment_items);
+                        }
+                    });
+                }
+            ///加载医生数据
+            load_docter_msg();
+
+        $('#back').click(function () {
+            history.back();
+        });
+    });
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script src="../js/weixin2.js"></script>
+</body>
+</html>
